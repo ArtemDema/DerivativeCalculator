@@ -15,5 +15,5 @@ class Equation(customtkinter.CTkLabel):
         pass
     
 
-equation = Equation(master = equation_frame, text = "1")
+equation = Equation(master = equation_frame, text = "")
 equation.place(x = 5, y = 10)
