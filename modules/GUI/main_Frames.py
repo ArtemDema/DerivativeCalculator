@@ -1,3 +1,7 @@
+r"""
+Создание главных фреймов для приложения
+"""
+
 import customtkinter
 from ..window import app
 

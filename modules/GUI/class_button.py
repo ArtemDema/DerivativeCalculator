@@ -1,9 +1,16 @@
+r"""
+Создание всех кнопок и вспомогательных окон
+"""
+
 import customtkinter, PIL, os
 from .equation import equation
 from ..window import app
 from ..ComputingPower import start_power
 
 class Button(customtkinter.CTkButton):
+    r"""
+    Класс, для создания кнопок и их функций по нажатию на них. А также всплывающих окон
+    """
     def __init__(self, master: any, x: int, y: int, text: str, fg_color: str, hover_color: str, image: str = None):
         self.image_name = None
         customtkinter.CTkButton.__init__(
@@ -68,6 +75,8 @@ class Button(customtkinter.CTkButton):
     def pop_up_w(self):
         if self.popup_window_exist == False:
             popup_window = customtkinter.CTkToplevel(app)
+            popup_window.resizable(False, False)
+            popup_window.title("Equal C")
 
             WIDTH = 200
             HEIGHT = 200
@@ -95,6 +104,8 @@ class Button(customtkinter.CTkButton):
     def example_button(self):
         if self.popup_window_example_exist == False:
             popup_window_example = customtkinter.CTkToplevel(app)
+            popup_window_example.resizable(False, False)
+            popup_window_example.title("Example")
 
             WIDTH = 500
             HEIGHT = 500
@@ -114,13 +125,13 @@ class Button(customtkinter.CTkButton):
             label = customtkinter.CTkLabel(master = popup_window_example, text="How to fill in the input field", font = ("Roboto Slab", 14))
             label.pack(padx= 10, pady = 10)
 
-            list_examples = ["sin, cos, tg and ctg:","sin(45), cos(60)", "we write in brackets","+ and -:", "10+66, 3*√25 -10",
-                             "after √ space","*", "2*tg(85), 50*(√25)^(3), |-7|*8^(2)","where in mathematics there is multiplication (which we do not write), here we must write it",
+            list_examples = ["sin, cos, tg and ctg:","sin(45), cos(60)", "we write in brackets","+ and -:", "10+66, 3*√(25)-10",
+                             " ","*", "2*tg(85), 50*(√(25))^(3), |-7|*8^(2)","where in mathematics there is multiplication (which we do not write), here we must write",
                              "^", "2^(5)*8", "in brackets all following symbols will be counted in powers",
-                             "/", "1/2, 4*3^(3)/3√25 *sin(10)", "after the fraction always put a space",
+                             "/", "1/(2), 4*3^(3)/(3*√(25)) *sin(10)", "in brackets all following symbols will be counted in powers",
                              "|", "|-45|+5","After the module, you don't have to put a space","log and lg",
                              "log(3)(3), lg(10), log(8)(1/3)", "first log in brackets is the base, the second bracket is the argument", 
-                             "√", "√100 *2", "after √ space (if there is no space, the symbols will be considered under the root)"]
+                             "√", "√(100)*2", "in brackets all following symbols will be counted in powers"]
 
             for i in range(8):
                 text1 = customtkinter.CTkLabel(master = scrol_frame, font = ("Roboto Slab", 28), text_color = "#FFFFFF",

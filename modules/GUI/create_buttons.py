@@ -1,3 +1,7 @@
+r"""
+Создание кнопок для главного окна
+"""
+
 from .main_Frames import button_frame, graphic_frame
 from .class_button import Button
 

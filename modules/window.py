@@ -1,3 +1,7 @@
+r"""
+Создание главного окна
+"""
+
 import customtkinter
 
 app = customtkinter.CTk(fg_color = "#E2E2E2")
@@ -15,3 +19,4 @@ app.geometry(f"{WIDTH}x{HEIGHT}+{screen_x}+{screen_y}")
 app.update()
 
 app.resizable(False, False)
+app.title("Derivative calculator")

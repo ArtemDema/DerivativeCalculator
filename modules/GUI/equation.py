@@ -1,3 +1,7 @@
+r"""
+Строка, в которой находится уравнение
+"""
+
 import customtkinter
 from .main_Frames import equation_frame
 
