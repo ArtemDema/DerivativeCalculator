@@ -10,7 +10,8 @@ def start_power(equation, button9):
     equal_C = button9.equal_C
     list = [f"{start_equation}"]
     start_equation = cut_function(list)
-    list_operations = ["^","*","/","+","-"]
+    # print(start_equation)
+    list_operations = ["^","/","*","+","-"]
     for i in range(len(list_operations)):
         for part in start_equation:
             if f"{list_operations[i]}" in part:
@@ -40,31 +41,74 @@ def start_power(equation, button9):
 
                 elif f"{list_operations[i]}" == "/":
                     stop = False
-                    list_division = []
-                    index_division = 0
+                    list_division_f = []
+                    list_division_s = []
+                    index_division = 1
                     while stop == False:
-                        if ")" in start_equation[index + index_division]:
-                            list_division.append(start_equation[index + index_division])
+                        if "(" in start_equation[index - index_division]:
                             stop = True
                         else:
-                            list_division.append(start_equation[index + index_division])
                             index_division += 1
-                    result = division(start_equation[index - 1], list_division)
+                    for i in range(index_division):
+                        list_division_f.append(start_equation[index - index_division])
+                        index_division -= 1
+
+                    stop = False
+                    index_division = 1
+                    while stop == False:
+                        if ")" in start_equation[index + index_division]:
+                            list_division_s.append(start_equation[index + index_division])
+                            stop = True
+                        else:
+                            list_division_s.append(start_equation[index + index_division])
+                            index_division += 1
+                    result = division(list_division_f, list_division_s)
+                    stop = False
+                    index_division = 1
+                    while stop == False:
+                        if ")" in start_equation[index + index_division]:
+                            del start_equation[index + index_division]
+                            stop = True
+                        else: del start_equation[index + index_division]
+                    stop = False
+                    while stop == False:
+                        if "(" in start_equation[index - index_division]:
+                            del start_equation[index - index_division]
+                            stop = True
+                        else: 
+                            del start_equation[index - index_division]
+                            index_division += 1
+                    start_equation[index - index_division] = str(result)
 
                 elif f"{list_operations[i]}" == "*":
                     result = multiplication(start_equation[index - 1], start_equation[index + 1])
                     if result == None:
                         break
+                    else:
+                        del start_equation[index + 1]
+                        del start_equation[index - 1]
+                        del start_equation[index - 1]
+                        start_equation.insert(index - 1, str(result))
 
                 elif f"{list_operations[i]}" == "-":
                     result = minus(start_equation[index - 1], start_equation[index + 1])
                     if result == None:
                         break
+                    else:
+                        del start_equation[index + 1]
+                        del start_equation[index - 1]
+                        del start_equation[index - 1]
+                        start_equation.insert(index - 1, str(result))
 
                 elif f"{list_operations[i]}" == "+":
                     result = sum(start_equation[index - 1], start_equation[index + 1])
                     if result == None:
                         break
+                    else:
+                        del start_equation[index + 1]
+                        del start_equation[index - 1]
+                        del start_equation[index - 1]
+                        start_equation.insert(index - 1, str(result))
 
     print(start_equation)
     

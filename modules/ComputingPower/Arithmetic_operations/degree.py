@@ -15,24 +15,33 @@ def degree(first_path: str, second_path: list):
 
     if len(second_path) == 1:
         for i in range(int(second_path[0])):
-            result_f = result_f * int(first_path)
-        return result_f
+            result = result * int(first_path)
+        return result
 
     for part in second_path:
         if "+" in part:
             index_f = second_path.index(part)
             result_f = sum(second_path[index_f - 1], second_path[index_f + 1])
-            second_path = result_f
+            del second_path[index_f - 1]
+            del second_path[index_f - 1]
+            del second_path[index_f - 1]
+            second_path.insert(index_f - 1, result_f)
     
         if "-" in part:
             index_f = second_path.index(part)
             result_f = minus(second_path[index_f - 1], second_path[index_f + 1])
-            second_path = result_f
+            del second_path[index_f - 1]
+            del second_path[index_f - 1]
+            del second_path[index_f - 1]
+            second_path.insert(index_f - 1, result_f)
         
         if "*" in part:
             index_f = second_path.index(part)
             result_f = multiplication(second_path[index_f - 1], second_path[index_f + 1])
-            second_path = result_f
+            del second_path[index_f - 1]
+            del second_path[index_f - 1]
+            del second_path[index_f - 1]
+            second_path.insert(index_f - 1, result_f)
 
     if second_path < 0:
         for i in range(second_path * (-1)):

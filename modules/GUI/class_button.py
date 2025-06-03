@@ -128,7 +128,7 @@ class Button(customtkinter.CTkButton):
             list_examples = ["sin, cos, tg and ctg:","sin(45), cos(60)", "we write in brackets","+ and -:", "10+66, 3*√(25)-10",
                              " ","*", "2*tg(85), 50*(√(25))^(3), |-7|*8^(2)","where in mathematics there is multiplication (which we do not write), here we must write",
                              "^", "2^(5)*8", "in brackets all following symbols will be counted in powers",
-                             "/", "1/(2), 4*3^(3)/(3*√(25)) *sin(10)", "in brackets all following symbols will be counted in powers",
+                             "/", "(1)/(2), (4*3^(3))/(3*√(25)) *sin(10)", "in brackets all following symbols will be counted in powers",
                              "|", "|-45|+5","After the module, you don't have to put a space","log and lg",
                              "log(3)(3), lg(10), log(8)(1/3)", "first log in brackets is the base, the second bracket is the argument", 
                              "√", "√(100)*2", "in brackets all following symbols will be counted in powers"]
