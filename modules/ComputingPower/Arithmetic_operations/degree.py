@@ -1,11 +1,9 @@
 r"""
 Степень
 """
-from .multiplication import multiplication
-from .minus import minus
-from .plus import sum
 
-def degree(first_path: str, second_path: list):
+
+def degree(first_path: str, second_path: list, minus, sum, multiplication):
     result = 1
     if "x" in first_path or "x" in second_path:
         return
@@ -43,11 +41,6 @@ def degree(first_path: str, second_path: list):
             del second_path[index_f - 1]
             second_path.insert(index_f - 1, result_f)
 
-    if second_path < 0:
-        for i in range(second_path * (-1)):
-            result = result * int(first_path)
-        return f"1/({result})"
-
-    for i in range(second_path):
+    for i in range(int(second_path[0])):
         result = result * int(first_path)
     return result

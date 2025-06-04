@@ -2,11 +2,7 @@ r"""
 Деление
 """
 
-from .minus import minus
-from .plus import sum
-from .multiplication import multiplication
-
-def division(first_path: list, second_path: list): 
+def division(first_path: list, second_path: list, minus, sum, multiplication): 
     for i in range(len(first_path)):
         first_path[i] = first_path[i].replace("(", "").replace(")", "")
     

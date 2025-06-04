@@ -7,3 +7,4 @@ from .minus import *
 from .multiplication import *
 from .plus import *
 from .degree import *
+from .radical import *

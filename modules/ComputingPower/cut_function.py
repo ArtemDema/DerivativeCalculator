@@ -14,7 +14,7 @@ r"""
 #невозможно продолжать решение функции)
 
 def cut_function(function: list):
-    list_operations = ["^","/","*","+","-","log","lg"]
+    list_operations = ["^","/","√","*","+","-","log","lg"]
     final = False
     while final == False:
         number = 0
@@ -27,6 +27,8 @@ def cut_function(function: list):
                         del function[index_f]
                         split_f= part.split(f"{list_operations[i]}", 1)
                         split_f.insert(1, f"{list_operations[i]}")
+                        if split_f[0] == "": del split_f[0]
+                        if split_f[2] == "": del split_f[2]
                         for i in range(len(split_f)):
                             function.insert(index_f + i, split_f[i])
         if number == 0: final = True
