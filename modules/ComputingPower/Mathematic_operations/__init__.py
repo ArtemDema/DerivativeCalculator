@@ -8,3 +8,4 @@ from .multiplication import *
 from .plus import *
 from .degree import *
 from .radical import *
+from .trigonometric_functions import *

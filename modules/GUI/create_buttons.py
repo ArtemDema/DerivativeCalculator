@@ -6,7 +6,7 @@ from .main_Frames import button_frame, graphic_frame
 from .class_button import Button
 
 list_text_button = ["sin","cos","tg","|","^","√",
-                    "ctg","x","+","*","log","(","-","/","ln",
+                    ".","x","+","*","log","(","-","/","ln",
                     ")","1","4","7","2","5","8","0","3","6","9"]
 
 #-------------------------------------------------------------------
@@ -32,7 +32,6 @@ for i in range(4):
     del list_text_button[0]
 #-------------------------------------------------------------------
 button5 = Button(master = button_frame, x = 433, y = 10, text = " ", fg_color = "#D9D9D9", hover_color = "#ACACAC")
-button5 = Button(master = button_frame, x = 433, y = 70, text = ".", fg_color = "#D9D9D9", hover_color = "#ACACAC")
 
 for i in range(3):
     button6 = Button(master = button_frame, x = 543, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#D9D9D9",
