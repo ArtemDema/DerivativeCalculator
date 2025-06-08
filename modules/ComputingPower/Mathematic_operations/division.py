@@ -2,7 +2,7 @@ r"""
 Деление
 """
 
-def division(first_path: list, second_path: list, minus, sum, multiplication, degree): 
+def division(first_path: list, second_path: list, minus, sum, multiplication, degree, radical): 
     list_operations = ["^","/","√","*","+","-","log","lg","(",")"]
     final = False
     while final == False:
@@ -75,10 +75,35 @@ def division(first_path: list, second_path: list, minus, sum, multiplication, de
                 
                 list_degree = [''.join(list_degree)]
 
-                result_f = degree(first_path[index_f - 1], list_degree, minus, sum, multiplication, division)
+                result_f = degree(first_path[index_f - 1], list_degree, minus, sum, multiplication, division, radical)
 
                 del first_path[index_f - 1]
                 first_path[index_f - 1] =  str(result_f)
+            
+            if "√" in part:
+                index_f = first_path.index(part)
+                list_radical = []
+                column = 0
+                final = False
+                while final == False:
+                    if ")" in first_path[index_f + 1]:
+                        list_radical.append(first_path[index_f + 1])
+                        del first_path[index_f + 1]
+                        column -= 1
+                        if column == 0: final = True
+                    elif "(" in first_path[index_f + 1]:
+                        list_radical.append(first_path[index_f + 1])
+                        del first_path[index_f + 1]
+                        column += 1
+                    else:
+                        list_radical.append(first_path[index_f + 1])
+                        del first_path[index_f + 1]
+                
+                list_radical = [''.join(list_radical)]
+
+                result_f = radical(list_radical, minus, sum, multiplication, degree, division)
+                del first_path[index_f - 1]
+                first_path.insert(index_f - 1, str(result_f))
 
             if "*" in part:
                 index_f = first_path.index(part)

@@ -3,7 +3,7 @@ r"""
 """
 
 
-def degree(first_path: str, second_path: list, minus, sum, multiplication, division):
+def degree(first_path: str, second_path: list, minus, sum, multiplication, division, radical):
     result = 1
     if "x" in first_path or "x" in second_path:
         return
@@ -45,6 +45,7 @@ def degree(first_path: str, second_path: list, minus, sum, multiplication, divis
                     stop = True
                 else:
                     index_division += 1
+
             for i in range(index_division):
                 list_division_f.append(second_path[index_f - index_division])
                 index_division -= 1
@@ -68,16 +69,10 @@ def degree(first_path: str, second_path: list, minus, sum, multiplication, divis
             list_division_f = [''.join(list_division_f)]
             list_division_s = [''.join(list_division_s)]
 
-            result_f = division(list_division_f, list_division_s, minus, sum, multiplication)
+            result_f = division(list_division_f, list_division_s, minus, sum, multiplication, degree, radical)
             
             stop = False
             index_division = 1
-            while stop == False:
-                if ")" in second_path[index_f + index_division]:
-                    del second_path[index_f + index_division]
-                    stop = True
-                else: del second_path[index_f + index_division]
-            stop = False
             while stop == False:
                 if "(" in second_path[index_f - index_division]:
                     del second_path[index_f - index_division]
@@ -86,6 +81,31 @@ def degree(first_path: str, second_path: list, minus, sum, multiplication, divis
                 else: 
                     del second_path[index_f - index_division]
                     index_division += 1
+
+        if "√" in part:
+            index_f = second_path.index(part)
+            list_radical = []
+            column = 0
+            final = False
+            while final == False:
+                if ")" in second_path[index_f + 1]:
+                    list_radical.append(second_path[index_f + 1])
+                    del second_path[index_f + 1]
+                    column -= 1
+                    if column == 0: final = True
+                elif "(" in second_path[index_f + 1]:
+                    list_radical.append(second_path[index_f + 1])
+                    del second_path[index_f + 1]
+                    column += 1
+                else:
+                    list_radical.append(second_path[index_f + 1])
+                    del second_path[index_f + 1]
+            
+            list_radical = [''.join(list_radical)]
+
+            result_f = radical(list_radical, minus, sum, multiplication, degree, division)
+            del second_path[index_f - 1]
+            second_path.insert(index_f - 1, str(result_f))
 
         if "*" in part:
             index_f = second_path.index(part)

@@ -17,13 +17,14 @@ def start_power(equation, button9):
             if f"{list_operations[i]}" in part:
                 index = start_equation.index(part)
 
-                # if f"{list_operations[i]}" == "^":
-                #     list_degree = [start_equation[index + 1]]
-                #     result = degree(start_equation[index - 1], list_degree, minus, sum, multiplication, division)
-                #     del start_equation[index + 1]
-                #     del start_equation[index - 1]
-                #     del start_equation[index - 1]
-                #     start_equation.insert(index - 1, str(result))
+                if f"{list_operations[i]}" == "^":
+                    if len(part) == 1:
+                        list_degree = [start_equation[index + 1]]
+                        result = degree(start_equation[index - 1], list_degree, minus, sum, multiplication, division, radical)
+                        del start_equation[index + 1]
+                        del start_equation[index - 1]
+                        del start_equation[index - 1]
+                        start_equation.insert(index - 1, str(result))
                 #----------------------------------------------------------------------------------
                 if f"{list_operations[i]}" == "sin" or f"{list_operations[i]}" == "cos" or f"{list_operations[i]}" == "tg":
                     stop = False
@@ -45,47 +46,51 @@ def start_power(equation, button9):
                             stop = True
                         else:
                             del start_equation[index + list_trigonometric]
-                    print(start_equation)
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "√":
-                    result = radical(start_equation[index + 1], minus, sum, multiplication)
-                    del start_equation[index + 1]
-                    del start_equation[index - 1]
-                    del start_equation[index - 1]
-                    start_equation.insert(index - 1, str(result))
+                    if len(part) == 1:
+                        list_radical = [start_equation[index + 1]]
+                        result = radical(list_radical, minus, sum, multiplication, degree, division)
+                        del start_equation[index + 1]
+                        del start_equation[index]
+                        start_equation.insert(index, str(result))
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "/":
-                    list_division_f = [start_equation[index - 1]]
-                    list_division_s = [start_equation[index + 1]]
-                    result = division(list_division_f, list_division_s, minus, sum, multiplication, degree)
-                    del start_equation[index + 1]
-                    del start_equation[index - 1]
-                    del start_equation[index - 1]
-                    start_equation.insert(index - 1, str(result))
+                    if len(part) == 1:
+                        list_division_f = [start_equation[index - 1]]
+                        list_division_s = [start_equation[index + 1]]
+                        result = division(list_division_f, list_division_s, minus, sum, multiplication, degree, radical)
+                        del start_equation[index + 1]
+                        del start_equation[index - 1]
+                        del start_equation[index - 1]
+                        start_equation.insert(index - 1, str(result))
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "*":
-                    result = multiplication(start_equation[index - 1], start_equation[index + 1])
-                    if result != None:
-                        del start_equation[index + 1]
-                        del start_equation[index - 1]
-                        del start_equation[index - 1]
-                        start_equation.insert(index - 1, str(result))
+                    if len(part) == 1:
+                        result = multiplication(start_equation[index - 1], start_equation[index + 1])
+                        if result != None:
+                            del start_equation[index + 1]
+                            del start_equation[index - 1]
+                            del start_equation[index - 1]
+                            start_equation.insert(index - 1, str(result))
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "-":
-                    result = minus(start_equation[index - 1], start_equation[index + 1])
-                    if result != None:
-                        del start_equation[index + 1]
-                        del start_equation[index - 1]
-                        del start_equation[index - 1]
-                        start_equation.insert(index - 1, str(result))
+                    if len(part) == 1:
+                        result = minus(start_equation[index - 1], start_equation[index + 1])
+                        if result != None:
+                            del start_equation[index + 1]
+                            del start_equation[index - 1]
+                            del start_equation[index - 1]
+                            start_equation.insert(index - 1, str(result))
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "+":
-                    result = sum(start_equation[index - 1], start_equation[index + 1])
-                    if result != None:
-                        del start_equation[index + 1]
-                        del start_equation[index - 1]
-                        del start_equation[index - 1]
-                        start_equation.insert(index - 1, str(result))
+                    if len(part) == 1:
+                        result = sum(start_equation[index - 1], start_equation[index + 1])
+                        if result != None:
+                            del start_equation[index + 1]
+                            del start_equation[index - 1]
+                            del start_equation[index - 1]
+                            start_equation.insert(index - 1, str(result))
 
     print(start_equation)
     
