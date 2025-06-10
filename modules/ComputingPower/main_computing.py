@@ -27,25 +27,12 @@ def start_power(equation, button9):
                         start_equation.insert(index - 1, str(result))
                 #----------------------------------------------------------------------------------
                 if f"{list_operations[i]}" == "sin" or f"{list_operations[i]}" == "cos" or f"{list_operations[i]}" == "tg":
-                    stop = False
-                    list_trigonometric = []
-                    index_trigonometric = 0
-                    while stop == False:
-                        if ")" in start_equation[index + index_trigonometric]:
-                            list_trigonometric.append(start_equation[index + index_trigonometric])
-                            stop = True
-                        else:
-                            list_trigonometric.append(start_equation[index + index_trigonometric])
-                            index_trigonometric += 1
-                    result = trigonometric_functions(list_trigonometric, f"{list_operations[i]}", minus, sum, multiplication)
-                    stop = False
-                    list_trigonometric = 0
-                    while stop == False:
-                        if ")" in start_equation[index + list_trigonometric]:
-                            start_equation[index + list_trigonometric] = str(result)
-                            stop = True
-                        else:
-                            del start_equation[index + list_trigonometric]
+                    list_trigonometric = [start_equation[index + 1]]
+                    result = trigonometric_functions(list_trigonometric, f"{list_operations[i]}", minus, 
+                                                     sum, multiplication, division, radical, degree)
+                    del start_equation[index + 1]
+                    del start_equation[index]
+                    start_equation.insert(index, str(result))
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "√":
                     if len(part) == 1:

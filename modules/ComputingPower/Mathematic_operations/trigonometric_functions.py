@@ -4,17 +4,140 @@ r"""
 
 import math
 
-def trigonometric_functions(function: list, type, minus, sum, multiplication):
-    for i in range(len(function)):
-            function[i] = function[i].replace("(", "").replace(")", "")
+def trigonometric_functions(function: list, type, minus, sum, multiplication, division, radical, degree):
+    list_operations = ["^","/","√","*","+","-","log","lg","(",")"]
+    final = False
+    while final == False:
+        number = 0
+        for i in range(len(list_operations)):
+            for part in function:
+                if f"{list_operations[i]}" in part:
+                    if len(part) > 1:
+                        number += 1
+                        index_f = function.index(part)
+                        del function[index_f]
+                        split_f= part.split(f"{list_operations[i]}", 1)
+                        split_f.insert(1, f"{list_operations[i]}")
+                        if split_f[0] == "": 
+                            del split_f[0]
+                        if len(split_f) == 3:
+                            if split_f[2] == "": 
+                                del split_f[2]
+                        for i in range(len(split_f)):
+                            function.insert(index_f + i, split_f[i])
+        if number == 0: final = True
 
-    for i in range(len(function)):
-            function[i] = function[i].replace("sin", "").replace("cos", "")
-
-    for i in range(len(function)):
-            function[i] = function[i].replace("tg", "")
+    del (function[0])
+    del (function[-1])
 
     for part in function:
+        if "^" in part:
+            index_f = function.index(part)
+            list_degree = []
+            column = 0
+            final = False 
+            while final == False:
+                if ")" in function[index_f + 1]:
+                    list_degree.append(function[index_f + 1])
+                    del function[index_f + 1]
+                    column -= 1
+                    if column == 0: final = True
+                elif "(" in function[index_f + 1]:
+                    list_degree.append(function[index_f + 1])
+                    del function[index_f + 1]
+                    column += 1
+                else:
+                    list_degree.append(function[index_f + 1])
+                    del function[index_f + 1]
+            
+            list_degree = [''.join(list_degree)]
+
+            result_f = degree(function[index_f - 1], list_degree, minus, sum, multiplication, division, radical)
+
+            del function[index_f - 1]
+            function[index_f - 1] =  str(result_f)
+
+        if "/" in part:
+            index_f = function.index(part)
+            list_division_f = []
+            list_division_s = []
+            index_division = 1
+            stop = False
+            while stop == False:
+                if "(" in function[index_f - index_division]:
+                    stop = True
+                else:
+                    index_division += 1
+
+            for i in range(index_division):
+                list_division_f.append(function[index_f - index_division])
+                index_division -= 1
+
+            column = 0
+            final = False 
+            while final == False:
+                if ")" in function[index_f + 1]:
+                    list_division_s.append(function[index_f + 1])
+                    del function[index_f + 1]
+                    column -= 1
+                    if column == 0: final = True
+                elif "(" in function[index_f + 1]:
+                    list_division_s.append(function[index_f + 1])
+                    del function[index_f + 1]
+                    column += 1
+                else:
+                    list_division_s.append(function[index_f + 1])
+                    del function[index_f + 1]
+
+            list_division_f = [''.join(list_division_f)]
+            list_division_s = [''.join(list_division_s)]
+
+            result_f = division(list_division_f, list_division_s, minus, sum, multiplication, degree, radical)
+            
+            stop = False
+            index_division = 1
+            while stop == False:
+                if "(" in function[index_f - index_division]:
+                    del function[index_f - index_division]
+                    function[index_f - index_division] = str(result_f)
+                    stop = True
+                else: 
+                    del function[index_f - index_division]
+                    index_division += 1
+            
+        if "√" in part:
+            index_f = function.index(part)
+            list_radical = []
+            column = 0
+            final = False
+            while final == False:
+                if ")" in function[index_f + 1]:
+                    list_radical.append(function[index_f + 1])
+                    del function[index_f + 1]
+                    column -= 1
+                    if column == 0: final = True
+                elif "(" in function[index_f + 1]:
+                    list_radical.append(function[index_f + 1])
+                    del function[index_f + 1]
+                    column += 1
+                else:
+                    list_radical.append(function[index_f + 1])
+                    del function[index_f + 1]
+            
+            list_radical = [''.join(list_radical)]
+
+            result_f = radical(list_radical, minus, sum, multiplication, degree, division)
+            del function[index_f - 1]
+            function.insert(index_f - 1, str(result_f))
+
+        if "*" in part:
+            index_f = function.index(part)
+            result_f = multiplication(function[index_f - 1], function[index_f + 1])
+            del function[index_f - 1]
+            del function[index_f - 1]
+            del function[index_f - 1]
+            function.insert(index_f - 1, result_f)
+
         if "+" in part:
             index_f = function.index(part)
             result_f = sum(function[index_f - 1], function[index_f + 1])
@@ -26,14 +149,6 @@ def trigonometric_functions(function: list, type, minus, sum, multiplication):
         if "-" in part:
             index_f = function.index(part)
             result_f = minus(function[index_f - 1], function[index_f + 1])
-            del function[index_f - 1]
-            del function[index_f - 1]
-            del function[index_f - 1]
-            function.insert(index_f - 1, result_f)
-        
-        if "*" in part:
-            index_f = function.index(part)
-            result_f = multiplication(function[index_f - 1], function[index_f + 1])
             del function[index_f - 1]
             del function[index_f - 1]
             del function[index_f - 1]
