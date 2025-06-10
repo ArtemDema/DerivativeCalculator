@@ -11,7 +11,7 @@ def start_power(equation, button9):
     list = [f"{start_equation}"]
     start_equation = cut_function(list)
     # print(start_equation)
-    list_operations = ["^","sin","cos","tg","ctg","/","√","*","+","-"]
+    list_operations = ["^","sin","cos","tg","ctg","√","log","ln","/","*","+","-"]
     for i in range(len(list_operations)):
         for part in start_equation:
             if f"{list_operations[i]}" in part:
@@ -41,6 +41,25 @@ def start_power(equation, button9):
                         del start_equation[index + 1]
                         del start_equation[index]
                         start_equation.insert(index, str(result))
+                #----------------------------------------------------------------------------------
+                elif f"{list_operations[i]}" == "log":
+                    if len(part) == 3:
+                        list_logarithm_f = [start_equation[index + 1]]
+                        list_logarithm_s = [start_equation[index + 1]]
+                        result = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree)
+                        del start_equation[index + 1]
+                        del start_equation[index]
+                        del start_equation[index]
+                        start_equation.insert(index, str(result))
+                #----------------------------------------------------------------------------------
+                elif f"{list_operations[i]}" == "ln":
+                    if len(part) == 2:
+                        list_logarithm_f = [start_equation[index + 1]]
+                        result = logarithm(list_logarithm_f, None, "lg", minus, sum, multiplication, division, radical, degree)
+                        del start_equation[index + 1]
+                        del start_equation[index]
+                        start_equation.insert(index, str(result))
+                    # print(result)
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "/":
                     if len(part) == 1:
@@ -80,4 +99,3 @@ def start_power(equation, button9):
                             start_equation.insert(index - 1, str(result))
 
     print(start_equation)
-    
