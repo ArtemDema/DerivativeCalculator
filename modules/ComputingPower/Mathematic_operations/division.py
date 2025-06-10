@@ -2,8 +2,8 @@ r"""
 Деление
 """
 
-def division(first_path: list, second_path: list, minus, sum, multiplication, degree, radical): 
-    list_operations = ["^","/","√","*","+","-","log","lg","(",")"]
+def division(first_path: list, second_path: list, minus, sum, multiplication, degree, radical, logarithm): 
+    list_operations = ["^","/","√","*","+","-","(",")"]
     final = False
     while final == False:
         number = 0
@@ -53,133 +53,274 @@ def division(first_path: list, second_path: list, minus, sum, multiplication, de
     del (second_path[-1])
 
     for i in range(2):
-        for part in first_path:
-            if "^" in part:
-                index_f = first_path.index(part)
-                list_degree = []
-                column = 0
-                final = False 
-                while final == False:
-                    if ")" in first_path[index_f + 1]:
-                        list_degree.append(first_path[index_f + 1])
-                        del first_path[index_f + 1]
-                        column -= 1
-                        if column == 0: final = True
-                    elif "(" in first_path[index_f + 1]:
-                        list_degree.append(first_path[index_f + 1])
-                        del first_path[index_f + 1]
-                        column += 1
-                    else:
-                        list_degree.append(first_path[index_f + 1])
-                        del first_path[index_f + 1]
+        list_operations = ["^","sin","cos","tg","ctg","√","log","ln","/","*","+","-"]
+        for i in range(len(list_operations)):
+            for part in first_path:
+                if f"{list_operations[i]}" in part:
+
+                    if f"{list_operations[i]}" == "^":
+                        if len(part) == 1:
+                            index_f = first_path.index(part)
+                            list_degree = []
+                            column = 0
+                            final = False 
+                            while final == False:
+                                if ")" in first_path[index_f + 1]:
+                                    list_degree.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                                    column -= 1
+                                    if column == 0: final = True
+                                elif "(" in first_path[index_f + 1]:
+                                    list_degree.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                                    column += 1
+                                else:
+                                    list_degree.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                            
+                            list_degree = [''.join(list_degree)]
+
+                            result_f = degree(first_path[index_f - 1], list_degree, minus, sum, multiplication, division, radical, logarithm)
+
+                            del first_path[index_f - 1]
+                            first_path[index_f - 1] =  str(result_f)
+
+                    if f"{list_operations[i]}" == "log":
+                        if len(part) == 3:
+                            index_f = first_path.index(part)
+                            list_logarithm_f = []
+                            list_logarithm_s = []
+                            stop = False
+                            column = 0
+                            while stop == False:
+                                if ")" in first_path[index_f + 1]:
+                                    list_logarithm_f.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                                    column -= 1
+                                    if column == 0: stop = True
+                                elif "(" in first_path[index_f + 1]:
+                                    list_logarithm_f.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                                    column += 1
+                                else:
+                                    list_logarithm_f.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                            
+                            stop = False
+                            column = 0
+                            while stop == False:
+                                if ")" in first_path[index_f + 1]:
+                                    list_logarithm_s.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                                    column -= 1
+                                    if column == 0: stop = True
+                                elif "(" in first_path[index_f + 1]:
+                                    list_logarithm_s.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                                    column += 1
+                                else:
+                                    list_logarithm_s.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+
+                            result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree)
+                            del first_path[index_f]
+                            first_path.insert(index_f, str(result_f))
+
+                    if f"{list_operations[i]}" == "ln":
+                        if len(part) == 2:
+                            list_logarithm_f = [first_path[index_f + 1]]
+                            result_f = logarithm(list_logarithm_f, None, "lg", minus, sum, multiplication, division, radical, degree)
+                            del first_path[index_f + 1]
+                            del first_path[index_f]
+                            first_path.insert(index_f, str(result_f))
+                    
+                    if f"{list_operations[i]}" == "√":
+                        if len(part) == 1:
+                            index_f = first_path.index(part)
+                            list_radical = []
+                            column = 0
+                            final = False
+                            while final == False:
+                                if ")" in first_path[index_f + 1]:
+                                    list_radical.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                                    column -= 1
+                                    if column == 0: final = True
+                                elif "(" in first_path[index_f + 1]:
+                                    list_radical.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                                    column += 1
+                                else:
+                                    list_radical.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                            
+                            list_radical = [''.join(list_radical)]
+
+                            result_f = radical(list_radical, minus, sum, multiplication, degree, division, logarithm)
+                            del first_path[index_f - 1]
+                            first_path.insert(index_f - 1, str(result_f))
+
+                    if f"{list_operations[i]}" == "*":
+                        if len(part) == 1:
+                            index_f = first_path.index(part)
+                            result_f = multiplication(first_path[index_f - 1], first_path[index_f + 1])
+                            del first_path[index_f - 1]
+                            del first_path[index_f - 1]
+                            del first_path[index_f - 1]
+                            first_path.insert(index_f - 1, str(result_f))
+
+                    if f"{list_operations[i]}" == "+":
+                        if len(part) == 1:
+                            index_f = first_path.index(part)
+                            result_f = sum(first_path[index_f - 1], first_path[index_f + 1])
+                            del first_path[index_f - 1]
+                            del first_path[index_f - 1]
+                            del first_path[index_f - 1]
+                            first_path.insert(index_f - 1, str(result_f))
                 
-                list_degree = [''.join(list_degree)]
-
-                result_f = degree(first_path[index_f - 1], list_degree, minus, sum, multiplication, division, radical)
-
-                del first_path[index_f - 1]
-                first_path[index_f - 1] =  str(result_f)
-            
-            if "√" in part:
-                index_f = first_path.index(part)
-                list_radical = []
-                column = 0
-                final = False
-                while final == False:
-                    if ")" in first_path[index_f + 1]:
-                        list_radical.append(first_path[index_f + 1])
-                        del first_path[index_f + 1]
-                        column -= 1
-                        if column == 0: final = True
-                    elif "(" in first_path[index_f + 1]:
-                        list_radical.append(first_path[index_f + 1])
-                        del first_path[index_f + 1]
-                        column += 1
-                    else:
-                        list_radical.append(first_path[index_f + 1])
-                        del first_path[index_f + 1]
-                
-                list_radical = [''.join(list_radical)]
-
-                result_f = radical(list_radical, minus, sum, multiplication, degree, division)
-                del first_path[index_f - 1]
-                first_path.insert(index_f - 1, str(result_f))
-
-            if "*" in part:
-                index_f = first_path.index(part)
-                result_f = multiplication(first_path[index_f - 1], first_path[index_f + 1])
-                del first_path[index_f - 1]
-                del first_path[index_f - 1]
-                del first_path[index_f - 1]
-                first_path.insert(index_f - 1, result_f)
-
-            if "+" in part:
-                index_f = first_path.index(part)
-                result_f = sum(first_path[index_f - 1], first_path[index_f + 1])
-                del first_path[index_f - 1]
-                del first_path[index_f - 1]
-                del first_path[index_f - 1]
-                first_path.insert(index_f - 1, result_f)
-        
-            if "-" in part:
-                index_f = first_path.index(part)
-                result_f = minus(first_path[index_f - 1], first_path[index_f + 1])
-                del first_path[index_f - 1]
-                del first_path[index_f - 1]
-                del first_path[index_f - 1]
-                first_path.insert(index_f - 1, result_f)
+                    if f"{list_operations[i]}" == "-":
+                        if len(part) == 1:
+                            index_f = first_path.index(part)
+                            result_f = minus(first_path[index_f - 1], first_path[index_f + 1])
+                            del first_path[index_f - 1]
+                            del first_path[index_f - 1]
+                            del first_path[index_f - 1]
+                            first_path.insert(index_f - 1, str(result_f))
 
     #---------------------------------------------------------------
     for i in range(2):
-        for part in second_path:
-            if "^" in part:
-                index_f = second_path.index(part)
-                list_degree = []
-                column = 0
-                final = False
-                while final == False:
-                    if ")" in second_path[index_f + 1]:
-                        list_degree.append(second_path[index_f + 1])
-                        del second_path[index_f + 1]
-                        column -= 1
-                        if column == 0: final = True
-                    elif "(" in second_path[index_f + 1]:
-                        list_degree.append(second_path[index_f + 1])
-                        del second_path[index_f + 1]
-                        column += 1
-                    else:
-                        list_degree.append(second_path[index_f + 1])
-                        del second_path[index_f + 1]
+        list_operations = ["^","sin","cos","tg","ctg","√","log","ln","/","*","+","-"]
+        for i in range(len(list_operations)):
+            for part in second_path:
+                if f"{list_operations[i]}" in part:
 
-                list_degree = [''.join(list_degree)]
+                    if f"{list_operations[i]}" == "^":
+                        if len(part) == 1:
+                            index_f = second_path.index(part)
+                            list_degree = []
+                            column = 0
+                            final = False 
+                            while final == False:
+                                if ")" in second_path[index_f + 1]:
+                                    list_degree.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                                    column -= 1
+                                    if column == 0: final = True
+                                elif "(" in second_path[index_f + 1]:
+                                    list_degree.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                                    column += 1
+                                else:
+                                    list_degree.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                            
+                            list_degree = [''.join(list_degree)]
 
-                result_f = degree(second_path[index_f - 1], list_degree, minus, sum, multiplication, division)
+                            result_f = degree(second_path[index_f - 1], list_degree, minus, sum, multiplication, division, radical, logarithm)
 
-                del second_path[index_f - 1]
-                second_path[index_f - 1] = str(result_f)
+                            del second_path[index_f - 1]
+                            second_path[index_f - 1] =  str(result_f)
 
-            if "*" in part:
-                index_f = second_path.index(part)
-                result_f = multiplication(second_path[index_f - 1], second_path[index_f + 1])
-                del second_path[index_f - 1]
-                del second_path[index_f - 1]
-                del second_path[index_f - 1]
-                second_path.insert(index_f - 1, result_f)
+                    if f"{list_operations[i]}" == "log":
+                        if len(part) == 3:
+                            index_f = second_path.index(part)
+                            list_logarithm_f = []
+                            list_logarithm_s = []
+                            stop = False
+                            column = 0
+                            while stop == False:
+                                if ")" in second_path[index_f + 1]:
+                                    list_logarithm_f.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                                    column -= 1
+                                    if column == 0: stop = True
+                                elif "(" in second_path[index_f + 1]:
+                                    list_logarithm_f.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                                    column += 1
+                                else:
+                                    list_logarithm_f.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                            
+                            stop = False
+                            column = 0
+                            while stop == False:
+                                if ")" in second_path[index_f + 1]:
+                                    list_logarithm_s.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                                    column -= 1
+                                    if column == 0: stop = True
+                                elif "(" in second_path[index_f + 1]:
+                                    list_logarithm_s.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                                    column += 1
+                                else:
+                                    list_logarithm_s.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+
+                            result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree)
+                            del second_path[index_f]
+                            second_path.insert(index_f, str(result_f))
+
+                    if f"{list_operations[i]}" == "ln":
+                        if len(part) == 2:
+                            list_logarithm_f = [second_path[index_f + 1]]
+                            result_f = logarithm(list_logarithm_f, None, "lg", minus, sum, multiplication, division, radical, degree)
+                            del second_path[index_f + 1]
+                            del second_path[index_f]
+                            second_path.insert(index_f, str(result_f))
+                    
+                    if f"{list_operations[i]}" == "√":
+                        if len(part) == 1:
+                            index_f = second_path.index(part)
+                            list_radical = []
+                            column = 0
+                            final = False
+                            while final == False:
+                                if ")" in second_path[index_f + 1]:
+                                    list_radical.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                                    column -= 1
+                                    if column == 0: final = True
+                                elif "(" in second_path[index_f + 1]:
+                                    list_radical.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                                    column += 1
+                                else:
+                                    list_radical.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                            
+                            list_radical = [''.join(list_radical)]
+
+                            result_f = radical(list_radical, minus, sum, multiplication, degree, division, logarithm)
+                            del second_path[index_f - 1]
+                            second_path.insert(index_f - 1, str(result_f))
+
+                    if f"{list_operations[i]}" == "*":
+                        if len(part) == 1:
+                            index_f = second_path.index(part)
+                            result_f = multiplication(second_path[index_f - 1], second_path[index_f + 1])
+                            del second_path[index_f - 1]
+                            del second_path[index_f - 1]
+                            del second_path[index_f - 1]
+                            second_path.insert(index_f - 1, str(result_f))
+
+                    if f"{list_operations[i]}" == "+":
+                        if len(part) == 1:
+                            index_f = second_path.index(part)
+                            result_f = sum(second_path[index_f - 1], second_path[index_f + 1])
+                            del second_path[index_f - 1]
+                            del second_path[index_f - 1]
+                            del second_path[index_f - 1]
+                            second_path.insert(index_f - 1, str(result_f))
                 
-            if "+" in part:
-                index_f = second_path.index(part)
-                result_f = sum(second_path[index_f - 1], second_path[index_f + 1])
-                del second_path[index_f - 1]
-                del second_path[index_f - 1]
-                del second_path[index_f - 1]
-                second_path.insert(index_f - 1, result_f)
-        
-            if "-" in part:
-                index_f = second_path.index(part)
-                result_f = minus(second_path[index_f - 1], second_path[index_f + 1])
-                del second_path[index_f - 1]
-                del second_path[index_f - 1]
-                del second_path[index_f - 1]
-                second_path.insert(index_f - 1, result_f)
+                    if f"{list_operations[i]}" == "-":
+                        if len(part) == 1:
+                            index_f = second_path.index(part)
+                            result_f = minus(second_path[index_f - 1], second_path[index_f + 1])
+                            del second_path[index_f - 1]
+                            del second_path[index_f - 1]
+                            del second_path[index_f - 1]
+                            second_path.insert(index_f - 1, str(result_f))
 
     return int(first_path[0]) // int(second_path[0])

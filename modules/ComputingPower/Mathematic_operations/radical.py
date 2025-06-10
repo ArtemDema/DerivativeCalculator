@@ -4,8 +4,8 @@ r"""
 import math
 
 
-def radical(function: list, minus, sum, multiplication, degree, division):
-    list_operations = ["^","/","√","*","+","-","log","lg","(",")"]
+def radical(function: list, minus, sum, multiplication, degree, division, logarithm):
+    list_operations = ["^","/","√","*","+","-","(",")"]
     final = False
     while final == False:
         number = 0
@@ -30,107 +30,162 @@ def radical(function: list, minus, sum, multiplication, degree, division):
     del (function[0])
     del (function[-1])
 
-    for part in function:
-        if "^" in part:
-            if len(part) == 1:
-                index_f = function.index(part)
-                list_degree = []
-                column = 0
-                final = False 
-                while final == False:
-                    if ")" in function[index_f + 1]:
-                        list_degree.append(function[index_f + 1])
-                        del function[index_f + 1]
-                        column -= 1
-                        if column == 0: final = True
-                    elif "(" in function[index_f + 1]:
-                        list_degree.append(function[index_f + 1])
-                        del function[index_f + 1]
-                        column += 1
-                    else:
-                        list_degree.append(function[index_f + 1])
-                        del function[index_f + 1]
-                
-                list_degree = [''.join(list_degree)]
+    list_operations = ["^","sin","cos","tg","ctg","√","log","ln","/","*","+","-"]
+    for i in range(len(list_operations)):
+        for part in function:
+            if f"{list_operations[i]}" in part:
 
-                result_f = degree(function[index_f - 1], list_degree, minus, sum, multiplication, division)
+                if f"{list_operations[i]}" == "^":
+                    if len(part) == 1:
+                        index_f = function.index(part)
+                        list_degree = []
+                        column = 0
+                        final = False 
+                        while final == False:
+                            if ")" in function[index_f + 1]:
+                                list_degree.append(function[index_f + 1])
+                                del function[index_f + 1]
+                                column -= 1
+                                if column == 0: final = True
+                            elif "(" in function[index_f + 1]:
+                                list_degree.append(function[index_f + 1])
+                                del function[index_f + 1]
+                                column += 1
+                            else:
+                                list_degree.append(function[index_f + 1])
+                                del function[index_f + 1]
+                        
+                        list_degree = [''.join(list_degree)]
 
-                del function[index_f - 1]
-                function[index_f - 1] =  str(result_f)
-        
-        if "/" in part:
-            index_f = function.index(part)
-            list_division_f = []
-            list_division_s = []
-            index_division = 1
-            stop = False
-            while stop == False:
-                if "(" in function[index_f - index_division]:
-                    stop = True
-                else:
-                    index_division += 1
+                        result_f = degree(function[index_f - 1], list_degree, minus, sum, multiplication, division, logarithm)
 
-            for i in range(index_division):
-                list_division_f.append(function[index_f - index_division])
-                index_division -= 1
-
-            column = 0
-            final = False 
-            while final == False:
-                if ")" in function[index_f + 1]:
-                    list_division_s.append(function[index_f + 1])
-                    del function[index_f + 1]
-                    column -= 1
-                    if column == 0: final = True
-                elif "(" in function[index_f + 1]:
-                    list_division_s.append(function[index_f + 1])
-                    del function[index_f + 1]
-                    column += 1
-                else:
-                    list_division_s.append(function[index_f + 1])
-                    del function[index_f + 1]
-
-            list_division_f = [''.join(list_division_f)]
-            list_division_s = [''.join(list_division_s)]
-
-            result_f = division(list_division_f, list_division_s, minus, sum, multiplication, degree)
+                        del function[index_f - 1]
+                        function[index_f - 1] =  str(result_f)
             
-            stop = False
-            index_division = 1
-            while stop == False:
-                if "(" in function[index_f - index_division]:
-                    del function[index_f - index_division]
-                    function[index_f - index_division] = str(result_f)
-                    stop = True
-                else: 
-                    del function[index_f - index_division]
-                    index_division += 1
+                if f"{list_operations[i]}" == "log":
+                        if len(part) == 3:
+                            index_f = function.index(part)
+                            list_logarithm_f = []
+                            list_logarithm_s = []
+                            stop = False
+                            column = 0
+                            while stop == False:
+                                if ")" in function[index_f + 1]:
+                                    list_logarithm_f.append(function[index_f + 1])
+                                    del function[index_f + 1]
+                                    column -= 1
+                                    if column == 0: stop = True
+                                elif "(" in function[index_f + 1]:
+                                    list_logarithm_f.append(function[index_f + 1])
+                                    del function[index_f + 1]
+                                    column += 1
+                                else:
+                                    list_logarithm_f.append(function[index_f + 1])
+                                    del function[index_f + 1]
+                            
+                            stop = False
+                            column = 0
+                            while stop == False:
+                                if ")" in function[index_f + 1]:
+                                    list_logarithm_s.append(function[index_f + 1])
+                                    del function[index_f + 1]
+                                    column -= 1
+                                    if column == 0: stop = True
+                                elif "(" in function[index_f + 1]:
+                                    list_logarithm_s.append(function[index_f + 1])
+                                    del function[index_f + 1]
+                                    column += 1
+                                else:
+                                    list_logarithm_s.append(function[index_f + 1])
+                                    del function[index_f + 1]
 
-        if "*" in part:
-            if len(part) == 1:
-                index_f = function.index(part)
-                result_f = multiplication(function[index_f - 1], function[index_f + 1])
-                del function[index_f - 1]
-                del function[index_f - 1]
-                del function[index_f - 1]
-                function.insert(index_f - 1, result_f)
+                            result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree)
+                            del function[index_f]
+                            function.insert(index_f, str(result_f))
 
-        if "+" in part:
-            if len(part) == 1:
-                index_f = function.index(part)
-                result_f = sum(function[index_f - 1], function[index_f + 1])
-                del function[index_f - 1]
-                del function[index_f - 1]
-                del function[index_f - 1]
-                function.insert(index_f - 1, result_f)
-    
-        if "-" in part:
-            if len(part) == 1:
-                index_f = function.index(part)
-                result_f = minus(function[index_f - 1], function[index_f + 1])
-                del function[index_f - 1]
-                del function[index_f - 1]
-                del function[index_f - 1]
-                function.insert(index_f - 1, result_f)
+                if f"{list_operations[i]}" == "ln":
+                    if len(part) == 2:
+                        print("a")
+                        list_logarithm_f = [function[index_f + 1]]
+                        result_f = logarithm(list_logarithm_f, None, "lg", minus, sum, multiplication, division, radical, degree)
+                        del function[index_f + 1]
+                        del function[index_f]
+                        function.insert(index_f, str(result_f))
+                
+                if f"{list_operations[i]}" == "/":
+                    if len(part) == 1:
+                        index_f = function.index(part)
+                        list_division_f = []
+                        list_division_s = []
+                        index_division = 1
+                        stop = False
+                        while stop == False:
+                            if "(" in function[index_f - index_division]:
+                                stop = True
+                            else:
+                                index_division += 1
+
+                        for i in range(index_division):
+                            list_division_f.append(function[index_f - index_division])
+                            index_division -= 1
+
+                        column = 0
+                        final = False 
+                        while final == False:
+                            if ")" in function[index_f + 1]:
+                                list_division_s.append(function[index_f + 1])
+                                del function[index_f + 1]
+                                column -= 1
+                                if column == 0: final = True
+                            elif "(" in function[index_f + 1]:
+                                list_division_s.append(function[index_f + 1])
+                                del function[index_f + 1]
+                                column += 1
+                            else:
+                                list_division_s.append(function[index_f + 1])
+                                del function[index_f + 1]
+
+                        list_division_f = [''.join(list_division_f)]
+                        list_division_s = [''.join(list_division_s)]
+
+                        result_f = division(list_division_f, list_division_s, minus, sum, multiplication, degree, logarithm)
+                        
+                        stop = False
+                        index_division = 1
+                        while stop == False:
+                            if "(" in function[index_f - index_division]:
+                                del function[index_f - index_division]
+                                function[index_f - index_division] = str(result_f)
+                                stop = True
+                            else: 
+                                del function[index_f - index_division]
+                                index_division += 1
+
+                if f"{list_operations[i]}" == "*":
+                    if len(part) == 1:
+                        index_f = function.index(part)
+                        result_f = multiplication(function[index_f - 1], function[index_f + 1])
+                        del function[index_f - 1]
+                        del function[index_f - 1]
+                        del function[index_f - 1]
+                        function.insert(index_f - 1, str(result_f))
+
+                if f"{list_operations[i]}" == "+":
+                    if len(part) == 1:
+                        index_f = function.index(part)
+                        result_f = sum(function[index_f - 1], function[index_f + 1])
+                        del function[index_f - 1]
+                        del function[index_f - 1]
+                        del function[index_f - 1]
+                        function.insert(index_f - 1, str(result_f))
+            
+                if f"{list_operations[i]}" == "-":
+                    if len(part) == 1:
+                        index_f = function.index(part)
+                        result_f = minus(function[index_f - 1], function[index_f + 1])
+                        del function[index_f - 1]
+                        del function[index_f - 1]
+                        del function[index_f - 1]
+                        function.insert(index_f - 1, str(result_f))
 
     return int(math.sqrt(int(function[0])))
