@@ -63,52 +63,70 @@ def radical(function: list, minus, sum, multiplication, degree, division, logari
                         function[index_f - 1] =  str(result_f)
             
                 if f"{list_operations[i]}" == "log":
-                        if len(part) == 3:
-                            index_f = function.index(part)
-                            list_logarithm_f = []
-                            list_logarithm_s = []
-                            stop = False
-                            column = 0
-                            while stop == False:
-                                if ")" in function[index_f + 1]:
-                                    list_logarithm_f.append(function[index_f + 1])
-                                    del function[index_f + 1]
-                                    column -= 1
-                                    if column == 0: stop = True
-                                elif "(" in function[index_f + 1]:
-                                    list_logarithm_f.append(function[index_f + 1])
-                                    del function[index_f + 1]
-                                    column += 1
-                                else:
-                                    list_logarithm_f.append(function[index_f + 1])
-                                    del function[index_f + 1]
-                            
-                            stop = False
-                            column = 0
-                            while stop == False:
-                                if ")" in function[index_f + 1]:
-                                    list_logarithm_s.append(function[index_f + 1])
-                                    del function[index_f + 1]
-                                    column -= 1
-                                    if column == 0: stop = True
-                                elif "(" in function[index_f + 1]:
-                                    list_logarithm_s.append(function[index_f + 1])
-                                    del function[index_f + 1]
-                                    column += 1
-                                else:
-                                    list_logarithm_s.append(function[index_f + 1])
-                                    del function[index_f + 1]
+                    if len(part) == 3:
+                        index_f = function.index(part)
+                        list_logarithm_f = []
+                        list_logarithm_s = []
+                        stop = False
+                        column = 0
+                        while stop == False:
+                            if ")" in function[index_f + 1]:
+                                list_logarithm_f.append(function[index_f + 1])
+                                del function[index_f + 1]
+                                column -= 1
+                                if column == 0: stop = True
+                            elif "(" in function[index_f + 1]:
+                                list_logarithm_f.append(function[index_f + 1])
+                                del function[index_f + 1]
+                                column += 1
+                            else:
+                                list_logarithm_f.append(function[index_f + 1])
+                                del function[index_f + 1]
+                        
+                        stop = False
+                        column = 0
+                        while stop == False:
+                            if ")" in function[index_f + 1]:
+                                list_logarithm_s.append(function[index_f + 1])
+                                del function[index_f + 1]
+                                column -= 1
+                                if column == 0: stop = True
+                            elif "(" in function[index_f + 1]:
+                                list_logarithm_s.append(function[index_f + 1])
+                                del function[index_f + 1]
+                                column += 1
+                            else:
+                                list_logarithm_s.append(function[index_f + 1])
+                                del function[index_f + 1]
 
-                            result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree)
-                            del function[index_f]
-                            function.insert(index_f, str(result_f))
+                        result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree)
+                        del function[index_f]
+                        function.insert(index_f, str(result_f))
 
                 if f"{list_operations[i]}" == "ln":
                     if len(part) == 2:
-                        print("a")
-                        list_logarithm_f = [function[index_f + 1]]
-                        result_f = logarithm(list_logarithm_f, None, "lg", minus, sum, multiplication, division, radical, degree)
-                        del function[index_f + 1]
+                        index_f = function.index(part)
+                        list_logarithm_f = []
+                        column = 0
+                        final = False 
+                        while final == False:
+                            if ")" in function[index_f + 1]:
+                                list_logarithm_f.append(function[index_f + 1])
+                                del function[index_f + 1]
+                                column -= 1
+                                if column == 0: final = True
+                            elif "(" in function[index_f + 1]:
+                                list_logarithm_f.append(function[index_f + 1])
+                                del function[index_f + 1]
+                                column += 1
+                            else:
+                                list_logarithm_f.append(function[index_f + 1])
+                                del function[index_f + 1]
+                        
+                        list_logarithm_f = [''.join(list_logarithm_f)]
+
+                        result_f = logarithm(list_logarithm_f, None, "ln", minus, sum, multiplication, division, radical, degree)
+
                         del function[index_f]
                         function.insert(index_f, str(result_f))
                 

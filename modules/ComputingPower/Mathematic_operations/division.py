@@ -128,9 +128,28 @@ def division(first_path: list, second_path: list, minus, sum, multiplication, de
 
                     if f"{list_operations[i]}" == "ln":
                         if len(part) == 2:
-                            list_logarithm_f = [first_path[index_f + 1]]
-                            result_f = logarithm(list_logarithm_f, None, "lg", minus, sum, multiplication, division, radical, degree)
-                            del first_path[index_f + 1]
+                            index_f = first_path.index(part)
+                            list_logarithm_f = []
+                            column = 0
+                            final = False 
+                            while final == False:
+                                if ")" in first_path[index_f + 1]:
+                                    list_logarithm_f.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                                    column -= 1
+                                    if column == 0: final = True
+                                elif "(" in first_path[index_f + 1]:
+                                    list_logarithm_f.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                                    column += 1
+                                else:
+                                    list_logarithm_f.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                            
+                            list_logarithm_f = [''.join(list_logarithm_f)]
+
+                            result_f = logarithm(list_logarithm_f, None, "ln", minus, sum, multiplication, division, radical, degree)
+
                             del first_path[index_f]
                             first_path.insert(index_f, str(result_f))
                     
@@ -264,9 +283,28 @@ def division(first_path: list, second_path: list, minus, sum, multiplication, de
 
                     if f"{list_operations[i]}" == "ln":
                         if len(part) == 2:
-                            list_logarithm_f = [second_path[index_f + 1]]
-                            result_f = logarithm(list_logarithm_f, None, "lg", minus, sum, multiplication, division, radical, degree)
-                            del second_path[index_f + 1]
+                            index_f = second_path.index(part)
+                            list_logarithm_f = []
+                            column = 0
+                            final = False 
+                            while final == False:
+                                if ")" in second_path[index_f + 1]:
+                                    list_logarithm_f.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                                    column -= 1
+                                    if column == 0: final = True
+                                elif "(" in second_path[index_f + 1]:
+                                    list_logarithm_f.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                                    column += 1
+                                else:
+                                    list_logarithm_f.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                            
+                            list_logarithm_f = [''.join(list_logarithm_f)]
+
+                            result_f = logarithm(list_logarithm_f, None, "ln", minus, sum, multiplication, division, radical, degree)
+
                             del second_path[index_f]
                             second_path.insert(index_f, str(result_f))
                     

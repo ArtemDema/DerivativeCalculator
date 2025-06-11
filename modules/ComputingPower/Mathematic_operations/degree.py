@@ -128,11 +128,30 @@ def degree(first_path: str, second_path: list, minus, sum, multiplication, divis
 
                 if f"{list_operations[i]}" == "ln":
                     if len(part) == 2:
-                        list_logarithm_f = [second_path[index_f + 1]]
-                        result_f = logarithm(list_logarithm_f, None, "lg", minus, sum, multiplication, division, radical, degree)
-                        del second_path[index_f + 1]
-                        del second_path[index_f]
-                        second_path.insert(index_f, str(result_f))
+                            index_f = second_path.index(part)
+                            list_logarithm_f = []
+                            column = 0
+                            final = False 
+                            while final == False:
+                                if ")" in second_path[index_f + 1]:
+                                    list_logarithm_f.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                                    column -= 1
+                                    if column == 0: final = True
+                                elif "(" in second_path[index_f + 1]:
+                                    list_logarithm_f.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                                    column += 1
+                                else:
+                                    list_logarithm_f.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                            
+                            list_logarithm_f = [''.join(list_logarithm_f)]
+
+                            result_f = logarithm(list_logarithm_f, None, "ln", minus, sum, multiplication, division, radical, degree)
+
+                            del second_path[index_f]
+                            second_path.insert(index_f, str(result_f))
 
                 if f"{list_operations[i]}" == "√":
                     if len(part) == 1:

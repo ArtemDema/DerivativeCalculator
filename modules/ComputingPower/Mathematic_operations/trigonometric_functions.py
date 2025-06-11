@@ -151,6 +151,32 @@ def trigonometric_functions(function: list, type, minus, sum, multiplication, di
                         result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree)
                         del function[index_f]
                         function.insert(index_f, str(result_f))
+                
+                if f"{list_operations[i]}" == "ln":
+                    if len(part) == 2:
+                        index_f = function.index(part)
+                        list_logarithm_f = []
+                        column = 0
+                        final = False 
+                        while final == False:
+                            if ")" in function[index_f + 1]:
+                                list_logarithm_f.append(function[index_f + 1])
+                                del function[index_f + 1]
+                                column -= 1
+                                if column == 0: final = True
+                            elif "(" in function[index_f + 1]:
+                                list_logarithm_f.append(function[index_f + 1])
+                                del function[index_f + 1]
+                                column += 1
+                            else:
+                                list_logarithm_f.append(function[index_f + 1])
+                                del function[index_f + 1]
+                        
+                        list_logarithm_f = [''.join(list_logarithm_f)]
+
+                        result_f = logarithm(list_logarithm_f, None, "ln", minus, sum, multiplication, division, radical, degree)
+                        del function[index_f]
+                        function.insert(index_f, str(result_f))
 
                 if f"{list_operations[i]}" == "√":
                     if len(part) == 1:
