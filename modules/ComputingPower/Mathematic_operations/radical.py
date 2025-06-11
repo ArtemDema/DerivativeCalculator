@@ -4,7 +4,7 @@ r"""
 import math
 
 
-def radical(function: list, minus, sum, multiplication, degree, division, logarithm):
+def radical(function: list, minus, sum, multiplication, degree, division, logarithm, trigonometric_functions):
     list_operations = ["^","/","√","*","+","-","(",")"]
     final = False
     while final == False:
@@ -57,10 +57,39 @@ def radical(function: list, minus, sum, multiplication, degree, division, logari
                         
                         list_degree = [''.join(list_degree)]
 
-                        result_f = degree(function[index_f - 1], list_degree, minus, sum, multiplication, division, logarithm)
+                        result_f = degree(function[index_f - 1], list_degree, minus, sum, multiplication, division, logarithm, trigonometric_functions)
 
-                        del function[index_f - 1]
-                        function[index_f - 1] =  str(result_f)
+                        del function[index_f]
+                        function.insert(index_f, str(result_f))
+                
+                if f"{list_operations[i]}" == "sin" or f"{list_operations[i]}" == "cos" or f"{list_operations[i]}" == "tg":
+                    if list_operations[i] == "sin" or list_operations[i] == "cos": len_t = 3
+                    else: len_t = 2
+                    if len(part) == len_t:
+                        index_f = function.index(part)
+                        list_trigonometric = []
+                        column = 0
+                        final = False 
+                        while final == False:
+                            if ")" in function[index_f + 1]:
+                                list_trigonometric.append(function[index_f + 1])
+                                del function[index_f + 1]
+                                column -= 1
+                                if column == 0: final = True
+                            elif "(" in function[index_f + 1]:
+                                list_trigonometric.append(function[index_f + 1])
+                                del function[index_f + 1]
+                                column += 1
+                            else:
+                                list_trigonometric.append(function[index_f + 1])
+                                del function[index_f + 1]
+                        
+                        list_trigonometric = [''.join(list_trigonometric)]
+
+                        result_f = trigonometric_functions(list_trigonometric, list_operations[i], minus, sum, multiplication, division, radical, degree, logarithm)
+
+                        del function[index_f]
+                        function.insert(index_f, str(result_f))
             
                 if f"{list_operations[i]}" == "log":
                     if len(part) == 3:
@@ -99,7 +128,7 @@ def radical(function: list, minus, sum, multiplication, degree, division, logari
                                 list_logarithm_s.append(function[index_f + 1])
                                 del function[index_f + 1]
 
-                        result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree)
+                        result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree, trigonometric_functions)
                         del function[index_f]
                         function.insert(index_f, str(result_f))
 
@@ -125,7 +154,7 @@ def radical(function: list, minus, sum, multiplication, degree, division, logari
                         
                         list_logarithm_f = [''.join(list_logarithm_f)]
 
-                        result_f = logarithm(list_logarithm_f, None, "ln", minus, sum, multiplication, division, radical, degree)
+                        result_f = logarithm(list_logarithm_f, None, "ln", minus, sum, multiplication, division, radical, degree, trigonometric_functions)
 
                         del function[index_f]
                         function.insert(index_f, str(result_f))
@@ -166,7 +195,7 @@ def radical(function: list, minus, sum, multiplication, degree, division, logari
                         list_division_f = [''.join(list_division_f)]
                         list_division_s = [''.join(list_division_s)]
 
-                        result_f = division(list_division_f, list_division_s, minus, sum, multiplication, degree, logarithm)
+                        result_f = division(list_division_f, list_division_s, minus, sum, multiplication, degree, logarithm, trigonometric_functions)
                         
                         stop = False
                         index_division = 1

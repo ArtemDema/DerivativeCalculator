@@ -27,6 +27,7 @@ def trigonometric_functions(function: list, type, minus, sum, multiplication, di
                             function.insert(index_f + i, split_f[i])
         if number == 0: final = True
 
+    print(function)
     del (function[0])
     del (function[-1])
 
@@ -59,8 +60,8 @@ def trigonometric_functions(function: list, type, minus, sum, multiplication, di
 
                         result_f = degree(function[index_f - 1], list_degree, minus, sum, multiplication, division, radical, logarithm)
 
-                        del function[index_f - 1]
-                        function[index_f - 1] =  str(result_f)
+                        del function[index_f]
+                        function.insert(index_f, str(result_f))
 
                 if f"{list_operations[i]}" == "/":
                     if len(part) == 1:

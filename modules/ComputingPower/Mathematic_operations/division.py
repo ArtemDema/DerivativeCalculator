@@ -2,7 +2,7 @@ r"""
 Деление
 """
 
-def division(first_path: list, second_path: list, minus, sum, multiplication, degree, radical, logarithm): 
+def division(first_path: list, second_path: list, minus, sum, multiplication, degree, radical, logarithm, trigonometric_functions): 
     list_operations = ["^","/","√","*","+","-","(",")"]
     final = False
     while final == False:
@@ -82,8 +82,37 @@ def division(first_path: list, second_path: list, minus, sum, multiplication, de
 
                             result_f = degree(first_path[index_f - 1], list_degree, minus, sum, multiplication, division, radical, logarithm)
 
-                            del first_path[index_f - 1]
-                            first_path[index_f - 1] =  str(result_f)
+                            del first_path[index_f]
+                            first_path.insert(index_f, str(result_f))
+                    
+                    if f"{list_operations[i]}" == "sin" or f"{list_operations[i]}" == "cos" or f"{list_operations[i]}" == "tg":
+                        if list_operations[i] == "sin" or list_operations[i] == "cos": len_t = 3
+                        else: len_t = 2
+                        if len(part) == len_t:
+                            index_f = first_path.index(part)
+                            list_trigonometric = []
+                            column = 0
+                            final = False 
+                            while final == False:
+                                if ")" in first_path[index_f + 1]:
+                                    list_trigonometric.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                                    column -= 1
+                                    if column == 0: final = True
+                                elif "(" in first_path[index_f + 1]:
+                                    list_trigonometric.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                                    column += 1
+                                else:
+                                    list_trigonometric.append(first_path[index_f + 1])
+                                    del first_path[index_f + 1]
+                            
+                            list_trigonometric = [''.join(list_trigonometric)]
+
+                            result_f = trigonometric_functions(list_trigonometric, list_operations[i], minus, sum, multiplication, division, radical, degree, logarithm)
+
+                            del first_path[index_f]
+                            first_path.insert(index_f, str(result_f))
 
                     if f"{list_operations[i]}" == "log":
                         if len(part) == 3:
@@ -122,7 +151,7 @@ def division(first_path: list, second_path: list, minus, sum, multiplication, de
                                     list_logarithm_s.append(first_path[index_f + 1])
                                     del first_path[index_f + 1]
 
-                            result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree)
+                            result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree, trigonometric_functions)
                             del first_path[index_f]
                             first_path.insert(index_f, str(result_f))
 
@@ -148,7 +177,7 @@ def division(first_path: list, second_path: list, minus, sum, multiplication, de
                             
                             list_logarithm_f = [''.join(list_logarithm_f)]
 
-                            result_f = logarithm(list_logarithm_f, None, "ln", minus, sum, multiplication, division, radical, degree)
+                            result_f = logarithm(list_logarithm_f, None, "ln", minus, sum, multiplication, division, radical, degree, trigonometric_functions)
 
                             del first_path[index_f]
                             first_path.insert(index_f, str(result_f))
@@ -175,7 +204,7 @@ def division(first_path: list, second_path: list, minus, sum, multiplication, de
                             
                             list_radical = [''.join(list_radical)]
 
-                            result_f = radical(list_radical, minus, sum, multiplication, degree, division, logarithm)
+                            result_f = radical(list_radical, minus, sum, multiplication, degree, division, logarithm, trigonometric_functions)
                             del first_path[index_f - 1]
                             first_path.insert(index_f - 1, str(result_f))
 
@@ -235,10 +264,39 @@ def division(first_path: list, second_path: list, minus, sum, multiplication, de
                             
                             list_degree = [''.join(list_degree)]
 
-                            result_f = degree(second_path[index_f - 1], list_degree, minus, sum, multiplication, division, radical, logarithm)
+                            result_f = degree(second_path[index_f - 1], list_degree, minus, sum, multiplication, division, radical, logarithm, trigonometric_functions)
 
-                            del second_path[index_f - 1]
-                            second_path[index_f - 1] =  str(result_f)
+                            del second_path[index_f]
+                            second_path.insert(index_f, str(result_f))
+                    
+                    if f"{list_operations[i]}" == "sin" or f"{list_operations[i]}" == "cos" or f"{list_operations[i]}" == "tg":
+                        if list_operations[i] == "sin" or list_operations[i] == "cos": len_t = 3
+                        else: len_t = 2
+                        if len(part) == len_t:
+                            index_f = second_path.index(part)
+                            list_trigonometric = []
+                            column = 0
+                            final = False 
+                            while final == False:
+                                if ")" in second_path[index_f + 1]:
+                                    list_trigonometric.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                                    column -= 1
+                                    if column == 0: final = True
+                                elif "(" in second_path[index_f + 1]:
+                                    list_trigonometric.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                                    column += 1
+                                else:
+                                    list_trigonometric.append(second_path[index_f + 1])
+                                    del second_path[index_f + 1]
+                            
+                            list_trigonometric = [''.join(list_trigonometric)]
+
+                            result_f = trigonometric_functions(list_trigonometric, list_operations[i], minus, sum, multiplication, division, radical, degree, logarithm)
+
+                            del second_path[index_f]
+                            second_path.insert(index_f, str(result_f))
 
                     if f"{list_operations[i]}" == "log":
                         if len(part) == 3:
@@ -277,7 +335,7 @@ def division(first_path: list, second_path: list, minus, sum, multiplication, de
                                     list_logarithm_s.append(second_path[index_f + 1])
                                     del second_path[index_f + 1]
 
-                            result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree)
+                            result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree, trigonometric_functions)
                             del second_path[index_f]
                             second_path.insert(index_f, str(result_f))
 
@@ -303,7 +361,7 @@ def division(first_path: list, second_path: list, minus, sum, multiplication, de
                             
                             list_logarithm_f = [''.join(list_logarithm_f)]
 
-                            result_f = logarithm(list_logarithm_f, None, "ln", minus, sum, multiplication, division, radical, degree)
+                            result_f = logarithm(list_logarithm_f, None, "ln", minus, sum, multiplication, division, radical, degree, trigonometric_functions)
 
                             del second_path[index_f]
                             second_path.insert(index_f, str(result_f))
@@ -330,7 +388,7 @@ def division(first_path: list, second_path: list, minus, sum, multiplication, de
                             
                             list_radical = [''.join(list_radical)]
 
-                            result_f = radical(list_radical, minus, sum, multiplication, degree, division, logarithm)
+                            result_f = radical(list_radical, minus, sum, multiplication, degree, division, logarithm, trigonometric_functions)
                             del second_path[index_f - 1]
                             second_path.insert(index_f - 1, str(result_f))
 

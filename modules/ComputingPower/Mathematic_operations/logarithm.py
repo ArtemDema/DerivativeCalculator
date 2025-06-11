@@ -3,7 +3,7 @@ r"""
 """
 import math
 
-def logarithm(function_f: list, function_s: list, type, minus, sum, multiplication, division, radical, degree):
+def logarithm(function_f: list, function_s: list, type, minus, sum, multiplication, division, radical, degree, trigonometric_functions):
     list_operations = ["^","/","√","*","+","-","(",")"]
     final = False
     while final == False:
@@ -83,8 +83,37 @@ def logarithm(function_f: list, function_s: list, type, minus, sum, multiplicati
 
                         result_f = degree(function_f[index_f - 1], list_degree, minus, sum, multiplication, division, radical)
 
-                        del function_f[index_f - 1]
-                        function_f[index_f - 1] =  str(result_f)
+                        del function_f[index_f]
+                        function_f.insert(index_f, str(result_f))
+                
+                if f"{list_operations[i]}" == "sin" or f"{list_operations[i]}" == "cos" or f"{list_operations[i]}" == "tg":
+                    if list_operations[i] == "sin" or list_operations[i] == "cos": len_t = 3
+                    else: len_t = 2
+                    if len(part) == len_t:
+                        index_f = function_f.index(part)
+                        list_trigonometric = []
+                        column = 0
+                        final = False 
+                        while final == False:
+                            if ")" in function_f[index_f + 1]:
+                                list_trigonometric.append(function_f[index_f + 1])
+                                del function_f[index_f + 1]
+                                column -= 1
+                                if column == 0: final = True
+                            elif "(" in function_f[index_f + 1]:
+                                list_trigonometric.append(function_f[index_f + 1])
+                                del function_f[index_f + 1]
+                                column += 1
+                            else:
+                                list_trigonometric.append(function_f[index_f + 1])
+                                del function_f[index_f + 1]
+                        
+                        list_trigonometric = [''.join(list_trigonometric)]
+
+                        result_f = trigonometric_functions(list_trigonometric, list_operations[i], minus, sum, multiplication, division, radical, degree, logarithm)
+
+                        del function_f[index_f]
+                        function_f.insert(index_f, str(result_f))
 
                 if f"{list_operations[i]}" == "/":
                     if len(part) == 1:
@@ -122,7 +151,7 @@ def logarithm(function_f: list, function_s: list, type, minus, sum, multiplicati
                         list_division_f = [''.join(list_division_f)]
                         list_division_s = [''.join(list_division_s)]
 
-                        result_f = division(list_division_f, list_division_s, minus, sum, multiplication, degree, radical)
+                        result_f = division(list_division_f, list_division_s, minus, sum, multiplication, degree, radical, trigonometric_functions)
                         
                         stop = False
                         index_division = 1
@@ -157,7 +186,7 @@ def logarithm(function_f: list, function_s: list, type, minus, sum, multiplicati
                         
                         list_radical = [''.join(list_radical)]
 
-                        result_f = radical(list_radical, minus, sum, multiplication, degree, division)
+                        result_f = radical(list_radical, minus, sum, multiplication, degree, division, trigonometric_functions)
                         del function_f[index_f - 1]
                         function_f.insert(index_f - 1, str(result_f))
 
@@ -216,7 +245,7 @@ def logarithm(function_f: list, function_s: list, type, minus, sum, multiplicati
                             
                             list_degree = [''.join(list_degree)]
 
-                            result_f = degree(function_s[index_f - 1], list_degree, minus, sum, multiplication, division, radical)
+                            result_f = trigonometric_functions(function_s[index_f - 1], list_degree, minus, sum, multiplication, division, radical)
 
                             del function_s[index_f - 1]
                             function_s[index_f - 1] =  str(result_f)
@@ -257,7 +286,7 @@ def logarithm(function_f: list, function_s: list, type, minus, sum, multiplicati
                             list_division_f = [''.join(list_division_f)]
                             list_division_s = [''.join(list_division_s)]
 
-                            result_f = division(list_division_f, list_division_s, minus, sum, multiplication, degree, radical)
+                            result_f = division(list_division_f, list_division_s, minus, sum, multiplication, degree, radical, trigonometric_functions)
                             
                             stop = False
                             index_division = 1
@@ -292,7 +321,7 @@ def logarithm(function_f: list, function_s: list, type, minus, sum, multiplicati
                             
                             list_radical = [''.join(list_radical)]
 
-                            result_f = radical(list_radical, minus, sum, multiplication, degree, division)
+                            result_f = radical(list_radical, minus, sum, multiplication, degree, division, trigonometric_functions)
                             del function_s[index_f - 1]
                             function_s.insert(index_f - 1, str(result_f))
 

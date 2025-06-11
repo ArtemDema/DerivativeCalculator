@@ -20,24 +20,27 @@ def start_power(equation, button9):
                 if f"{list_operations[i]}" == "^":
                     if len(part) == 1:
                         list_degree = [start_equation[index + 1]]
-                        result = degree(start_equation[index - 1], list_degree, minus, sum, multiplication, division, radical, logarithm)
+                        result = degree(start_equation[index - 1], list_degree, minus, sum, multiplication, division, radical, logarithm, trigonometric_functions)
                         del start_equation[index + 1]
                         del start_equation[index - 1]
                         del start_equation[index - 1]
                         start_equation.insert(index - 1, str(result))
                 #----------------------------------------------------------------------------------
                 if f"{list_operations[i]}" == "sin" or f"{list_operations[i]}" == "cos" or f"{list_operations[i]}" == "tg":
-                    list_trigonometric = [start_equation[index + 1]]
-                    result = trigonometric_functions(list_trigonometric, f"{list_operations[i]}", minus, 
-                                                     sum, multiplication, division, radical, degree, logarithm)
-                    del start_equation[index + 1]
-                    del start_equation[index]
-                    start_equation.insert(index, str(result))
+                    if list_operations[i] == "sin" or list_operations[i] == "cos": len_t = 3
+                    else: len_t = 2
+                    if len(part) == len_t:
+                        list_trigonometric = [start_equation[index + 1]]
+                        result = trigonometric_functions(list_trigonometric, f"{list_operations[i]}", minus, 
+                                                        sum, multiplication, division, radical, degree, logarithm)
+                        del start_equation[index + 1]
+                        del start_equation[index]
+                        start_equation.insert(index, str(result))
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "√":
                     if len(part) == 1:
                         list_radical = [start_equation[index + 1]]
-                        result = radical(list_radical, minus, sum, multiplication, degree, division, logarithm)
+                        result = radical(list_radical, minus, sum, multiplication, degree, division, logarithm, trigonometric_functions)
                         del start_equation[index + 1]
                         del start_equation[index]
                         start_equation.insert(index, str(result))
@@ -46,7 +49,7 @@ def start_power(equation, button9):
                     if len(part) == 3:
                         list_logarithm_f = [start_equation[index + 1]]
                         list_logarithm_s = [start_equation[index + 2]]
-                        result = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree)
+                        result = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree, trigonometric_functions)
                         del start_equation[index + 1]
                         del start_equation[index]
                         del start_equation[index]
@@ -55,7 +58,7 @@ def start_power(equation, button9):
                 elif f"{list_operations[i]}" == "ln":
                     if len(part) == 2:
                         list_logarithm_f = [start_equation[index + 1]]
-                        result = logarithm(list_logarithm_f, None, "lg", minus, sum, multiplication, division, radical, degree)
+                        result = logarithm(list_logarithm_f, None, "lg", minus, sum, multiplication, division, radical, degree, trigonometric_functions)
                         del start_equation[index + 1]
                         del start_equation[index]
                         start_equation.insert(index, str(result))
@@ -64,7 +67,7 @@ def start_power(equation, button9):
                     if len(part) == 1:
                         list_division_f = [start_equation[index - 1]]
                         list_division_s = [start_equation[index + 1]]
-                        result = division(list_division_f, list_division_s, minus, sum, multiplication, degree, radical, logarithm)
+                        result = division(list_division_f, list_division_s, minus, sum, multiplication, degree, radical, logarithm, trigonometric_functions)
                         del start_equation[index + 1]
                         del start_equation[index - 1]
                         del start_equation[index - 1]
