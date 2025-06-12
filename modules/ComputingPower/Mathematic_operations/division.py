@@ -2,7 +2,61 @@ r"""
 Деление
 """
 
-def division(first_path: list, second_path: list, minus, sum, multiplication, degree, radical, logarithm, trigonometric_functions): 
+def division_calculating(index, list, type, minus, sum,
+            multiplication, degree, degree_calculating, radical, radical_calculating, 
+            logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating):
+    list_division_f = []
+    list_division_s = []
+    index_division = 1
+    stop = False
+    while stop == False:
+        if "(" in list[index - index_division]:
+            stop = True
+        else:
+            index_division += 1
+
+    for i in range(index_division):
+        list_division_f.append(list[index - index_division])
+        index_division -= 1
+
+    column = 0
+    final = False 
+    while final == False:
+        if ")" in list[index + 1]:
+            list_division_s.append(list[index + 1])
+            del list[index + 1]
+            column -= 1
+            if column == 0: final = True
+        elif "(" in list[index + 1]:
+            list_division_s.append(list[index + 1])
+            del list[index + 1]
+            column += 1
+        else:
+            list_division_s.append(list[index + 1])
+            del list[index + 1]
+
+    list_division_f = [''.join(list_division_f)]
+    list_division_s = [''.join(list_division_s)]
+
+    result_f = division(list_division_f, list_division_s, minus, sum,
+            multiplication, degree, degree_calculating, radical, radical_calculating, 
+            logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
+    
+    stop = False
+    index_division = 1
+    while stop == False:
+        if "(" in list[index - index_division]:
+            del list[index - index_division]
+            list[index - index_division] = str(result_f)
+            stop = True
+        else: 
+            del list[index - index_division]
+            index_division += 1
+
+
+def division(first_path: list, second_path: list, minus, sum,
+            multiplication, degree, degree_calculating, radical, radical_calculating, 
+            logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating): 
     list_operations = ["^","/","√","*","+","-","(",")"]
     final = False
     while final == False:
@@ -61,152 +115,29 @@ def division(first_path: list, second_path: list, minus, sum, multiplication, de
                     if f"{list_operations[i]}" == "^":
                         if len(part) == 1:
                             index_f = first_path.index(part)
-                            list_degree = []
-                            column = 0
-                            final = False 
-                            while final == False:
-                                if ")" in first_path[index_f + 1]:
-                                    list_degree.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                                    column -= 1
-                                    if column == 0: final = True
-                                elif "(" in first_path[index_f + 1]:
-                                    list_degree.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                                    column += 1
-                                else:
-                                    list_degree.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                            
-                            list_degree = [''.join(list_degree)]
-
-                            result_f = degree(first_path[index_f - 1], list_degree, minus, sum, multiplication, division, radical, logarithm)
-
-                            del first_path[index_f]
-                            first_path.insert(index_f, str(result_f))
+                            first_path = degree_calculating(index_f, first_path, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
                     
                     if f"{list_operations[i]}" == "sin" or f"{list_operations[i]}" == "cos" or f"{list_operations[i]}" == "tg":
                         if list_operations[i] == "sin" or list_operations[i] == "cos": len_t = 3
                         else: len_t = 2
                         if len(part) == len_t:
                             index_f = first_path.index(part)
-                            list_trigonometric = []
-                            column = 0
-                            final = False 
-                            while final == False:
-                                if ")" in first_path[index_f + 1]:
-                                    list_trigonometric.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                                    column -= 1
-                                    if column == 0: final = True
-                                elif "(" in first_path[index_f + 1]:
-                                    list_trigonometric.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                                    column += 1
-                                else:
-                                    list_trigonometric.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                            
-                            list_trigonometric = [''.join(list_trigonometric)]
-
-                            result_f = trigonometric_functions(list_trigonometric, list_operations[i], minus, sum, multiplication, division, radical, degree, logarithm)
-
-                            del first_path[index_f]
-                            first_path.insert(index_f, str(result_f))
+                            first_path = trigonimetric_functions_calculating(index_f, first_path, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating)
 
                     if f"{list_operations[i]}" == "log":
                         if len(part) == 3:
                             index_f = first_path.index(part)
-                            list_logarithm_f = []
-                            list_logarithm_s = []
-                            stop = False
-                            column = 0
-                            while stop == False:
-                                if ")" in first_path[index_f + 1]:
-                                    list_logarithm_f.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                                    column -= 1
-                                    if column == 0: stop = True
-                                elif "(" in first_path[index_f + 1]:
-                                    list_logarithm_f.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                                    column += 1
-                                else:
-                                    list_logarithm_f.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                            
-                            stop = False
-                            column = 0
-                            while stop == False:
-                                if ")" in first_path[index_f + 1]:
-                                    list_logarithm_s.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                                    column -= 1
-                                    if column == 0: stop = True
-                                elif "(" in first_path[index_f + 1]:
-                                    list_logarithm_s.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                                    column += 1
-                                else:
-                                    list_logarithm_s.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-
-                            result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree, trigonometric_functions)
-                            del first_path[index_f]
-                            first_path.insert(index_f, str(result_f))
+                            first_path = log_calculating(index_f, first_path, f"{list_operations[i]}", minus, sum, multiplication, division, radical, degree, trigonometric_functions, trigonimetric_functions_calculating)
 
                     if f"{list_operations[i]}" == "ln":
                         if len(part) == 2:
                             index_f = first_path.index(part)
-                            list_logarithm_f = []
-                            column = 0
-                            final = False 
-                            while final == False:
-                                if ")" in first_path[index_f + 1]:
-                                    list_logarithm_f.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                                    column -= 1
-                                    if column == 0: final = True
-                                elif "(" in first_path[index_f + 1]:
-                                    list_logarithm_f.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                                    column += 1
-                                else:
-                                    list_logarithm_f.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                            
-                            list_logarithm_f = [''.join(list_logarithm_f)]
-
-                            result_f = logarithm(list_logarithm_f, None, "ln", minus, sum, multiplication, division, radical, degree, trigonometric_functions)
-
-                            del first_path[index_f]
-                            first_path.insert(index_f, str(result_f))
+                            first_path = ln_calculating(index_f, first_path, f"{list_operations[i]}", minus, sum, multiplication, division, radical, degree, trigonometric_functions, trigonimetric_functions_calculating)
                     
                     if f"{list_operations[i]}" == "√":
                         if len(part) == 1:
                             index_f = first_path.index(part)
-                            list_radical = []
-                            column = 0
-                            final = False
-                            while final == False:
-                                if ")" in first_path[index_f + 1]:
-                                    list_radical.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                                    column -= 1
-                                    if column == 0: final = True
-                                elif "(" in first_path[index_f + 1]:
-                                    list_radical.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                                    column += 1
-                                else:
-                                    list_radical.append(first_path[index_f + 1])
-                                    del first_path[index_f + 1]
-                            
-                            list_radical = [''.join(list_radical)]
-
-                            result_f = radical(list_radical, minus, sum, multiplication, degree, division, logarithm, trigonometric_functions)
-                            del first_path[index_f - 1]
-                            first_path.insert(index_f - 1, str(result_f))
+                            first_path = radical_calculating(index_f, first_path, f"{list_operations[i]}", minus, sum, multiplication, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
 
                     if f"{list_operations[i]}" == "*":
                         if len(part) == 1:
@@ -245,152 +176,29 @@ def division(first_path: list, second_path: list, minus, sum, multiplication, de
                     if f"{list_operations[i]}" == "^":
                         if len(part) == 1:
                             index_f = second_path.index(part)
-                            list_degree = []
-                            column = 0
-                            final = False 
-                            while final == False:
-                                if ")" in second_path[index_f + 1]:
-                                    list_degree.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                                    column -= 1
-                                    if column == 0: final = True
-                                elif "(" in second_path[index_f + 1]:
-                                    list_degree.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                                    column += 1
-                                else:
-                                    list_degree.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                            
-                            list_degree = [''.join(list_degree)]
-
-                            result_f = degree(second_path[index_f - 1], list_degree, minus, sum, multiplication, division, radical, logarithm, trigonometric_functions)
-
-                            del second_path[index_f]
-                            second_path.insert(index_f, str(result_f))
+                            second_path = degree_calculating(index_f, second_path, f"{list_operations[i]}", minus, sum, multiplication, division, radical, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
                     
                     if f"{list_operations[i]}" == "sin" or f"{list_operations[i]}" == "cos" or f"{list_operations[i]}" == "tg":
                         if list_operations[i] == "sin" or list_operations[i] == "cos": len_t = 3
                         else: len_t = 2
                         if len(part) == len_t:
                             index_f = second_path.index(part)
-                            list_trigonometric = []
-                            column = 0
-                            final = False 
-                            while final == False:
-                                if ")" in second_path[index_f + 1]:
-                                    list_trigonometric.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                                    column -= 1
-                                    if column == 0: final = True
-                                elif "(" in second_path[index_f + 1]:
-                                    list_trigonometric.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                                    column += 1
-                                else:
-                                    list_trigonometric.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                            
-                            list_trigonometric = [''.join(list_trigonometric)]
-
-                            result_f = trigonometric_functions(list_trigonometric, list_operations[i], minus, sum, multiplication, division, radical, degree, logarithm)
-
-                            del second_path[index_f]
-                            second_path.insert(index_f, str(result_f))
+                            second_path = trigonimetric_functions_calculating(index_f, second_path, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating)
 
                     if f"{list_operations[i]}" == "log":
                         if len(part) == 3:
                             index_f = second_path.index(part)
-                            list_logarithm_f = []
-                            list_logarithm_s = []
-                            stop = False
-                            column = 0
-                            while stop == False:
-                                if ")" in second_path[index_f + 1]:
-                                    list_logarithm_f.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                                    column -= 1
-                                    if column == 0: stop = True
-                                elif "(" in second_path[index_f + 1]:
-                                    list_logarithm_f.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                                    column += 1
-                                else:
-                                    list_logarithm_f.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                            
-                            stop = False
-                            column = 0
-                            while stop == False:
-                                if ")" in second_path[index_f + 1]:
-                                    list_logarithm_s.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                                    column -= 1
-                                    if column == 0: stop = True
-                                elif "(" in second_path[index_f + 1]:
-                                    list_logarithm_s.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                                    column += 1
-                                else:
-                                    list_logarithm_s.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-
-                            result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, radical, degree, trigonometric_functions)
-                            del second_path[index_f]
-                            second_path.insert(index_f, str(result_f))
+                            second_path = log_calculating(index_f, second_path, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating)
 
                     if f"{list_operations[i]}" == "ln":
                         if len(part) == 2:
                             index_f = second_path.index(part)
-                            list_logarithm_f = []
-                            column = 0
-                            final = False 
-                            while final == False:
-                                if ")" in second_path[index_f + 1]:
-                                    list_logarithm_f.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                                    column -= 1
-                                    if column == 0: final = True
-                                elif "(" in second_path[index_f + 1]:
-                                    list_logarithm_f.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                                    column += 1
-                                else:
-                                    list_logarithm_f.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                            
-                            list_logarithm_f = [''.join(list_logarithm_f)]
-
-                            result_f = logarithm(list_logarithm_f, None, "ln", minus, sum, multiplication, division, radical, degree, trigonometric_functions)
-
-                            del second_path[index_f]
-                            second_path.insert(index_f, str(result_f))
+                            second_path = ln_calculating(index_f, second_path, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating)
                     
                     if f"{list_operations[i]}" == "√":
                         if len(part) == 1:
                             index_f = second_path.index(part)
-                            list_radical = []
-                            column = 0
-                            final = False
-                            while final == False:
-                                if ")" in second_path[index_f + 1]:
-                                    list_radical.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                                    column -= 1
-                                    if column == 0: final = True
-                                elif "(" in second_path[index_f + 1]:
-                                    list_radical.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                                    column += 1
-                                else:
-                                    list_radical.append(second_path[index_f + 1])
-                                    del second_path[index_f + 1]
-                            
-                            list_radical = [''.join(list_radical)]
-
-                            result_f = radical(list_radical, minus, sum, multiplication, degree, division, logarithm, trigonometric_functions)
-                            del second_path[index_f - 1]
-                            second_path.insert(index_f - 1, str(result_f))
+                            function_f = radical_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum, multiplication, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
 
                     if f"{list_operations[i]}" == "*":
                         if len(part) == 1:
