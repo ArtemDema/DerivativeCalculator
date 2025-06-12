@@ -114,10 +114,14 @@ def trigonometric_functions(function: list, type, minus, sum, multiplication, di
                         function.insert(index_f - 1, str(result_f))
 
     if type == "sin":
-        return math.sin(int(function[0]))
+        result = math.sin(float(function[0]))
+        result = round(float(result), 1)
+        return result
     if type == "cos":
-        return math.cos(int(function[0]))
+        result = math.cos(float(function[0]))
+        result = round(float(result), 1)
+        return result
     if type == "tg":
-        return math.tan(int(function[0]))
-    if type == "ctg":
-        return math.tan(int(function[0]))
+        result = math.tan(float(function[0]))
+        result = round(float(result), 1)
+        return result

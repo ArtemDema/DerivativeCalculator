@@ -227,4 +227,6 @@ def division(first_path: list, second_path: list, minus, sum,
                             del second_path[index_f - 1]
                             second_path.insert(index_f - 1, str(result_f))
 
-    return int(first_path[0]) // int(second_path[0])
+    result = float(first_path[0]) / float(second_path[0])
+    result = round(float(result), 1)
+    return result

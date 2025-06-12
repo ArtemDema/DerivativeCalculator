@@ -238,6 +238,10 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                             function_s.insert(index_f - 1, str(result_f))
 
     if type == "log":
-        return int(math.log(int(function_s[0]), int(function_f[0])))
+        result = math.log(float(function_s[0]), float(function_f[0]))
+        result = round(float(result), 1)
+        return result
     else:
-        return int(math.log10(int(function_f[0])))
+        result = math.log10(float(function_f[0]))
+        result = round(float(result), 1)
+        return result

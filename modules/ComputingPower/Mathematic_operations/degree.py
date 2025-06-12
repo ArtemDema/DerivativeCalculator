@@ -121,6 +121,6 @@ def degree(first_path: str, second_path: list, minus, sum,
                         del second_path[index_f - 1]
                         second_path.insert(index_f - 1, str(result_f))
 
-    for i in range(int(second_path[0])):
-        result = result * int(first_path)
+    result = float(first_path[0]) ** float(second_path[0])
+    result = round(float(result), 1)
     return result

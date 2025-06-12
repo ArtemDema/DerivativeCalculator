@@ -122,4 +122,6 @@ def radical(function: list, minus, sum, multiplication,
                         del function[index_f - 1]
                         function.insert(index_f - 1, str(result_f))
 
-    return int(math.sqrt(int(function[0])))
+    result = math.sqrt(float(function[0]))
+    result = round(float(result), 1)
+    return result
