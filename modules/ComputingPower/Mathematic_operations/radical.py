@@ -33,6 +33,8 @@ def radical_calculating(index, list, type, minus, sum, multiplication,
     del list[index - 1]
     list.insert(index - 1, str(result_f))
 
+    return list
+
 
 def radical(function: list, minus, sum, multiplication, 
             degree, degree_calculating, division, division_calculating, 

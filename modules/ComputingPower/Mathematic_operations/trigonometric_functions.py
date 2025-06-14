@@ -28,6 +28,7 @@ def trigonimetric_functions_calculating(index, list, type, minus, sum, multiplic
 
     del list[index]
     list.insert(index, str(result_f))
+    
     return list
 
 def trigonometric_functions(function: list, type, minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating):

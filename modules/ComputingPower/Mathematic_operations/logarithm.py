@@ -46,6 +46,8 @@ def log_calculating(index, list, type, minus, sum,
     del list[index]
     list.insert(index, str(result_f))
 
+    return list
+
 def ln_calculating(index, list, type, minus, sum, 
               multiplication, division, division_calculating, radical, radical_calculating, 
               degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating):
@@ -74,6 +76,8 @@ def ln_calculating(index, list, type, minus, sum,
 
     del list[index]
     list.insert(index, str(result_f))
+
+    return list
 
 def logarithm(function_f: list, function_s: list, type, minus, sum, 
               multiplication, division, division_calculating, radical, radical_calculating, 
@@ -148,12 +152,12 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                 if f"{list_operations[i]}" == "/":
                     if len(part) == 1:
                         index_f = function_f.index(part)
-                        function_f = division_calculating(index_f, function_f, type, minus, sum,multiplication, degree, degree_calculating, radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
+                        function_f = division_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum,multiplication, degree, degree_calculating, radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
 
                 if f"{list_operations[i]}" == "√":
                     if len(part) == 1:
                         index_f = function_f.index(part)
-                        function_f = radical_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum, multiplication, division, radical, degree, trigonometric_functions, trigonimetric_functions_calculating)
+                        function_f = radical_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum, multiplication, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
 
                 if f"{list_operations[i]}" == "*":
                     if len(part) == 1:

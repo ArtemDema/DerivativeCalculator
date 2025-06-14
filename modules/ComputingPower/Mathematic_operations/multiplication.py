@@ -10,6 +10,5 @@ def multiplication(first_path, second_path):
 
     first_path = round(float(first_path), 1)
     second_path = round(float(second_path), 1)
-    print(first_path, second_path)
     
     return first_path * second_path

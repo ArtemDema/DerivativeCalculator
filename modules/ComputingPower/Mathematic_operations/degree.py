@@ -28,8 +28,13 @@ def degree_calculating(index, list, type, minus, sum,
            multiplication, division, division_calculating, 
            radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
 
+    print(list)
     del list[index]
-    list.insert(index, str(result_f))
+    del list[index - 1]
+    list.insert(index - 1, str(result_f))
+    print(list)
+
+    return list
 
 def degree(first_path: str, second_path: list, minus, sum, 
            multiplication, division, division_calculating, 
@@ -77,7 +82,7 @@ def degree(first_path: str, second_path: list, minus, sum,
                 if f"{list_operations[i]}" == "/":
                     if len(part) == 1:
                         index_f = second_path.index(part)
-                        second_path = division_calculating(index_f, second_path, type, minus, sum,multiplication, degree, degree_calculating, radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
+                        second_path = division_calculating(index_f, second_path, f"{list_operations[i]}", minus, sum,multiplication, degree, degree_calculating, radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
                 
                 if f"{list_operations[i]}" == "log":
                     if len(part) == 3:

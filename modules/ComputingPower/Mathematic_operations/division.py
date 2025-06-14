@@ -52,6 +52,8 @@ def division_calculating(index, list, type, minus, sum,
         else: 
             del list[index - index_division]
             index_division += 1
+            
+    return list
 
 
 def division(first_path: list, second_path: list, minus, sum,

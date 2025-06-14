@@ -11,7 +11,7 @@ def start_power(equation, button9):
     list = [f"{start_equation}"]
     start_equation = cut_function(list)
     # print(start_equation)
-    list_operations = ["^","sin","cos","tg","ctg","√","log","ln","/","*","+","-"]
+    list_operations = ["^","sin","cos","tg","ctg","√","log","ln","/","(","*","+","-"]
     for i in range(len(list_operations)):
         for part in start_equation:
             if f"{list_operations[i]}" in part:
@@ -71,6 +71,13 @@ def start_power(equation, button9):
                         del start_equation[index - 1]
                         del start_equation[index - 1]
                         start_equation.insert(index - 1, str(result))
+                #----------------------------------------------------------------------------------
+                elif f"{list_operations[i]}" == "(":
+                    list_bracket = [start_equation[index]]
+                    result = bracket_calculating(list_bracket, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, trigonometric_functions, trigonimetric_functions_calculating, ln_calculating, radical, radical_calculating, minus, sum, multiplication)
+                    if result != None:
+                        del start_equation[index]
+                        start_equation.insert(index, str(result))
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "*":
                     if len(part) == 1:
