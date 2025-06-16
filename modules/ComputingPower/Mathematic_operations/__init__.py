@@ -11,3 +11,4 @@ from .radical import *
 from .trigonometric_functions import *
 from .logarithm import *
 from .bracket import *
+from .module import *

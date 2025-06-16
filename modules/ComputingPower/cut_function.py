@@ -6,7 +6,7 @@ r"""
 #перебираем список с нашей функцией. Если там будет знак, который мы сейчас перебираем то
 #мы получаем местоположение этого арифметического действия по индексу.
 #Потом мы удаляем елемент, где находился это знак.
-#Дальше сплитим место, где мы напши знак(что бы по окончанию сплита получить "2", "2". или например "5*4/2","8")
+#Дальше сплитим место, где мы нашли знак(что бы по окончанию сплита получить "2", "2". или например "5*4/2","8")
 #И по середине этого сплита добавляем наш знак, по которому мы сплитили
 #Если есть пустые елементы - удаляем
 #И наконец, на место удалённого индекса мы ставим наш список. Можно сказать просто заменяем его
@@ -14,7 +14,7 @@ r"""
 #невозможно продолжать решение функции)
 
 def cut_function(function: list):
-    list_operations = ["^","/","√","*","+","-","(",")"]
+    list_operations = ["^","/","√","*","+","-","(",")", "|"]
     final = False
     while final == False:
         number = 0
@@ -55,5 +55,26 @@ def cut_function(function: list):
                 else:
                     function[index_f] = str(function[index_f]) + str(function[index_f + 1])
                     del function[index_f + 1]
+    
+    column = 0
+    for part in function:
+        if "|" in part:
+            if len(part) == 1:
+                column += 1
+                index_f = function.index(part)
+                final = False
+                while final == False:
+                    if "|" in function[index_f + 1]:
+                        function[index_f] = str(function[index_f]) + str(function[index_f + 1])
+                        del function[index_f + 1]
+                        column -= 1
+                        if column == 0: final = True
+                    elif "|" in function[index_f + 1]:
+                        function[index_f] = str(function[index_f]) + str(function[index_f + 1])
+                        del function[index_f + 1]
+                        column += 1
+                    else:
+                        function[index_f] = str(function[index_f]) + str(function[index_f + 1])
+                        del function[index_f + 1]
 
     return function

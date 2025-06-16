@@ -5,7 +5,7 @@ import math
 
 def log_calculating(index, list, type, minus, sum, 
               multiplication, division, division_calculating, radical, radical_calculating, 
-              degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating):
+              degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating):
     list_logarithm_f = []
     list_logarithm_s = []
     stop = False
@@ -42,7 +42,7 @@ def log_calculating(index, list, type, minus, sum,
 
     result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, 
               multiplication, division, division_calculating, radical, radical_calculating, 
-              degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating)
+              degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
     del list[index]
     list.insert(index, str(result_f))
 
@@ -50,7 +50,7 @@ def log_calculating(index, list, type, minus, sum,
 
 def ln_calculating(index, list, type, minus, sum, 
               multiplication, division, division_calculating, radical, radical_calculating, 
-              degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating):
+              degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating):
     list_logarithm_f = []
     column = 0
     final = False 
@@ -72,7 +72,7 @@ def ln_calculating(index, list, type, minus, sum,
 
     result_f = logarithm(list_logarithm_f, None, "ln", minus, sum, 
               multiplication, division, division_calculating, radical, radical_calculating, 
-              degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating)
+              degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
 
     del list[index]
     list.insert(index, str(result_f))
@@ -81,8 +81,8 @@ def ln_calculating(index, list, type, minus, sum,
 
 def logarithm(function_f: list, function_s: list, type, minus, sum, 
               multiplication, division, division_calculating, radical, radical_calculating, 
-              degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating):
-    list_operations = ["^","/","√","*","+","-","(",")"]
+              degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating):
+    list_operations = ["^","/","√","*","+","-","(",")","|"]
     final = False
     while final == False:
         number = 0
@@ -132,7 +132,7 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
         del (function_s[0])
         del (function_s[-1])
     #----------------------------------------------------------------------------------
-    list_operations = ["^","sin","cos","tg","ctg","√","log","ln","/","*","+","-"]
+    list_operations = ["^","sin","cos","tg","ctg","√","|","log","ln","/","(","*","+","-"]
     for i in range(len(list_operations)):
         for part in function_f:
             if f"{list_operations[i]}" in part:
@@ -140,24 +140,36 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                 if f"{list_operations[i]}" == "^":
                     if len(part) == 1:
                         index_f = function_f.index(part)
-                        function_f = degree_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum, multiplication, division, radical, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
+                        function_f = degree_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum, multiplication, division, radical, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
                 
                 if f"{list_operations[i]}" == "sin" or f"{list_operations[i]}" == "cos" or f"{list_operations[i]}" == "tg":
                     if list_operations[i] == "sin" or list_operations[i] == "cos": len_t = 3
                     else: len_t = 2
                     if len(part) == len_t:
                         index_f = function_f.index(part)
-                        function_f = trigonimetric_functions_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating)
+                        function_f = trigonimetric_functions_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating, bracket_calculating, module_calculating)
 
                 if f"{list_operations[i]}" == "/":
                     if len(part) == 1:
                         index_f = function_f.index(part)
-                        function_f = division_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum,multiplication, degree, degree_calculating, radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
+                        function_f = division_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum,multiplication, degree, degree_calculating, radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
 
                 if f"{list_operations[i]}" == "√":
                     if len(part) == 1:
                         index_f = function_f.index(part)
-                        function_f = radical_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum, multiplication, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
+                        function_f = radical_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum, multiplication, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
+
+                if f"{list_operations[i]}" == "|":
+                    if len(part) == 1:
+                        index_f = function_f.index(part)
+                        function_f = module_calculating(index_f, function_f, minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree_calculating, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating)
+
+                if f"{list_operations[i]}" == "(":
+                    list_bracket = [function_f[index_f]]
+                    result = bracket_calculating(list_bracket, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, trigonometric_functions, trigonimetric_functions_calculating, ln_calculating, radical, radical_calculating, minus, sum, multiplication, bracket_calculating, module_calculating)
+                    if result != None:
+                        del function_f[index_f]
+                        function_f.insert(index_f, str(result))
 
                 if f"{list_operations[i]}" == "*":
                     if len(part) == 1:
@@ -187,7 +199,7 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                         function_f.insert(index_f - 1, str(result_f))
     #----------------------------------------------------------------------------------
     if function_s != None:
-        list_operations = ["^","sin","cos","tg","ctg","√","log","ln","/","*","+","-"]
+        list_operations = ["^","sin","cos","tg","ctg","√","|","log","ln","/","(","*","+","-"]
         for i in range(len(list_operations)):
             for part in function_s:
                 if f"{list_operations[i]}" in part:
@@ -195,24 +207,36 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                     if f"{list_operations[i]}" == "^":
                         if len(part) == 1:
                             index_f = function_s.index(part)
-                            function_s = degree_calculating(index_f, function_s, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
+                            function_s = degree_calculating(index_f, function_s, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, module_calculating)
 
                     if f"{list_operations[i]}" == "sin" or f"{list_operations[i]}" == "cos" or f"{list_operations[i]}" == "tg":
                         if list_operations[i] == "sin" or list_operations[i] == "cos": len_t = 3
                         else: len_t = 2
                         if len(part) == len_t:
                             index_f = function_s.index(part)
-                            function_s = trigonimetric_functions_calculating(index_f, function_s, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating)
+                            function_s = trigonimetric_functions_calculating(index_f, function_s, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating, module_calculating)
 
                     if f"{list_operations[i]}" == "/":
                         if len(part) == 1:
                             index_f = function_s.index(part)
-                            function_s = division_calculating(index_f, function_s, type, minus, sum,multiplication, degree, degree_calculating, radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
+                            function_s = division_calculating(index_f, function_s, type, minus, sum,multiplication, degree, degree_calculating, radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, module_calculating)
 
                     if f"{list_operations[i]}" == "√":
                         if len(part) == 1:
                             index_f = function_s.index(part)
-                            function_s = radical_calculating(index_f, function_s, f"{list_operations[i]}", minus, sum, multiplication, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
+                            function_s = radical_calculating(index_f, function_s, f"{list_operations[i]}", minus, sum, multiplication, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, module_calculating)
+
+                    if f"{list_operations[i]}" == "|":
+                        if len(part) == 1:
+                            index_f = function_s.index(part)
+                            function_s = log_calculating(index_f, function_s, minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree_calculating, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
+
+                    if f"{list_operations[i]}" == "(":
+                        list_bracket = [function_s[index_f]]
+                        result = bracket_calculating(list_bracket, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, trigonometric_functions, trigonimetric_functions_calculating, ln_calculating, radical, radical_calculating, minus, sum, multiplication, bracket_calculating, module_calculating)
+                        if result != None:
+                            del function_s[index_f]
+                            function_s.insert(index_f, str(result))
 
                     if f"{list_operations[i]}" == "*":
                         if len(part) == 1:
