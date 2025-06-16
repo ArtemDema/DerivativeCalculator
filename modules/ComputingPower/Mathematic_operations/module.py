@@ -23,7 +23,6 @@ def module_calculating(index, list, minus, sum,
            multiplication, division, division_calculating, 
            radical, radical_calculating, degree_calculating, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating)
 
-    print(list, result_f)
     del list[index]
     list.insert(index - 1, str(result_f))
 

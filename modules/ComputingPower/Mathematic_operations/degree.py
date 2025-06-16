@@ -41,7 +41,7 @@ def degree(first_path: str, second_path: list, minus, sum,
     if "x" in first_path or "x" in second_path:
         return
     
-    list_operations = ["^","/","√","*","+","-","(",")","|"]
+    list_operations = ["^","/","√","|","*","+","(",")","+","-",]
     final = False
     while final == False:
         number = 0
@@ -142,6 +142,9 @@ def degree(first_path: str, second_path: list, minus, sum,
                             del second_path[index_f - 1]
                             second_path.insert(index_f - 1, str(result_f))
 
+    if len(second_path) == 2:
+        second_path = [str(second_path[0]) + str(second_path[1])]
+    print(second_path)
     result = float(first_path) ** float(second_path[0])
     result = round(float(result), 1)
     return result
