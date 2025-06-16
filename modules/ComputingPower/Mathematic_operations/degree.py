@@ -69,6 +69,11 @@ def degree(first_path: str, second_path: list, minus, sum,
     for i in range(len(list_operations)):
         for part in second_path:
             if f"{list_operations[i]}" in part:
+
+                if f"{list_operations[i]}" == "^":
+                    if len(part) == 1:
+                        index_f = second_path.index(part)
+                        second_path = degree_calculating(index_f, second_path, f"{list_operations[i]}", minus, sum, multiplication, division, radical, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
                 
                 if f"{list_operations[i]}" == "sin" or f"{list_operations[i]}" == "cos" or f"{list_operations[i]}" == "tg":
                     if list_operations[i] == "sin" or list_operations[i] == "cos": len_t = 3
@@ -130,11 +135,12 @@ def degree(first_path: str, second_path: list, minus, sum,
                 if f"{list_operations[i]}" == "-":
                     if len(part) == 1:
                         index_f = second_path.index(part)
-                        result_f = minus(second_path[index_f - 1], second_path[index_f + 1])
-                        del second_path[index_f - 1]
-                        del second_path[index_f - 1]
-                        del second_path[index_f - 1]
-                        second_path.insert(index_f - 1, str(result_f))
+                        if index_f != 0:
+                            result_f = minus(second_path[index_f - 1], second_path[index_f + 1])
+                            del second_path[index_f - 1]
+                            del second_path[index_f - 1]
+                            del second_path[index_f - 1]
+                            second_path.insert(index_f - 1, str(result_f))
 
     result = float(first_path) ** float(second_path[0])
     result = round(float(result), 1)

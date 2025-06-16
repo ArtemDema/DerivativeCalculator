@@ -126,6 +126,11 @@ def division(first_path: list, second_path: list, minus, sum,
                             index_f = first_path.index(part)
                             first_path = trigonimetric_functions_calculating(index_f, first_path, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating, bracket_calculating, module_calculating)
 
+                    if f"{list_operations[i]}" == "/":
+                        if len(part) == 1:
+                            index_f = first_path.index(part)
+                            first_path = division_calculating(index_f, first_path, f"{list_operations[i]}", minus, sum,multiplication, degree, degree_calculating, radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
+
                     if f"{list_operations[i]}" == "|":
                         if len(part) == 1:
                             index_f = first_path.index(part)
@@ -174,11 +179,12 @@ def division(first_path: list, second_path: list, minus, sum,
                     if f"{list_operations[i]}" == "-":
                         if len(part) == 1:
                             index_f = first_path.index(part)
-                            result_f = minus(first_path[index_f - 1], first_path[index_f + 1])
-                            del first_path[index_f - 1]
-                            del first_path[index_f - 1]
-                            del first_path[index_f - 1]
-                            first_path.insert(index_f - 1, str(result_f))
+                            if index_f != 0:
+                                result_f = minus(first_path[index_f - 1], first_path[index_f + 1])
+                                del first_path[index_f - 1]
+                                del first_path[index_f - 1]
+                                del first_path[index_f - 1]
+                                first_path.insert(index_f - 1, str(result_f))
 
     #---------------------------------------------------------------
     for i in range(2):
@@ -198,6 +204,11 @@ def division(first_path: list, second_path: list, minus, sum,
                         if len(part) == len_t:
                             index_f = second_path.index(part)
                             second_path = trigonimetric_functions_calculating(index_f, second_path, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating, bracket_calculating, module_calculating)
+
+                    if f"{list_operations[i]}" == "/":
+                        if len(part) == 1:
+                            index_f = second_path.index(part)
+                            second_path = division_calculating(index_f, second_path, f"{list_operations[i]}", minus, sum,multiplication, degree, degree_calculating, radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
 
                     if f"{list_operations[i]}" == "|":
                         if len(part) == 1:
@@ -247,11 +258,12 @@ def division(first_path: list, second_path: list, minus, sum,
                     if f"{list_operations[i]}" == "-":
                         if len(part) == 1:
                             index_f = second_path.index(part)
-                            result_f = minus(second_path[index_f - 1], second_path[index_f + 1])
-                            del second_path[index_f - 1]
-                            del second_path[index_f - 1]
-                            del second_path[index_f - 1]
-                            second_path.insert(index_f - 1, str(result_f))
+                            if index_f != 0:
+                                result_f = minus(second_path[index_f - 1], second_path[index_f + 1])
+                                del second_path[index_f - 1]
+                                del second_path[index_f - 1]
+                                del second_path[index_f - 1]
+                                second_path.insert(index_f - 1, str(result_f))
 
     result = float(first_path[0]) / float(second_path[0])
     result = round(float(result), 1)

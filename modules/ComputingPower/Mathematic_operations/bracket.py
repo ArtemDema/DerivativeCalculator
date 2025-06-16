@@ -92,12 +92,13 @@ def bracket_calculating(function, degree, degree_calculating, division, division
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "-":
                     if len(part) == 1:
-                        result = minus(function[index - 1], function[index + 1])
-                        if result != None:
-                            del function[index + 1]
-                            del function[index - 1]
-                            del function[index - 1]
-                            function.insert(index - 1, str(result))
+                        if index != 0:
+                            result = minus(function[index - 1], function[index + 1])
+                            if result != None:
+                                del function[index + 1]
+                                del function[index - 1]
+                                del function[index - 1]
+                                function.insert(index - 1, str(result))
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "+":
                     if len(part) == 1:

@@ -164,6 +164,16 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                         index_f = function_f.index(part)
                         function_f = module_calculating(index_f, function_f, minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree_calculating, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating)
 
+                if f"{list_operations[i]}" == "log":
+                        if len(part) == 3:
+                            index_f = function_f.index(part)
+                            function_f = log_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
+
+                if f"{list_operations[i]}" == "ln":
+                    if len(part) == 2:
+                        index_f = function_f.index(part)
+                        function_f = ln_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
+
                 if f"{list_operations[i]}" == "(":
                     list_bracket = [function_f[index_f]]
                     result = bracket_calculating(list_bracket, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, trigonometric_functions, trigonimetric_functions_calculating, ln_calculating, radical, radical_calculating, minus, sum, multiplication, bracket_calculating, module_calculating)
@@ -192,11 +202,12 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                 if f"{list_operations[i]}" == "-":
                     if len(part) == 1:
                         index_f = function_f.index(part)
-                        result_f = minus(function_f[index_f - 1], function_f[index_f + 1])
-                        del function_f[index_f - 1]
-                        del function_f[index_f - 1]
-                        del function_f[index_f - 1]
-                        function_f.insert(index_f - 1, str(result_f))
+                        if index_f != 0:
+                            result_f = minus(function_f[index_f - 1], function_f[index_f + 1])
+                            del function_f[index_f - 1]
+                            del function_f[index_f - 1]
+                            del function_f[index_f - 1]
+                            function_f.insert(index_f - 1, str(result_f))
     #----------------------------------------------------------------------------------
     if function_s != None:
         list_operations = ["^","sin","cos","tg","ctg","√","|","log","ln","/","(","*","+","-"]
@@ -225,6 +236,16 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                         if len(part) == 1:
                             index_f = function_s.index(part)
                             function_s = radical_calculating(index_f, function_s, f"{list_operations[i]}", minus, sum, multiplication, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, module_calculating)
+
+                    if f"{list_operations[i]}" == "log":
+                        if len(part) == 3:
+                            index_f = function_s.index(part)
+                            function_s = log_calculating(index_f, function_s, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
+
+                    if f"{list_operations[i]}" == "ln":
+                        if len(part) == 2:
+                            index_f = function_s.index(part)
+                            function_s = ln_calculating(index_f, function_s, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
 
                     if f"{list_operations[i]}" == "|":
                         if len(part) == 1:
@@ -259,11 +280,12 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                     if f"{list_operations[i]}" == "-":
                         if len(part) == 1:
                             index_f = function_s.index(part)
-                            result_f = minus(function_s[index_f - 1], function_s[index_f + 1])
-                            del function_s[index_f - 1]
-                            del function_s[index_f - 1]
-                            del function_s[index_f - 1]
-                            function_s.insert(index_f - 1, str(result_f))
+                            if index_f != 0:
+                                result_f = minus(function_s[index_f - 1], function_s[index_f + 1])
+                                del function_s[index_f - 1]
+                                del function_s[index_f - 1]
+                                del function_s[index_f - 1]
+                                function_s.insert(index_f - 1, str(result_f))
 
     if type == "log":
         result = math.log(float(function_s[0]), float(function_f[0]))

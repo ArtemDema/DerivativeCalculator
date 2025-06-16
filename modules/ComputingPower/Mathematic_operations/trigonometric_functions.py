@@ -67,6 +67,13 @@ def trigonometric_functions(function: list, type, minus, sum, multiplication, di
                         index_f = function.index(part)
                         function = degree_calculating(index_f, function, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
 
+                if f"{list_operations[i]}" == "sin" or f"{list_operations[i]}" == "cos" or f"{list_operations[i]}" == "tg":
+                    if list_operations[i] == "sin" or list_operations[i] == "cos": len_t = 3
+                    else: len_t = 2
+                    if len(part) == len_t:
+                        index_f = function.index(part)
+                        function = trigonimetric_functions_calculating(index_f, function, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating, bracket_calculating, module_calculating)
+
                 if f"{list_operations[i]}" == "/":
                     if len(part) == 1:
                         index_f = function.index(part)
@@ -120,11 +127,12 @@ def trigonometric_functions(function: list, type, minus, sum, multiplication, di
                 if f"{list_operations[i]}" == "-":
                     if len(part) == 1:
                         index_f = function.index(part)
-                        result_f = minus(function[index_f - 1], function[index_f + 1])
-                        del function[index_f - 1]
-                        del function[index_f - 1]
-                        del function[index_f - 1]
-                        function.insert(index_f - 1, str(result_f))
+                        if index_f != 0:
+                            result_f = minus(function[index_f - 1], function[index_f + 1])
+                            del function[index_f - 1]
+                            del function[index_f - 1]
+                            del function[index_f - 1]
+                            function.insert(index_f - 1, str(result_f))
 
     if type == "sin":
         result = math.sin(float(function[0]))
