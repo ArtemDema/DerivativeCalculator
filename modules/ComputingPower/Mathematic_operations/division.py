@@ -161,30 +161,48 @@ def division(first_path: list, second_path: list, minus, sum,
                     if f"{list_operations[i]}" == "*":
                         if len(part) == 1:
                             index_f = first_path.index(part)
-                            result_f = multiplication(first_path[index_f - 1], first_path[index_f + 1])
-                            del first_path[index_f - 1]
-                            del first_path[index_f - 1]
-                            del first_path[index_f - 1]
-                            first_path.insert(index_f - 1, str(result_f))
+                            list_multiplication = []
+                            if index_f - 2 >= 0:
+                                if first_path[index_f - 2] == "-":
+                                    list_multiplication.append(first_path[index_f - 2])
+                            list_multiplication.append(first_path[index_f - 1])
+                            result = multiplication(list_multiplication, first_path[index_f + 1])
+                            if result != None:
+                                del first_path[index_f + 1]
+                                del first_path[index_f - 1]
+                                del first_path[index_f - 1]
+                                first_path.insert(index_f - 1, str(result))
 
                     if f"{list_operations[i]}" == "+":
                         if len(part) == 1:
                             index_f = first_path.index(part)
-                            result_f = sum(first_path[index_f - 1], first_path[index_f + 1])
-                            del first_path[index_f - 1]
-                            del first_path[index_f - 1]
-                            del first_path[index_f - 1]
-                            first_path.insert(index_f - 1, str(result_f))
+                            list_sum = []
+                            if index_f - 2 >= 0:
+                                if first_path[index_f - 2] == "-":
+                                    list_sum.append(first_path[index_f - 2])
+                            list_sum.append(first_path[index_f - 1])
+                            result = sum(first_path[index_f - 1], first_path[index_f + 1])
+                            if result != None:
+                                del first_path[index_f + 1]
+                                del first_path[index_f - 1]
+                                del first_path[index_f - 1]
+                                first_path.insert(index_f - 1, str(result))
                 
                     if f"{list_operations[i]}" == "-":
                         if len(part) == 1:
-                            index_f = first_path.index(part)
                             if index_f != 0:
-                                result_f = minus(first_path[index_f - 1], first_path[index_f + 1])
-                                del first_path[index_f - 1]
-                                del first_path[index_f - 1]
-                                del first_path[index_f - 1]
-                                first_path.insert(index_f - 1, str(result_f))
+                                index_f = first_path.index(part)
+                                list_minus = []
+                                if index_f - 2 >= 0:
+                                    if first_path[index_f - 2] == "-":
+                                        list_minus.append(first_path[index_f - 2])
+
+                            list_minus.append(first_path[index_f - 1])
+                            result = minus(list_minus, first_path[index_f + 1])
+                            del first_path[index_f - 1]
+                            del first_path[index_f - 1]
+                            del first_path[index_f - 1]
+                            first_path.insert(index_f - 1, str(result))
 
     #---------------------------------------------------------------
     for i in range(2):
@@ -240,30 +258,48 @@ def division(first_path: list, second_path: list, minus, sum,
                     if f"{list_operations[i]}" == "*":
                         if len(part) == 1:
                             index_f = second_path.index(part)
-                            result_f = multiplication(second_path[index_f - 1], second_path[index_f + 1])
-                            del second_path[index_f - 1]
-                            del second_path[index_f - 1]
-                            del second_path[index_f - 1]
-                            second_path.insert(index_f - 1, str(result_f))
+                            list_multiplication = []
+                            if index_f - 2 >= 0:
+                                if second_path[index_f - 2] == "-":
+                                    list_multiplication.append(second_path[index_f - 2])
+                            list_multiplication.append(second_path[index_f - 1])
+                            result = multiplication(list_multiplication, second_path[index_f + 1])
+                            if result != None:
+                                del second_path[index_f + 1]
+                                del second_path[index_f - 1]
+                                del second_path[index_f - 1]
+                                second_path.insert(index_f - 1, str(result))
 
                     if f"{list_operations[i]}" == "+":
                         if len(part) == 1:
                             index_f = second_path.index(part)
-                            result_f = sum(second_path[index_f - 1], second_path[index_f + 1])
-                            del second_path[index_f - 1]
-                            del second_path[index_f - 1]
-                            del second_path[index_f - 1]
-                            second_path.insert(index_f - 1, str(result_f))
+                            list_sum = []
+                            if index_f - 2 >= 0:
+                                if second_path[index_f - 2] == "-":
+                                    list_sum.append(second_path[index_f - 2])
+                            list_sum.append(second_path[index_f - 1])
+                            result = sum(second_path[index_f - 1], second_path[index_f + 1])
+                            if result != None:
+                                del second_path[index_f + 1]
+                                del second_path[index_f - 1]
+                                del second_path[index_f - 1]
+                                second_path.insert(index_f - 1, str(result))
                 
                     if f"{list_operations[i]}" == "-":
                         if len(part) == 1:
-                            index_f = second_path.index(part)
                             if index_f != 0:
-                                result_f = minus(second_path[index_f - 1], second_path[index_f + 1])
+                                index_f = second_path.index(part)
+                                list_minus = []
+                                if index_f - 2 >= 0:
+                                    if second_path[index_f - 2] == "-":
+                                        list_minus.append(second_path[index_f - 2])
+
+                                list_minus.append(second_path[index_f - 1])
+                                result = minus(list_minus, second_path[index_f + 1])
                                 del second_path[index_f - 1]
                                 del second_path[index_f - 1]
                                 del second_path[index_f - 1]
-                                second_path.insert(index_f - 1, str(result_f))
+                                second_path.insert(index_f - 1, str(result))
 
     result = float(first_path[0]) / float(second_path[0])
     result = round(float(result), 1)

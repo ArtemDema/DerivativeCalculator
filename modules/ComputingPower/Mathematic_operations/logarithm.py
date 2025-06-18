@@ -184,30 +184,48 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                 if f"{list_operations[i]}" == "*":
                     if len(part) == 1:
                         index_f = function_f.index(part)
-                        result_f = multiplication(function_f[index_f - 1], function_f[index_f + 1])
-                        del function_f[index_f - 1]
-                        del function_f[index_f - 1]
-                        del function_f[index_f - 1]
-                        function_f.insert(index_f - 1, str(result_f))
+                        list_multiplication = []
+                        if index_f - 2 >= 0:
+                            if function_f[index_f - 2] == "-":
+                                list_multiplication.append(function_f[index_f - 2])
+                        list_multiplication.append(function_f[index_f - 1])
+                        result = multiplication(list_multiplication, function_f[index_f + 1])
+                        if result != None:
+                            del function_f[index_f + 1]
+                            del function_f[index_f - 1]
+                            del function_f[index_f - 1]
+                            function_f.insert(index_f - 1, str(result))
 
                 if f"{list_operations[i]}" == "+":
                     if len(part) == 1:
                         index_f = function_f.index(part)
-                        result_f = sum(function_f[index_f - 1], function_f[index_f + 1])
-                        del function_f[index_f - 1]
-                        del function_f[index_f - 1]
-                        del function_f[index_f - 1]
-                        function_f.insert(index_f - 1, str(result_f))
+                        list_sum = []
+                        if index_f - 2 >= 0:
+                            if function_f[index_f - 2] == "-":
+                                list_sum.append(function_f[index_f - 2])
+                        list_sum.append(function_f[index_f - 1])
+                        result = sum(function_f[index_f - 1], function_f[index_f + 1])
+                        if result != None:
+                            del function_f[index_f + 1]
+                            del function_f[index_f - 1]
+                            del function_f[index_f - 1]
+                            function_f.insert(index_f - 1, str(result))
             
                 if f"{list_operations[i]}" == "-":
                     if len(part) == 1:
-                        index_f = function_f.index(part)
                         if index_f != 0:
-                            result_f = minus(function_f[index_f - 1], function_f[index_f + 1])
+                            index_f = function_f.index(part)
+                            list_minus = []
+                            if index_f - 2 >= 0:
+                                if function_f[index_f - 2] == "-":
+                                    list_minus.append(function_f[index_f - 2])
+
+                            list_minus.append(function_f[index_f - 1])
+                            result = minus(list_minus, function_f[index_f + 1])
                             del function_f[index_f - 1]
                             del function_f[index_f - 1]
                             del function_f[index_f - 1]
-                            function_f.insert(index_f - 1, str(result_f))
+                            function_f.insert(index_f - 1, str(result))
     #----------------------------------------------------------------------------------
     if function_s != None:
         list_operations = ["^","sin","cos","tg","ctg","√","|","log","ln","/","(","*","+","-"]
@@ -262,30 +280,48 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                     if f"{list_operations[i]}" == "*":
                         if len(part) == 1:
                             index_f = function_s.index(part)
-                            result_f = multiplication(function_s[index_f - 1], function_s[index_f + 1])
-                            del function_s[index_f - 1]
-                            del function_s[index_f - 1]
-                            del function_s[index_f - 1]
-                            function_s.insert(index_f - 1, str(result_f))
+                            list_multiplication = []
+                            if index_f - 2 >= 0:
+                                if function_s[index_f - 2] == "-":
+                                    list_multiplication.append(function_s[index_f - 2])
+                            list_multiplication.append(function_s[index_f - 1])
+                            result = multiplication(list_multiplication, function_s[index_f + 1])
+                            if result != None:
+                                del function_s[index_f + 1]
+                                del function_s[index_f - 1]
+                                del function_s[index_f - 1]
+                                function_s.insert(index_f - 1, str(result))
 
                     if f"{list_operations[i]}" == "+":
                         if len(part) == 1:
                             index_f = function_s.index(part)
-                            result_f = sum(function_s[index_f - 1], function_s[index_f + 1])
-                            del function_s[index_f - 1]
-                            del function_s[index_f - 1]
-                            del function_s[index_f - 1]
-                            function_s.insert(index_f - 1, str(result_f))
+                            list_sum = []
+                            if index_f - 2 >= 0:
+                                if function_s[index_f - 2] == "-":
+                                    list_sum.append(function_s[index_f - 2])
+                            list_sum.append(function_s[index_f - 1])
+                            result = sum(function_s[index_f - 1], function_s[index_f + 1])
+                            if result != None:
+                                del function_s[index_f + 1]
+                                del function_s[index_f - 1]
+                                del function_s[index_f - 1]
+                                function_s.insert(index_f - 1, str(result))
                 
                     if f"{list_operations[i]}" == "-":
                         if len(part) == 1:
-                            index_f = function_s.index(part)
                             if index_f != 0:
-                                result_f = minus(function_s[index_f - 1], function_s[index_f + 1])
+                                index_f = function_s.index(part)
+                                list_minus = []
+                                if index_f - 2 >= 0:
+                                    if function_s[index_f - 2] == "-":
+                                        list_minus.append(function_s[index_f - 2])
+
+                                list_minus.append(function_s[index_f - 1])
+                                result = minus(list_minus, function_s[index_f + 1])
                                 del function_s[index_f - 1]
                                 del function_s[index_f - 1]
                                 del function_s[index_f - 1]
-                                function_s.insert(index_f - 1, str(result_f))
+                                function_s.insert(index_f - 1, str(result))
 
     if type == "log":
         result = math.log(float(function_s[0]), float(function_f[0]))

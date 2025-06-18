@@ -109,30 +109,48 @@ def trigonometric_functions(function: list, type, minus, sum, multiplication, di
                 if f"{list_operations[i]}" == "*":
                     if len(part) == 1:
                         index_f = function.index(part)
-                        result_f = multiplication(function[index_f - 1], function[index_f + 1])
-                        del function[index_f - 1]
-                        del function[index_f - 1]
-                        del function[index_f - 1]
-                        function.insert(index_f - 1, str(result_f))
+                        list_multiplication = []
+                        if index_f - 2 >= 0:
+                            if function[index_f - 2] == "-":
+                                list_multiplication.append(function[index_f - 2])
+                        list_multiplication.append(function[index_f - 1])
+                        result = multiplication(list_multiplication, function[index_f + 1])
+                        if result != None:
+                            del function[index_f + 1]
+                            del function[index_f - 1]
+                            del function[index_f - 1]
+                            function.insert(index_f - 1, str(result))
 
                 if f"{list_operations[i]}" == "+":
                     if len(part) == 1:
                         index_f = function.index(part)
-                        result_f = sum(function[index_f - 1], function[index_f + 1])
-                        del function[index_f - 1]
-                        del function[index_f - 1]
-                        del function[index_f - 1]
-                        function.insert(index_f - 1, str(result_f))
+                        list_sum = []
+                        if index_f - 2 >= 0:
+                            if function[index_f - 2] == "-":
+                                list_sum.append(function[index_f - 2])
+                        list_sum.append(function[index_f - 1])
+                        result = sum(function[index_f - 1], function[index_f + 1])
+                        if result != None:
+                            del function[index_f + 1]
+                            del function[index_f - 1]
+                            del function[index_f - 1]
+                            function.insert(index_f - 1, str(result))
             
                 if f"{list_operations[i]}" == "-":
                     if len(part) == 1:
-                        index_f = function.index(part)
                         if index_f != 0:
-                            result_f = minus(function[index_f - 1], function[index_f + 1])
+                            index_f = function.index(part)
+                            list_minus = []
+                            if index_f - 2 >= 0:
+                                if function[index_f - 2] == "-":
+                                    list_minus.append(function[index_f - 2])
+
+                            list_minus.append(function[index_f - 1])
+                            result = minus(list_minus, function[index_f + 1])
                             del function[index_f - 1]
                             del function[index_f - 1]
                             del function[index_f - 1]
-                            function.insert(index_f - 1, str(result_f))
+                            function.insert(index_f - 1, str(result))
 
     if type == "sin":
         result = math.sin(float(function[0]))

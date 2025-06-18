@@ -11,10 +11,13 @@ def start_power(equation, button9):
     list = [f"{start_equation}"]
     start_equation = cut_function(list)
     # print(start_equation)
-    list_operations = ["^","sin","cos","tg","ctg","√","|","log","ln","/","(","*","+","-"]
+    list_operations = ["^","sin","cos","tg","√","|","log","ln","/","(","*"]
+    index_minus = None
+    index_plus = None
     for i in range(len(list_operations)):
         for part in start_equation:
             if f"{list_operations[i]}" in part:
+                # print(start_equation)
                 index = start_equation.index(part)
 
                 if f"{list_operations[i]}" == "^":
@@ -87,29 +90,18 @@ def start_power(equation, button9):
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "*":
                     if len(part) == 1:
-                        result = multiplication(start_equation[index - 1], start_equation[index + 1])
+                        list_multiplication = []
+                        if index - 2 >= 0:
+                            if start_equation[index - 2] == "-":
+                                list_multiplication.append(start_equation[index - 2])
+                        list_multiplication.append(start_equation[index - 1])
+                        result = multiplication(list_multiplication, start_equation[index + 1])
                         if result != None:
                             del start_equation[index + 1]
                             del start_equation[index - 1]
                             del start_equation[index - 1]
                             start_equation.insert(index - 1, str(result))
                 #----------------------------------------------------------------------------------
-                elif f"{list_operations[i]}" == "-":
-                    if len(part) == 1:
-                        result = minus(start_equation[index - 1], start_equation[index + 1])
-                        if result != None:
-                            del start_equation[index + 1]
-                            del start_equation[index - 1]
-                            del start_equation[index - 1]
-                            start_equation.insert(index - 1, str(result))
-                #----------------------------------------------------------------------------------
-                elif f"{list_operations[i]}" == "+":
-                    if len(part) == 1:
-                        result = sum(start_equation[index - 1], start_equation[index + 1])
-                        if result != None:
-                            del start_equation[index + 1]
-                            del start_equation[index - 1]
-                            del start_equation[index - 1]
-                            start_equation.insert(index - 1, str(result))
+    start_equation = sun_and_minus_calculating(start_equation, sum, minus)
 
     print(start_equation)

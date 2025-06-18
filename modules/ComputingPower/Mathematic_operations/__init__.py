@@ -12,3 +12,4 @@ from .trigonometric_functions import *
 from .logarithm import *
 from .bracket import *
 from .module import *
+from .plus_and_minus_calculation import *

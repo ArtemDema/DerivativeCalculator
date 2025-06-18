@@ -108,43 +108,61 @@ def degree(first_path: str, second_path: list, minus, sum,
                         function_f = radical_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum, multiplication, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
 
                 if f"{list_operations[i]}" == "(":
-                    list_bracket = [function[index_f]]
+                    list_bracket = [second_path[index_f]]
                     result = bracket_calculating(list_bracket, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, trigonometric_functions, trigonimetric_functions_calculating, ln_calculating, radical, radical_calculating, minus, sum, multiplication, bracket_calculating, module_calculating)
                     if result != None:
-                        del function[index_f]
-                        function.insert(index_f, str(result))
+                        del second_path[index_f]
+                        second_path.insert(index_f, str(result))
 
                 if f"{list_operations[i]}" == "*":
                     if len(part) == 1:
                         index_f = second_path.index(part)
-                        result_f = multiplication(second_path[index_f - 1], second_path[index_f + 1])
-                        del second_path[index_f - 1]
-                        del second_path[index_f - 1]
-                        del second_path[index_f - 1]
-                        second_path.insert(index_f - 1, str(result_f))
+                        list_multiplication = []
+                        if index_f - 2 >= 0:
+                            if second_path[index_f - 2] == "-":
+                                list_multiplication.append(second_path[index_f - 2])
+                        list_multiplication.append(second_path[index_f - 1])
+                        result = multiplication(list_multiplication, second_path[index_f + 1])
+                        if result != None:
+                            del second_path[index_f + 1]
+                            del second_path[index_f - 1]
+                            del second_path[index_f - 1]
+                            second_path.insert(index_f - 1, str(result))
 
                 if f"{list_operations[i]}" == "+":
                     if len(part) == 1:
                         index_f = second_path.index(part)
-                        result_f = sum(second_path[index_f - 1], second_path[index_f + 1])
-                        del second_path[index_f - 1]
-                        del second_path[index_f - 1]
-                        del second_path[index_f - 1]
-                        second_path.insert(index_f - 1, str(result_f))
+                        list_sum = []
+                        if index_f - 2 >= 0:
+                            if second_path[index_f - 2] == "-":
+                                list_sum.append(second_path[index_f - 2])
+                        list_sum.append(second_path[index_f - 1])
+                        result = sum(second_path[index_f - 1], second_path[index_f + 1])
+                        if result != None:
+                            del second_path[index_f + 1]
+                            del second_path[index_f - 1]
+                            del second_path[index_f - 1]
+                            second_path.insert(index_f - 1, str(result))
             
                 if f"{list_operations[i]}" == "-":
                     if len(part) == 1:
-                        index_f = second_path.index(part)
                         if index_f != 0:
-                            result_f = minus(second_path[index_f - 1], second_path[index_f + 1])
+                            index_f = second_path.index(part)
+                            list_minus = []
+                            if index_f - 2 >= 0:
+                                if second_path[index_f - 2] == "-":
+                                    list_minus.append(second_path[index_f - 2])
+
+                            list_minus.append(second_path[index_f - 1])
+                            result = minus(list_minus, second_path[index_f + 1])
                             del second_path[index_f - 1]
                             del second_path[index_f - 1]
                             del second_path[index_f - 1]
-                            second_path.insert(index_f - 1, str(result_f))
+                            second_path.insert(index_f - 1, str(result))
 
     if len(second_path) == 2:
         second_path = [str(second_path[0]) + str(second_path[1])]
-    print(second_path)
+
     result = float(first_path) ** float(second_path[0])
     result = round(float(result), 1)
     return result

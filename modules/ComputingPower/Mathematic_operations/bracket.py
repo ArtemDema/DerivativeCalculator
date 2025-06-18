@@ -83,30 +83,48 @@ def bracket_calculating(function, degree, degree_calculating, division, division
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "*":
                     if len(part) == 1:
-                        result = multiplication(function[index - 1], function[index + 1])
+                        index_f = function.index(part)
+                        list_multiplication = []
+                        if index_f - 2 >= 0:
+                            if function[index_f - 2] == "-":
+                                list_multiplication.append(function[index_f - 2])
+                        list_multiplication.append(function[index_f - 1])
+                        result = multiplication(list_multiplication, function[index_f + 1])
                         if result != None:
-                            del function[index + 1]
-                            del function[index - 1]
-                            del function[index - 1]
-                            function.insert(index - 1, str(result))
+                            del function[index_f + 1]
+                            del function[index_f - 1]
+                            del function[index_f - 1]
+                            function.insert(index_f - 1, str(result))
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "-":
                     if len(part) == 1:
-                        if index != 0:
-                            result = minus(function[index - 1], function[index + 1])
-                            if result != None:
-                                del function[index + 1]
-                                del function[index - 1]
-                                del function[index - 1]
-                                function.insert(index - 1, str(result))
+                        if index_f != 0:
+                            index_f = function.index(part)
+                            list_minus = []
+                            if index_f - 2 >= 0:
+                                if function[index_f - 2] == "-":
+                                    list_minus.append(function[index_f - 2])
+
+                            list_minus.append(function[index_f - 1])
+                            result = minus(list_minus, function[index_f + 1])
+                            del function[index_f - 1]
+                            del function[index_f - 1]
+                            del function[index_f - 1]
+                            function.insert(index_f - 1, str(result))
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "+":
                     if len(part) == 1:
-                        result = sum(function[index - 1], function[index + 1])
+                        index_f = function.index(part)
+                        list_sum = []
+                        if index_f - 2 >= 0:
+                            if function[index_f - 2] == "-":
+                                list_sum.append(function[index_f - 2])
+                        list_sum.append(function[index_f - 1])
+                        result = sum(function[index_f - 1], function[index_f + 1])
                         if result != None:
-                            del function[index + 1]
-                            del function[index - 1]
-                            del function[index - 1]
-                            function.insert(index - 1, str(result))
+                            del function[index_f + 1]
+                            del function[index_f - 1]
+                            del function[index_f - 1]
+                            function.insert(index_f - 1, str(result))
 
     return function[0]
