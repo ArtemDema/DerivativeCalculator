@@ -33,4 +33,8 @@ def sun_and_minus_calculating(function: list, sum, minus):
                         del function[index - 1]
                         del function[index - 1]
                         function.insert(index - 1, str(result))
+                    else:
+                        function[index] = f"{function[index]}{function[index + 1]}"
+                        del function[index + 1]
+
     return function

@@ -2,6 +2,7 @@ r"""
 Логарифм
 """
 import math
+from .plus_and_minus_calculation import sun_and_minus_calculating
 
 def log_calculating(index, list, type, minus, sum, 
               multiplication, division, division_calculating, radical, radical_calculating, 
@@ -196,36 +197,7 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                             del function_f[index_f - 1]
                             function_f.insert(index_f - 1, str(result))
 
-                if f"{list_operations[i]}" == "+":
-                    if len(part) == 1:
-                        index_f = function_f.index(part)
-                        list_sum = []
-                        if index_f - 2 >= 0:
-                            if function_f[index_f - 2] == "-":
-                                list_sum.append(function_f[index_f - 2])
-                        list_sum.append(function_f[index_f - 1])
-                        result = sum(function_f[index_f - 1], function_f[index_f + 1])
-                        if result != None:
-                            del function_f[index_f + 1]
-                            del function_f[index_f - 1]
-                            del function_f[index_f - 1]
-                            function_f.insert(index_f - 1, str(result))
-            
-                if f"{list_operations[i]}" == "-":
-                    if len(part) == 1:
-                        if index_f != 0:
-                            index_f = function_f.index(part)
-                            list_minus = []
-                            if index_f - 2 >= 0:
-                                if function_f[index_f - 2] == "-":
-                                    list_minus.append(function_f[index_f - 2])
-
-                            list_minus.append(function_f[index_f - 1])
-                            result = minus(list_minus, function_f[index_f + 1])
-                            del function_f[index_f - 1]
-                            del function_f[index_f - 1]
-                            del function_f[index_f - 1]
-                            function_f.insert(index_f - 1, str(result))
+    function_f = sun_and_minus_calculating(function_f, sum, minus)
     #----------------------------------------------------------------------------------
     if function_s != None:
         list_operations = ["^","sin","cos","tg","ctg","√","|","log","ln","/","(","*","+","-"]
@@ -268,7 +240,7 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                     if f"{list_operations[i]}" == "|":
                         if len(part) == 1:
                             index_f = function_s.index(part)
-                            function_s = log_calculating(index_f, function_s, minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree_calculating, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
+                            function_s = module_calculating(index_f, function_s, minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree_calculating, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
 
                     if f"{list_operations[i]}" == "(":
                         list_bracket = [function_s[index_f]]
@@ -292,36 +264,7 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                                 del function_s[index_f - 1]
                                 function_s.insert(index_f - 1, str(result))
 
-                    if f"{list_operations[i]}" == "+":
-                        if len(part) == 1:
-                            index_f = function_s.index(part)
-                            list_sum = []
-                            if index_f - 2 >= 0:
-                                if function_s[index_f - 2] == "-":
-                                    list_sum.append(function_s[index_f - 2])
-                            list_sum.append(function_s[index_f - 1])
-                            result = sum(function_s[index_f - 1], function_s[index_f + 1])
-                            if result != None:
-                                del function_s[index_f + 1]
-                                del function_s[index_f - 1]
-                                del function_s[index_f - 1]
-                                function_s.insert(index_f - 1, str(result))
-                
-                    if f"{list_operations[i]}" == "-":
-                        if len(part) == 1:
-                            if index_f != 0:
-                                index_f = function_s.index(part)
-                                list_minus = []
-                                if index_f - 2 >= 0:
-                                    if function_s[index_f - 2] == "-":
-                                        list_minus.append(function_s[index_f - 2])
-
-                                list_minus.append(function_s[index_f - 1])
-                                result = minus(list_minus, function_s[index_f + 1])
-                                del function_s[index_f - 1]
-                                del function_s[index_f - 1]
-                                del function_s[index_f - 1]
-                                function_s.insert(index_f - 1, str(result))
+    function_s = sun_and_minus_calculating(function_s, sum, minus)
 
     if type == "log":
         result = math.log(float(function_s[0]), float(function_f[0]))

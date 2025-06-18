@@ -1,6 +1,7 @@
 r"""
 Деление
 """
+from .plus_and_minus_calculation import sun_and_minus_calculating
 
 def division_calculating(index, list, type, minus, sum,
             multiplication, degree, degree_calculating, radical, radical_calculating, 
@@ -134,7 +135,7 @@ def division(first_path: list, second_path: list, minus, sum,
                     if f"{list_operations[i]}" == "|":
                         if len(part) == 1:
                             index_f = first_path.index(part)
-                            first_path = log_calculating(index_f, first_path, minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree_calculating, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
+                            first_path = module_calculating(index_f, first_path, minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree_calculating, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
 
                     if f"{list_operations[i]}" == "log":
                         if len(part) == 3:
@@ -173,36 +174,7 @@ def division(first_path: list, second_path: list, minus, sum,
                                 del first_path[index_f - 1]
                                 first_path.insert(index_f - 1, str(result))
 
-                    if f"{list_operations[i]}" == "+":
-                        if len(part) == 1:
-                            index_f = first_path.index(part)
-                            list_sum = []
-                            if index_f - 2 >= 0:
-                                if first_path[index_f - 2] == "-":
-                                    list_sum.append(first_path[index_f - 2])
-                            list_sum.append(first_path[index_f - 1])
-                            result = sum(first_path[index_f - 1], first_path[index_f + 1])
-                            if result != None:
-                                del first_path[index_f + 1]
-                                del first_path[index_f - 1]
-                                del first_path[index_f - 1]
-                                first_path.insert(index_f - 1, str(result))
-                
-                    if f"{list_operations[i]}" == "-":
-                        if len(part) == 1:
-                            if index_f != 0:
-                                index_f = first_path.index(part)
-                                list_minus = []
-                                if index_f - 2 >= 0:
-                                    if first_path[index_f - 2] == "-":
-                                        list_minus.append(first_path[index_f - 2])
-
-                            list_minus.append(first_path[index_f - 1])
-                            result = minus(list_minus, first_path[index_f + 1])
-                            del first_path[index_f - 1]
-                            del first_path[index_f - 1]
-                            del first_path[index_f - 1]
-                            first_path.insert(index_f - 1, str(result))
+    first_path = sun_and_minus_calculating(first_path, sum, minus)
 
     #---------------------------------------------------------------
     for i in range(2):
@@ -270,36 +242,7 @@ def division(first_path: list, second_path: list, minus, sum,
                                 del second_path[index_f - 1]
                                 second_path.insert(index_f - 1, str(result))
 
-                    if f"{list_operations[i]}" == "+":
-                        if len(part) == 1:
-                            index_f = second_path.index(part)
-                            list_sum = []
-                            if index_f - 2 >= 0:
-                                if second_path[index_f - 2] == "-":
-                                    list_sum.append(second_path[index_f - 2])
-                            list_sum.append(second_path[index_f - 1])
-                            result = sum(second_path[index_f - 1], second_path[index_f + 1])
-                            if result != None:
-                                del second_path[index_f + 1]
-                                del second_path[index_f - 1]
-                                del second_path[index_f - 1]
-                                second_path.insert(index_f - 1, str(result))
-                
-                    if f"{list_operations[i]}" == "-":
-                        if len(part) == 1:
-                            if index_f != 0:
-                                index_f = second_path.index(part)
-                                list_minus = []
-                                if index_f - 2 >= 0:
-                                    if second_path[index_f - 2] == "-":
-                                        list_minus.append(second_path[index_f - 2])
-
-                                list_minus.append(second_path[index_f - 1])
-                                result = minus(list_minus, second_path[index_f + 1])
-                                del second_path[index_f - 1]
-                                del second_path[index_f - 1]
-                                del second_path[index_f - 1]
-                                second_path.insert(index_f - 1, str(result))
+    second_path = sun_and_minus_calculating(second_path, sum, minus)
 
     result = float(first_path[0]) / float(second_path[0])
     result = round(float(result), 1)

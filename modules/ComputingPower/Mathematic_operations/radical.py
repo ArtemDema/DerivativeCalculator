@@ -2,6 +2,7 @@ r"""
 Корень
 """
 import math
+from .plus_and_minus_calculation import sun_and_minus_calculating
 
 def radical_calculating(index, list, type, minus, sum, multiplication, 
             degree, degree_calculating, division, division_calculating, 
@@ -129,37 +130,11 @@ def radical(function: list, minus, sum, multiplication,
                             del function[index_f - 1]
                             function.insert(index_f - 1, str(result))
 
-                if f"{list_operations[i]}" == "+":
-                    if len(part) == 1:
-                        index_f = function.index(part)
-                        list_sum = []
-                        if index_f - 2 >= 0:
-                            if function[index_f - 2] == "-":
-                                list_sum.append(function[index_f - 2])
-                        list_sum.append(function[index_f - 1])
-                        result = sum(function[index_f - 1], function[index_f + 1])
-                        if result != None:
-                            del function[index_f + 1]
-                            del function[index_f - 1]
-                            del function[index_f - 1]
-                            function.insert(index_f - 1, str(result))
-            
-                if f"{list_operations[i]}" == "-":
-                    if len(part) == 1:
-                        if index_f != 0:
-                            index_f = function.index(part)
-                            list_minus = []
-                            if index_f - 2 >= 0:
-                                if function[index_f - 2] == "-":
-                                    list_minus.append(function[index_f - 2])
-
-                            list_minus.append(function[index_f - 1])
-                            result = minus(list_minus, function[index_f + 1])
-                            del function[index_f - 1]
-                            del function[index_f - 1]
-                            del function[index_f - 1]
-                            function.insert(index_f - 1, str(result))
-
-    result = math.sqrt(float(function[0]))
-    result = round(float(result), 1)
-    return result
+    function = sun_and_minus_calculating(function, sum, minus)
+    for part in function:
+        if part.startswith("-"):
+            return ValueError
+        else:
+            result = math.sqrt(float(function[0]))
+            result = round(float(result), 1)
+            return result

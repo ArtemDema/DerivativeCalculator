@@ -1,6 +1,7 @@
 r"""
 Степень
 """
+from .plus_and_minus_calculation import sun_and_minus_calculating
 
 def degree_calculating(index, list, type, minus, sum, 
            multiplication, division, division_calculating, 
@@ -129,36 +130,7 @@ def degree(first_path: str, second_path: list, minus, sum,
                             del second_path[index_f - 1]
                             second_path.insert(index_f - 1, str(result))
 
-                if f"{list_operations[i]}" == "+":
-                    if len(part) == 1:
-                        index_f = second_path.index(part)
-                        list_sum = []
-                        if index_f - 2 >= 0:
-                            if second_path[index_f - 2] == "-":
-                                list_sum.append(second_path[index_f - 2])
-                        list_sum.append(second_path[index_f - 1])
-                        result = sum(second_path[index_f - 1], second_path[index_f + 1])
-                        if result != None:
-                            del second_path[index_f + 1]
-                            del second_path[index_f - 1]
-                            del second_path[index_f - 1]
-                            second_path.insert(index_f - 1, str(result))
-            
-                if f"{list_operations[i]}" == "-":
-                    if len(part) == 1:
-                        if index_f != 0:
-                            index_f = second_path.index(part)
-                            list_minus = []
-                            if index_f - 2 >= 0:
-                                if second_path[index_f - 2] == "-":
-                                    list_minus.append(second_path[index_f - 2])
-
-                            list_minus.append(second_path[index_f - 1])
-                            result = minus(list_minus, second_path[index_f + 1])
-                            del second_path[index_f - 1]
-                            del second_path[index_f - 1]
-                            del second_path[index_f - 1]
-                            second_path.insert(index_f - 1, str(result))
+    second_path = sun_and_minus_calculating(second_path, sum, minus)
 
     if len(second_path) == 2:
         second_path = [str(second_path[0]) + str(second_path[1])]
