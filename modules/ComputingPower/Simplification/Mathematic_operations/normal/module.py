@@ -33,6 +33,10 @@ def module_calculating(index, list, minus, sum,
 def module(function: list, minus, sum, 
            multiplication, division, division_calculating, 
            radical, radical_calculating, degree_calculating, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating):
+    for part in function:
+        if "x" in part:
+            return
+    
     result = 1
     list_operations = ["^","/","√","*","+","-","(",")","|"]
     final = False

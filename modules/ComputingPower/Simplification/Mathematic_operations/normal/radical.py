@@ -41,6 +41,10 @@ def radical(function: list, minus, sum, multiplication,
             degree, degree_calculating, division, division_calculating, 
             logarithm, log_calculating, ln_calculating, 
             trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating):
+    for part in function:
+        if "x" in part:
+            return
+
     list_operations = ["^","/","√","*","+","-","(",")","|"]
     final = False
     while final == False:

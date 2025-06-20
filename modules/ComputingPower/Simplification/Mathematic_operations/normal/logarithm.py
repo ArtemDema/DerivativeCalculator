@@ -83,6 +83,13 @@ def ln_calculating(index, list, type, minus, sum,
 def logarithm(function_f: list, function_s: list, type, minus, sum, 
               multiplication, division, division_calculating, radical, radical_calculating, 
               degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating):
+    for part in function_f:
+        if "x" in part:
+            return
+    for part in function_s:
+        if "x" in part:
+            return
+    
     list_operations = ["^","/","√","*","+","-","(",")","|"]
     final = False
     while final == False:

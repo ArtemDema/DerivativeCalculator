@@ -60,6 +60,13 @@ def division_calculating(index, list, type, minus, sum,
 def division(first_path: list, second_path: list, minus, sum,
             multiplication, degree, degree_calculating, radical, radical_calculating, 
             logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating):
+    for part in first_path:
+        if "x" in part:
+            return
+    for part in second_path:
+        if "x" in part:
+            return
+    
     list_operations = ["^","/","√","*","+","-","(",")","|"]
     final = False
     while final == False:
@@ -135,7 +142,7 @@ def division(first_path: list, second_path: list, minus, sum,
                     if f"{list_operations[i]}" == "|":
                         if len(part) == 1:
                             index_f = first_path.index(part)
-                            first_path = module_calculating(index_f, first_path, minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree_calculating, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating)
+                            first_path = module_calculating(index_f, first_path, minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree_calculating, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating)
 
                     if f"{list_operations[i]}" == "log":
                         if len(part) == 3:
@@ -218,7 +225,7 @@ def division(first_path: list, second_path: list, minus, sum,
                     if f"{list_operations[i]}" == "√":
                         if len(part) == 1:
                             index_f = second_path.index(part)
-                            function_f = radical_calculating(index_f, function_f, f"{list_operations[i]}", minus, sum, multiplication, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
+                            second_path = radical_calculating(index_f, second_path, f"{list_operations[i]}", minus, sum, multiplication, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
 
                     if f"{list_operations[i]}" == "(":
                         list_bracket = [second_path[index_f]]

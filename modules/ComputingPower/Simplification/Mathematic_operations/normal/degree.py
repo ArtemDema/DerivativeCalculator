@@ -39,8 +39,12 @@ def degree(first_path: str, second_path: list, minus, sum,
            multiplication, division, division_calculating, 
            radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating):
     result = 1
-    if "x" in first_path or "x" in second_path:
+    
+    if first_path == "x":
         return
+    for part in second_path:
+        if "x" in part:
+            return
     
     list_operations = ["^","/","√","|","*","+","(",")","+","-",]
     final = False

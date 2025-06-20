@@ -5,9 +5,11 @@ r"""
 import math
 
 def multiplication(first_path: list, second_path: str):
-    if "x" in first_path or "x" in second_path:
+    for part in first_path:
+        if "x" in part:
+            return
+    if "x" in second_path or "√" in second_path or "sin" in second_path or "cos" in second_path or "tg" in second_path or "|" in second_path or "(" in second_path:
         return
-
     first_path = ''.join(first_path)
     first_path = round(float(first_path), 1)
     second_path = round(float(second_path), 1)

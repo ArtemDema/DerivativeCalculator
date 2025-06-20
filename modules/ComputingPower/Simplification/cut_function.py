@@ -14,7 +14,7 @@ r"""
 #невозможно продолжать решение функции)
 
 def cut_function(function: list):
-    list_operations = ["^","/","√","*","+","-","(",")", "|"]
+    list_operations = ["^","/","√","*","+","-","(",")","|"]
     final = False
     while final == False:
         number = 0

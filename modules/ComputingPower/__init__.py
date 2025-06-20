@@ -1,1 +1,1 @@
-from .main_computing import *
+from .Simplification import *

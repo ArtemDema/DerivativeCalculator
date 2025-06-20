@@ -32,6 +32,10 @@ def trigonimetric_functions_calculating(index, list, type, minus, sum, multiplic
     return list
 
 def trigonometric_functions(function: list, type, minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating, bracket_calculating, module_calculating):
+    for part in function:
+        if "x" in part:
+            return
+    
     list_operations = ["^","/","√","*","+","-","(",")","|"]
     final = False
     while final == False:

@@ -1,13 +1,13 @@
 r"""
-Проверка, и проведение действий в скобочках
+Проверка, и проведение действий в скобочках c X
 """
-from .plus_and_minus_calculation import sun_and_minus_calculating
 
-def bracket_calculating(function, degree, degree_calculating, division, division_calculating, 
+
+def bracket_calculating(function: list, degree, degree_calculating, division, division_calculating, 
                         logarithm, log_calculating, trigonometric_functions, trigonimetric_functions_calculating, 
                         ln_calculating, radical, radical_calculating, minus, sum, 
                         multiplication, module_calculating):
-    
+
     list_operations = ["^","/","√","*","+","-","(",")","|"]
     final = False
     while final == False:
@@ -29,6 +29,9 @@ def bracket_calculating(function, degree, degree_calculating, division, division
                         for i in range(len(split_f)):
                             function.insert(index_f + i, split_f[i])
         if number == 0: final = True
+
+    if len(function) == 3:
+        return
 
     del (function[0])
     del (function[-1])
@@ -81,22 +84,3 @@ def bracket_calculating(function, degree, degree_calculating, division, division
                     if result != None:
                         del function[index_f]
                         function.insert(index_f, str(result))
-                #----------------------------------------------------------------------------------
-                elif f"{list_operations[i]}" == "*":
-                    if len(part) == 1:
-                        index_f = function.index(part)
-                        list_multiplication = []
-                        if index_f - 2 >= 0:
-                            if function[index_f - 2] == "-":
-                                list_multiplication.append(function[index_f - 2])
-                        list_multiplication.append(function[index_f - 1])
-                        result = multiplication(list_multiplication, function[index_f + 1])
-                        if result != None:
-                            del function[index_f + 1]
-                            del function[index_f - 1]
-                            del function[index_f - 1]
-                            function.insert(index_f - 1, str(result))
-                #----------------------------------------------------------------------------------
-    function = sun_and_minus_calculating(function, sum, minus)
-
-    return function[0]
