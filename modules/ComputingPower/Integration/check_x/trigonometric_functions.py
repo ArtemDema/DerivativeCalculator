@@ -58,11 +58,11 @@ def trigonometric_functions_x(list_trigonometric, type):
     del (list_trigonometric[-1])
 
     if type == "sin":
-        result = ["cos", f"({list_trigonometric[0]})"]
+        result = ["-","cos", f"(x)"]
         return result
     if type == "cos":
-        result = ["-","sin", f"({list_trigonometric[0]})"]
+        result = ["sin", f"(x)"]
         return result
     if type == "tg":
-        result = ["(1)", "/", "(cos^(2))", f"({list_trigonometric[0]})"]
+        result = ["-", "ln", "(|cos(x)|)"]
         return result

@@ -56,8 +56,11 @@ def logarithm_x(first_path, second_path, type):
         del (second_path[-1])
 
     if type == "log":
-        result = ["(1)","/", f"({second_path[0]} * ln({first_path[0]}))"]
+        if first_path != "x":
+            result = ["(x*ln(x)-x)","/", f"(ln({first_path[0]}))"]
+        else:
+            result = [f"(ln({second_path}))","/", "(ln(x))"]
         return result
     else:
-        result = ["(1)","/", f"({first_path[0]})"]
+        result = ["x","*", "ln", "(x)", "-", "x"]
         return result

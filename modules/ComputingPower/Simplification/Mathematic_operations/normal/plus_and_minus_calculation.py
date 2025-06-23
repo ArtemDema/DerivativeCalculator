@@ -3,9 +3,10 @@ r"""
 """
 
 def sun_and_minus_calculating(function: list, sum, minus):
-    for part in function:
-        if "x" in part:
-            return function
+    if function != None:
+        for part in function:
+            if "x" in part:
+                return function
 
     for i in range(5):
         for part in function:

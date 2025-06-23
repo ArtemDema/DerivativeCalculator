@@ -86,10 +86,10 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
     for part in function_f:
         if "x" in part:
             return
-    for part in function_s:
-        if "x" in part:
-            return
-    
+    if function_s != None:
+        for part in function_s:
+            if "x" in part:
+                return
     list_operations = ["^","/","√","*","+","-","(",")","|"]
     final = False
     while final == False:
@@ -204,7 +204,8 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                             del function_f[index_f - 1]
                             function_f.insert(index_f - 1, str(result))
 
-    function_f = sun_and_minus_calculating(function_f, sum, minus)
+        if ["+", "-"] in function_f:
+            function_f = sun_and_minus_calculating(function_f, sum, minus)
     #----------------------------------------------------------------------------------
     if function_s != None:
         list_operations = ["^","sin","cos","tg","ctg","√","|","log","ln","/","(","*","+","-"]
@@ -271,7 +272,8 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                                 del function_s[index_f - 1]
                                 function_s.insert(index_f - 1, str(result))
 
-    function_s = sun_and_minus_calculating(function_s, sum, minus)
+        if ["+", "-"] in function_s:
+            function_s = sun_and_minus_calculating(function_s, sum, minus)
 
     if type == "log":
         result = math.log(float(function_s[0]), float(function_f[0]))

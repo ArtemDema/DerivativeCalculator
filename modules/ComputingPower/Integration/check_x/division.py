@@ -53,5 +53,8 @@ def division_x(first_path, second_path):
     del (second_path[0])
     del (second_path[-1])
 
-    result = [f"(-{first_path[0]})","/",f"({second_path[0]}^(2))"]
+    if first_path[0] != "x":
+        result = ["8", "*","ln","(|x|)"]
+    else:
+        result = ["(x^(2))", "/", f"({second_path * 2})"]
     return result

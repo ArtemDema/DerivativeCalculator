@@ -4,7 +4,7 @@ r"""
 
 from .cut_function import cut_function
 from .Mathematic_operations.normal import *
-from .computing_with_X import checks_X
+from ..Integration import checks_X
 
 def start_power(equation, button9):
     start_equation = equation._text
@@ -109,6 +109,7 @@ def start_power(equation, button9):
                             del start_equation[index - 1]
                             start_equation.insert(index - 1, str(result))
                 #----------------------------------------------------------------------------------
-    start_equation = sun_and_minus_calculating(start_equation, sum, minus)
+    if ["+", "-"] in start_equation:
+        start_equation = sun_and_minus_calculating(start_equation, sum, minus)
 
     start_equation = checks_X(start_equation)

@@ -28,5 +28,5 @@ def radical_x(function):
 
     del (function[0])
     del (function[-1])
-    result = ["(1)", "/", f"(2*√({function[0]}))"]
+    result = ["0.66", "*", "x", "^", "(1.5)"]
     return result
