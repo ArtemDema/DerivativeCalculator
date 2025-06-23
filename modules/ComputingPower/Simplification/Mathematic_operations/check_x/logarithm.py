@@ -3,78 +3,61 @@ r"""
 """
 
 
-def log_calculating(index, list, type, minus, sum, 
-              multiplication, division, division_calculating, radical, radical_calculating, 
-              degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating):
-    list_logarithm_f = []
-    list_logarithm_s = []
-    stop = False
-    column = 0
-    while stop == False:
-        if ")" in list[index + 1]:
-            list_logarithm_f.append(list[index + 1])
-            del list[index + 1]
-            column -= 1
-            if column == 0: stop = True
-        elif "(" in list[index + 1]:
-            list_logarithm_f.append(list[index + 1])
-            del list[index + 1]
-            column += 1
-        else:
-            list_logarithm_f.append(list[index + 1])
-            del list[index + 1]
-    
-    stop = False
-    column = 0
-    while stop == False:
-        if ")" in list[index + 1]:
-            list_logarithm_s.append(list[index + 1])
-            del list[index + 1]
-            column -= 1
-            if column == 0: stop = True
-        elif "(" in list[index + 1]:
-            list_logarithm_s.append(list[index + 1])
-            del list[index + 1]
-            column += 1
-        else:
-            list_logarithm_s.append(list[index + 1])
-            del list[index + 1]
-
-    result_f = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, 
-              multiplication, division, division_calculating, radical, radical_calculating, 
-              degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
-    del list[index]
-    list.insert(index, str(result_f))
-
-    return list
-
-def ln_calculating(index, list, type, minus, sum, 
-              multiplication, division, division_calculating, radical, radical_calculating, 
-              degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating):
-    list_logarithm_f = []
-    column = 0
-    final = False 
+def logarithm_x(first_path, second_path, type):
+    list_operations = ["^","/","√","|","*","+","(",")","+","-",]
+    final = False
     while final == False:
-        if ")" in list[index + 1]:
-            list_logarithm_f.append(list[index + 1])
-            del list[index + 1]
-            column -= 1
-            if column == 0: final = True
-        elif "(" in list[index + 1]:
-            list_logarithm_f.append(list[index + 1])
-            del list[index + 1]
-            column += 1
-        else:
-            list_logarithm_f.append(list[index + 1])
-            del list[index + 1]
-    
-    list_logarithm_f = [''.join(list_logarithm_f)]
+        number = 0
+        for i in range(len(list_operations)):
+            for part in first_path:
+                if f"{list_operations[i]}" in part:
+                    if len(part) > 1:
+                        number += 1
+                        index_f = first_path.index(part)
+                        del first_path[index_f]
+                        split_f= part.split(f"{list_operations[i]}", 1)
+                        split_f.insert(1, f"{list_operations[i]}")
+                        if split_f[0] == "": 
+                            del split_f[0]
+                        if len(split_f) == 3:
+                            if split_f[2] == "": 
+                                del split_f[2]
+                        for i in range(len(split_f)):
+                            first_path.insert(index_f + i, split_f[i])
+        if number == 0: final = True
 
-    result_f = logarithm(list_logarithm_f, None, "ln", minus, sum, 
-              multiplication, division, division_calculating, radical, radical_calculating, 
-              degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
+    del (first_path[0])
+    del (first_path[-1])
 
-    del list[index]
-    list.insert(index, str(result_f))
+    if second_path != None:
+        list_operations = ["^","/","√","|","*","+","(",")","+","-",]
+        final = False
+        while final == False:
+            number = 0
+            for i in range(len(list_operations)):
+                for part in second_path:
+                    if f"{list_operations[i]}" in part:
+                        if len(part) > 1:
+                            number += 1
+                            index_f = second_path.index(part)
+                            del second_path[index_f]
+                            split_f= part.split(f"{list_operations[i]}", 1)
+                            split_f.insert(1, f"{list_operations[i]}")
+                            if split_f[0] == "": 
+                                del split_f[0]
+                            if len(split_f) == 3:
+                                if split_f[2] == "": 
+                                    del split_f[2]
+                            for i in range(len(split_f)):
+                                second_path.insert(index_f + i, split_f[i])
+            if number == 0: final = True
 
-    return list
+        del (second_path[0])
+        del (second_path[-1])
+
+    if type == "log":
+        result = ["(1)","/", f"({second_path[0]} * ln({first_path[0]}))"]
+        return result
+    else:
+        result = ["(1)","/", f"({first_path[0]})"]
+        return result

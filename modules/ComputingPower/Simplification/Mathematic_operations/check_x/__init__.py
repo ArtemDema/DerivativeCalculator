@@ -6,6 +6,5 @@ from .bracket import *
 from .degree import *
 from .division import *
 from.logarithm import *
-from .module import *
 from .radical import *
 from .trigonometric_functions import *

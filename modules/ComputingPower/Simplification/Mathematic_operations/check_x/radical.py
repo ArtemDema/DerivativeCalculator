@@ -3,32 +3,6 @@ r"""
 """
 
 
-def radical_calculating(index, list):
-    list_radical = []
-    column = 0
-    final = False
-    while final == False:
-        if ")" in list[index + 1]:
-            list_radical.append(list[index + 1])
-            del list[index + 1]
-            column -= 1
-            if column == 0: final = True
-        elif "(" in list[index + 1]:
-            list_radical.append(list[index + 1])
-            del list[index + 1]
-            column += 1
-        else:
-            list_radical.append(list[index + 1])
-            del list[index + 1]
-    
-    list_radical = [''.join(list_radical)]
-
-    result_f = radical_x(list_radical)
-    del list[index - 1]
-    list.insert(index - 1, str(result_f))
-
-    return list
-
 def radical_x(function):
     list_operations = ["^","/","√","|","*","+","(",")","+","-",]
     final = False
@@ -54,5 +28,5 @@ def radical_x(function):
 
     del (function[0])
     del (function[-1])
-    result = ["(1)", "/", "(2*√x)"]
+    result = ["(1)", "/", f"(2*√({function[0]}))"]
     return result

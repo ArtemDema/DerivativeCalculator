@@ -54,16 +54,10 @@ def bracket_calculating(function: list, degree, degree_calculating, division, di
                     else: len_t = 2
                     if len(part) == len_t:
                         function = trigonimetric_functions_calculating(index, function, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating, bracket_calculating, module_calculating)
-                        del function[index + 1]
-                        del function[index]
-                        function.insert(index, str(result))
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "√":
                     if len(part) == 1:
                         function = radical_calculating(index, function, f"{list_operations[i]}", minus, sum, multiplication, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
-                        del function[index + 1]
-                        del function[index]
-                        function.insert(index, str(result))
                 #----------------------------------------------------------------------------------
                 elif f"{list_operations[i]}" == "|":
                     if len(part) == 1:

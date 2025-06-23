@@ -3,94 +3,133 @@ r"""
 """
 
 from .Mathematic_operations.check_x import *
-from .cut_function import cut_function
 
 def checks_X(equation: list):
-    list = [f"{equation}"]
-    # print(equation)
-    list_operations = ["^","sin","cos","tg","√","|","log","ln","/","(","*"]
-    for i in range(len(list_operations)):
-        for part in equation:
-            if f"{list_operations[i]}" in part:
-                # print(equation)
-                index = equation.index(part)
+    result_degree = None
+    result_trigonometric = None
+    result_radical = None
+    result_division = None
+    result_logarithm = None
+    result_bracket = None     
 
-                if f"{list_operations[i]}" == "^":
-                    if len(part) == 1:
-                        list_degree = [equation[index + 1]]
-                        result = degree_x(equation[index - 1], list_degree)
-                        if result != None:
-                            del equation[index + 1]
-                            del equation[index - 1]
-                            del equation[index - 1]
-                            for i in range(len(result)):
-                                equation.insert(index - 1 + i, result[i])
-                # #----------------------------------------------------------------------------------
-                # if f"{list_operations[i]}" == "sin" or f"{list_operations[i]}" == "cos" or f"{list_operations[i]}" == "tg":
-                #     if list_operations[i] == "sin" or list_operations[i] == "cos": len_t = 3
-                #     else: len_t = 2
-                #     if len(part) == len_t:
-                #         list_trigonometric = [equation[index + 1]]
-                #         result = trigonometric_functions(list_trigonometric, f"{list_operations[i]}", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating, bracket_calculating, module_calculating)
-                #         if result != None:
-                #             del equation[index + 1]
-                #             del equation[index]
-                #             equation.insert(index, str(result))
-                #----------------------------------------------------------------------------------
-                elif f"{list_operations[i]}" == "√":
-                    if len(part) == 1:
-                        list_radical = [equation[index + 1]]
-                        result = radical_x(list_radical)
-                        if result != None:
-                            del equation[index + 1]
-                            del equation[index]
-                            for i in range(len(result)):
-                                equation.insert(index + i, result[i])
-                #----------------------------------------------------------------------------------
-                # elif f"{list_operations[i]}" == "|":
-                #     if "(" not in equation[index]:
-                #         list_module = [equation[index]]
-                #         result = module(list_module, minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree_calculating, degree, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating)
-                #         if result != None:
-                #             del equation[index]
-                #             equation.insert(index, str(result))
-                # #----------------------------------------------------------------------------------
-                # elif f"{list_operations[i]}" == "log":
-                #     if len(part) == 3:
-                #         list_logarithm_f = [equation[index + 1]]
-                #         list_logarithm_s = [equation[index + 2]]
-                #         result = logarithm(list_logarithm_f, list_logarithm_s, "log", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
-                #         if result != None:
-                #             del equation[index + 1]
-                #             del equation[index]
-                #             del equation[index]
-                #             equation.insert(index, str(result))
-                # #----------------------------------------------------------------------------------
-                # elif f"{list_operations[i]}" == "ln":
-                #     if len(part) == 2:
-                #         list_logarithm_f = [equation[index + 1]]
-                #         result = logarithm(list_logarithm_f, None, "lg", minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
-                #         if result != None:
-                #             del equation[index + 1]
-                #             del equation[index]
-                #             equation.insert(index, str(result))
-                # #----------------------------------------------------------------------------------
-                # elif f"{list_operations[i]}" == "/":
-                #     if len(part) == 1:
-                #         list_division_f = [equation[index - 1]]
-                #         list_division_s = [equation[index + 1]]
-                #         result = division(list_division_f, list_division_s, minus, sum,multiplication, degree, degree_calculating, radical, radical_calculating, logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
-                #         if result != None:
-                #             del equation[index + 1]
-                #             del equation[index - 1]
-                #             del equation[index - 1]
-                #             equation.insert(index - 1, str(result))
-                # #----------------------------------------------------------------------------------
-                # elif f"{list_operations[i]}" == "(":
-                #     list_bracket = [equation[index]]
-                #     result = bracket_calculating(list_bracket, degree, degree_calculating, division, division_calculating, logarithm, log_calculating, trigonometric_functions, trigonimetric_functions_calculating, ln_calculating, radical, radical_calculating, minus, sum, multiplication, module_calculating)
-                #     if result != None:
-                #         del equation[index]
-                #         equation.insert(index, str(result))
+    list_degree_c = {}
+    for part in equation:
+        if "^" in part:
+            index = equation.index(part)
+            if len(part) == 1:
+                list_degree = [equation[index + 1]]
+                index_degree = index
+                result_degree = degree_x(list_degree, f"{equation[index]}")
+                list_degree_c[f"{index_degree}"] = result_degree
+    if len(list_degree_c) != 0:
+        for idx in sorted(list_degree_c.keys(), reverse=True):
+            index = int(idx)
+            values = list_degree_c[idx]
+            del equation[index + 1]
+            del equation[index]
+            for v in reversed(values):
+                equation.insert(index, v)
 
+    list_trigonometric_c = {}
+    for part in equation:
+        if "sin" in part or "cos" in part or "tg" in part:
+            index = equation.index(part)
+            if equation[index] == "sin" or equation[index] == "cos": len_t = 3
+            else: len_t = 2
+            if len(part) == len_t:
+                list_trigonometric = [equation[index + 1]]
+                index_trigonometric = index
+                result_trigonometric = trigonometric_functions_x(list_trigonometric, f"{equation[index]}")
+                list_trigonometric_c[f"{index_trigonometric}"] = result_trigonometric
+    if len(list_trigonometric_c) != 0:
+        for idx in sorted(list_trigonometric_c.keys(), reverse=True):
+            index = int(idx)
+            values = list_trigonometric_c[idx]
+            del equation[index + 1]
+            del equation[index]
+            for v in reversed(values):
+                equation.insert(index, v)
+
+    list_radical_c = {}
+    for part in equation:
+        if "√" in part:
+            index = equation.index(part)
+            if len(part) == 1:
+                list_radical = [equation[index + 1]]
+                index_radical = index
+                result_radical = radical_x(list_radical)
+                list_radical_c[f"{index_radical}"] = result_radical
+    if len(list_radical_c) != 0:
+        for idx in sorted(list_radical_c.keys(), reverse=True):
+            index = int(idx)
+            values = list_radical_c[idx]
+            del equation[index + 1]
+            del equation[index]
+            for v in reversed(values):
+                equation.insert(index, v)
+
+    list_division_c = {}
+    for part in equation:
+        if "/" in part:
+            index = equation.index(part)
+            if len(part) == 1:
+                next_part = str(equation[index + 1])
+                if len(next_part) == 3:
+                    index_division = index
+                    list_division_f = [equation[index - 1]]
+                    list_division_s = [equation[index + 1]]
+                    result_division = division_x(list_division_f, list_division_s)
+                    list_division_c[f"{index_division - 1}"] = result_division
+    if len(list_division_c) != 0:
+        for idx in sorted(list_division_c.keys(), reverse=True):
+            index = int(idx)
+            values = list_division_c[idx]
+            del equation[index + 2]
+            del equation[index + 1]
+            del equation[index]
+            
+            for part in reversed(values):
+                equation.insert(index, part)
+
+    list_logarithm_c = {}
+    for part in equation:
+        if "log" in part or "ln" in part:
+            index = equation.index(part)
+            if f"{equation[index]}" == "log":
+                if len(part) == 3:
+                    list_logarithm_f = [equation[index + 1]]
+                    list_logarithm_s = [equation[index + 2]]
+                    index_logarithm = index
+                    result_logarithm = logarithm_x(list_logarithm_f, list_logarithm_s, "log")
+                    list_logarithm_c[f"{index_logarithm}"] = result_logarithm
+            else:
+                if len(part) == 2:
+                    list_logarithm_f = [equation[index + 1]]
+                    index_logarithm = index
+                    result_logarithm = logarithm_x(list_logarithm_f, None, "ln")
+                    list_logarithm_c[f"{index_logarithm}"] = result_logarithm
+    if len(list_logarithm_c) != 0:
+        for idx in sorted(list_logarithm_c.keys(), reverse=True):
+            index = int(idx)
+            values = list_logarithm_c[idx]
+            del equation[index + 1]
+            del equation[index]
+            for v in reversed(values):
+                equation.insert(index, v)
+
+    list_bracket_c = {}
+    for part in equation:
+        if "(" in part:
+            list_bracket = [equation[index]]
+            result_bracket = bracket_calculating_x(list_bracket)
+            if result_bracket != None:
+                index_bracket = index
+                list_bracket_c[f"{index_bracket}"] = result_bracket
+    if len(list_bracket_c) != 0:
+        for idx in sorted(list_bracket_c.keys(), reverse=True):
+            index = int(idx)
+            values = list_bracket_c[idx]
+            del equation[index]
+            for v in reversed(values):
+                equation.insert(index, v)
     print(equation)

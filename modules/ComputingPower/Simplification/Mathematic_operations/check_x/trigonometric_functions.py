@@ -3,7 +3,7 @@ r"""
 """
 
 
-def trigonimetric_functions_calculating(index, list, type, minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating, bracket_calculating, module_calculating):
+def trigonimetric_functions_calculating_x(index, list, type):
     list_trigonometric = []
     column = 0
     final = False 
@@ -23,9 +23,46 @@ def trigonimetric_functions_calculating(index, list, type, minus, sum, multiplic
     
     list_trigonometric = [''.join(list_trigonometric)]
 
-    result_f = trigonometric_functions(list_trigonometric, type, minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating, bracket_calculating, module_calculating)
+    result_f = trigonometric_functions_x(list_trigonometric, type)
 
     del list[index]
-    list.insert(index, str(result_f))
+    for i in range(len(result_f)):
+        list.insert(index + i, result_f[i])
     
     return list
+
+def trigonometric_functions_x(list_trigonometric, type):
+    list_operations = ["^","/","√","|","*","+","(",")","+","-",]
+    final = False
+    while final == False:
+        number = 0
+        for i in range(len(list_operations)):
+            for part in list_trigonometric:
+                if f"{list_operations[i]}" in part:
+                    if len(part) > 1:
+                        number += 1
+                        index_f = list_trigonometric.index(part)
+                        del list_trigonometric[index_f]
+                        split_f= part.split(f"{list_operations[i]}", 1)
+                        split_f.insert(1, f"{list_operations[i]}")
+                        if split_f[0] == "": 
+                            del split_f[0]
+                        if len(split_f) == 3:
+                            if split_f[2] == "": 
+                                del split_f[2]
+                        for i in range(len(split_f)):
+                            list_trigonometric.insert(index_f + i, split_f[i])
+        if number == 0: final = True
+
+    del (list_trigonometric[0])
+    del (list_trigonometric[-1])
+
+    if type == "sin":
+        result = ["cos", f"({list_trigonometric[0]})"]
+        return result
+    if type == "cos":
+        result = ["-","sin", f"({list_trigonometric[0]})"]
+        return result
+    if type == "tg":
+        result = ["(1)", "/", "(cos^(2))", f"({list_trigonometric[0]})"]
+        return result

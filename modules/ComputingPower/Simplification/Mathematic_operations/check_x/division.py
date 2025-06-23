@@ -2,56 +2,56 @@ r"""
 Деление c X
 """
 
-
-def division_calculating(index, list, type, minus, sum,
-            multiplication, degree, degree_calculating, radical, radical_calculating, 
-            logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating):
-    list_division_f = []
-    list_division_s = []
-    index_division = 1
-    stop = False
-    while stop == False:
-        if "(" in list[index - index_division]:
-            stop = True
-        else:
-            index_division += 1
-
-    for i in range(index_division):
-        list_division_f.append(list[index - index_division])
-        index_division -= 1
-
-    column = 0
-    final = False 
+def division_x(first_path, second_path):
+    list_operations = ["^","/","√","|","*","+","(",")","+","-",]
+    final = False
     while final == False:
-        if ")" in list[index + 1]:
-            list_division_s.append(list[index + 1])
-            del list[index + 1]
-            column -= 1
-            if column == 0: final = True
-        elif "(" in list[index + 1]:
-            list_division_s.append(list[index + 1])
-            del list[index + 1]
-            column += 1
-        else:
-            list_division_s.append(list[index + 1])
-            del list[index + 1]
+        number = 0
+        for i in range(len(list_operations)):
+            for part in first_path:
+                if f"{list_operations[i]}" in part:
+                    if len(part) > 1:
+                        number += 1
+                        index_f = first_path.index(part)
+                        del first_path[index_f]
+                        split_f= part.split(f"{list_operations[i]}", 1)
+                        split_f.insert(1, f"{list_operations[i]}")
+                        if split_f[0] == "": 
+                            del split_f[0]
+                        if len(split_f) == 3:
+                            if split_f[2] == "": 
+                                del split_f[2]
+                        for i in range(len(split_f)):
+                            first_path.insert(index_f + i, split_f[i])
+        if number == 0: final = True
 
-    list_division_f = [''.join(list_division_f)]
-    list_division_s = [''.join(list_division_s)]
+    del (first_path[0])
+    del (first_path[-1])
 
-    result_f = division(list_division_f, list_division_s, minus, sum,
-            multiplication, degree, degree_calculating, radical, radical_calculating, 
-            logarithm, log_calculating, ln_calculating, trigonometric_functions, trigonimetric_functions_calculating, bracket_calculating, module_calculating)
-    
-    stop = False
-    index_division = 1
-    while stop == False:
-        if "(" in list[index - index_division]:
-            del list[index - index_division]
-            list[index - index_division] = str(result_f)
-            stop = True
-        else: 
-            del list[index - index_division]
-            index_division += 1
-            
-    return list
+    list_operations = ["^","/","√","|","*","+","(",")","+","-",]
+    final = False
+    while final == False:
+        number = 0
+        for i in range(len(list_operations)):
+            for part in second_path:
+                if f"{list_operations[i]}" in part:
+                    if len(part) > 1:
+                        number += 1
+                        index_f = second_path.index(part)
+                        del second_path[index_f]
+                        split_f= part.split(f"{list_operations[i]}", 1)
+                        split_f.insert(1, f"{list_operations[i]}")
+                        if split_f[0] == "": 
+                            del split_f[0]
+                        if len(split_f) == 3:
+                            if split_f[2] == "": 
+                                del split_f[2]
+                        for i in range(len(split_f)):
+                            second_path.insert(index_f + i, split_f[i])
+        if number == 0: final = True
+
+    del (second_path[0])
+    del (second_path[-1])
+
+    result = [f"(-{first_path[0]})","/",f"({second_path[0]}^(2))"]
+    return result
