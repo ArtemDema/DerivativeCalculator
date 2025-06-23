@@ -28,7 +28,7 @@ def degree_x(function_f, function_s):
     del (function_s[0])
     del (function_s[-1])
     if function_f == "x":
-        result = [f"(x^({float(function_s) + 1}))", "/", f"({float(function_s) + 1})"]
+        result = [f"(x^({float(function_s[0]) + 1}))", "/", f"({float(function_s[0]) + 1})"]
     else:
-        result = [f"{float(function_s)}","^","(x)","/","(ln",f"({float(function_f)}))"]
+        result = [f"({float(function_f[0])}^(x))","/",f"(ln({float(function_f[0])}))"]
     return result

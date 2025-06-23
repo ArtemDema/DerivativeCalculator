@@ -2,9 +2,9 @@ r"""
 Главная вычислительная обработка
 """
 
-from .cut_function import cut_function
-from .Mathematic_operations.normal import *
-from ..Integration import checks_X
+from .Simplification.cut_function import cut_function
+from .Simplification.Mathematic_operations.normal import *
+from .Integration import checks_X
 
 def start_power(equation, button9):
     start_equation = equation._text

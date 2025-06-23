@@ -19,14 +19,15 @@ def checks_X(equation: list):
             if len(part) == 1:
                 list_degree = [equation[index + 1]]
                 index_degree = index
-                result_degree = degree_x(list_degree, f"{equation[index]}")
-                list_degree_c[f"{index_degree}"] = result_degree
+                result_degree = degree_x(equation[index - 1], list_degree)
+                del equation[index + 1]
+                list_degree_c[f"{index_degree - 1}"] = result_degree
     if len(list_degree_c) != 0:
         for idx in sorted(list_degree_c.keys(), reverse=True):
             index = int(idx)
             values = list_degree_c[idx]
-            del equation[index + 1]
-            del equation[index]
+            del equation[index - 1]
+            del equation[index - 1]
             for part in reversed(values):
                 equation.insert(index, part)
 
@@ -96,6 +97,7 @@ def checks_X(equation: list):
                 equation.insert(index, part)
 
     list_division_c = {}
+    print(equation)
     for part in equation:
         if "/" in part:
             index = equation.index(part)
