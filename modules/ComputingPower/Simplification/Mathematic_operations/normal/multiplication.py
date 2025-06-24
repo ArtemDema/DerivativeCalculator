@@ -2,7 +2,7 @@ r"""
 Умножение
 """
 
-import re
+from ...cut_function import cut_function
 
 def multiplication(first_path: list, second_path: str):
     for part in first_path:
@@ -11,29 +11,15 @@ def multiplication(first_path: list, second_path: str):
     if "√" in second_path or "sin" in second_path or "cos" in second_path or "tg" in second_path or "|" in second_path:
         return
     
-    first_path = re.split(r'([()\-])', first_path[0])
-    for part in first_path:
-        if part == '':
-            index = first_path.index(part)
-            del first_path[index]
-
-    second_path = re.split(r'([()\-])', second_path)
-    for part in second_path:
-        if part == '':
-            index = second_path.index(part)
-            del second_path[index]
-
-
+    first_path = cut_function(first_path)
+    if "(" in second_path:
+        second_path = second_path[1:-1]
+    second_path = cut_function(list(second_path))
 
     for part in first_path:
         if part == "(" or part == ")": 
             index = first_path.index(part)
             del first_path[index]
-    for part in second_path:
-        if part == "(" or part == ")": 
-            index = second_path.index(part)
-            del second_path[index]
-
 
 
     if len(second_path) == 1 or second_path[0] == "-":
@@ -44,10 +30,19 @@ def multiplication(first_path: list, second_path: str):
                 else:
                     result = f"-{first_path[1]}{second_path[0]}"
             elif "-" in second_path:
-                result = f"-{first_path[0]}{second_path[1]}"
+                if len(second_path) == 3:
+                    result = f"-{int(first_path[0]) * int(second_path[1])}{second_path[2]}"
+                else:
+                    result = f"-{first_path[0]}{second_path[1]}"
             else:
                 result = f"{first_path[0]}{second_path[0]}"
             return result
+    else:
+        if first_path[0] == "-":
+            result = f"-{int(first_path[0]) * int(second_path[1])}{second_path[2]}"
+        else:
+            result = f"{int(first_path[0]) * int(second_path[0])}{second_path[1]}"
+        return result
 
     if len(first_path) == 1 or first_path[0] == "-":
         if "x" in first_path:
@@ -61,6 +56,12 @@ def multiplication(first_path: list, second_path: str):
             else:
                 result = f"{second_path[0]}{first_path[0]}"
             return result
+    else:
+        if second_path[0] == "-":
+            result = f"-{second_path[0] * first_path[1]}{first_path[2]}"
+        else:
+            result = f"{second_path[0] * first_path[0]}{first_path[1]}"
+        return result
 
 
 
