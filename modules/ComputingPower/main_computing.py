@@ -101,6 +101,8 @@ def start_power(equation, button9):
                         if index - 2 >= 0:
                             if start_equation[index - 2] == "-":
                                 list_multiplication.append(start_equation[index - 2])
+                                del start_equation[index - 2]
+                                index -= 1
                         list_multiplication.append(start_equation[index - 1])
                         result = multiplication(list_multiplication, start_equation[index + 1])
                         if result != None:
@@ -109,7 +111,7 @@ def start_power(equation, button9):
                             del start_equation[index - 1]
                             start_equation.insert(index - 1, str(result))
                 #----------------------------------------------------------------------------------
-    if ["+", "-"] in start_equation:
+    if "-" in start_equation or "+" in start_equation:
         start_equation = sun_and_minus_calculating(start_equation, sum, minus)
 
     start_equation = checks_X(start_equation)
