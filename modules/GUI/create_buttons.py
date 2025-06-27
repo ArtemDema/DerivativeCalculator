@@ -31,7 +31,6 @@ for i in range(4):
                     hover_color = "#ACACAC")
     del list_text_button[0]
 #-------------------------------------------------------------------
-button5 = Button(master = button_frame, x = 433, y = 10, text = " ", fg_color = "#D9D9D9", hover_color = "#ACACAC")
 
 for i in range(3):
     button6 = Button(master = button_frame, x = 543, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#D9D9D9",
@@ -54,7 +53,7 @@ for i in range(3):
 button10 = Button(master = button_frame, x = 755, y = 190, text = "", fg_color = "#65E08A",
                     hover_color = "#3FD56C", image = "Enter")
 
-button11 = Button(master = graphic_frame, x = 760, y = 450, text = "", fg_color = "#D9D9D9",
+button11 = Button(master = button_frame, x = 433, y = 10, text = "", fg_color = "#D9D9D9",
                     hover_color = "#ACACAC", image = "Download")
 
 button12 = Button(master = graphic_frame, x = 0, y = 450, text = "Example", fg_color = "#D9D9D9",

@@ -97,7 +97,6 @@ def checks_X(equation: list):
                 equation.insert(index, part)
 
     list_division_c = {}
-    print(equation)
     for part in equation:
         if "/" in part:
             index = equation.index(part)
@@ -146,4 +145,4 @@ def checks_X(equation: list):
             if equation[index + 1] == "-":
                 del equation[index + 1]
                 equation[index] = "+"
-    print(equation)
+    return equation

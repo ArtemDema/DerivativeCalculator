@@ -52,15 +52,18 @@ def multiplication(first_path: list, second_path: str):
                 else:
                     result = f"-{second_path[1]}{first_path[0]}"
             elif "-" in first_path:
-                result = f"-{second_path[0]}{first_path[1]}"
+                if len(first_path) == 3:
+                    result = f"-{int(second_path[0]) * int(first_path[1])}{first_path[2]}"
+                else:
+                    result = f"-{second_path[0]}{first_path[1]}"
             else:
                 result = f"{second_path[0]}{first_path[0]}"
             return result
     else:
         if second_path[0] == "-":
-            result = f"-{second_path[0] * first_path[1]}{first_path[2]}"
+            result = f"-{int(second_path[0]) * int(first_path[1])}{first_path[2]}"
         else:
-            result = f"{second_path[0] * first_path[0]}{first_path[1]}"
+            result = f"{int(second_path[0]) * int(first_path[0])}{first_path[1]}"
         return result
 
 

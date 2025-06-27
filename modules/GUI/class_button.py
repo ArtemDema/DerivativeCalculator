@@ -5,7 +5,9 @@ r"""
 import customtkinter, PIL, os
 from .equation import equation
 from ..window import app
-from ..ComputingPower import start_power
+from ..RenderGraphics import render_and_simplification
+from .main_Frames import graphic_frame
+from ..RenderGraphics import save_graph
 
 class Button(customtkinter.CTkButton):
     r"""
@@ -53,6 +55,8 @@ class Button(customtkinter.CTkButton):
             elif self.image_name == "Enter":
                 self.pop_up_w()
                 return
+            elif self.image_name == "Download":
+                save_graph()
             else:
                 equation.confirm_text()
                 return
@@ -66,7 +70,7 @@ class Button(customtkinter.CTkButton):
         self.equal_C = entry.get()
         popup_window.destroy()
         self.popup_window_exist = False
-        start_power(equation, self)
+        render_and_simplification(equation, self, graphic_frame)
     
     def close_example(self, popup_window):
         popup_window.destroy()

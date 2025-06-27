@@ -6,9 +6,7 @@ from .Simplification.cut_function import cut_function
 from .Simplification.Mathematic_operations.normal import *
 from .Integration import checks_X
 
-def start_power(equation, button9):
-    start_equation = equation._text
-    equal_C = button9.equal_C
+def start_power(start_equation):
     list = [f"{start_equation}"]
     start_equation = cut_function(list)
     # print(start_equation)
@@ -103,6 +101,8 @@ def start_power(equation, button9):
                                 list_multiplication.append(start_equation[index - 2])
                                 del start_equation[index - 2]
                                 index -= 1
+                            if start_equation[index - 2] == "sin" or start_equation[index - 2] == "cos" or start_equation[index - 2] == "tg":
+                                break
                         list_multiplication.append(start_equation[index - 1])
                         result = multiplication(list_multiplication, start_equation[index + 1])
                         if result != None:
@@ -115,3 +115,5 @@ def start_power(equation, button9):
         start_equation = sun_and_minus_calculating(start_equation, sum, minus)
 
     start_equation = checks_X(start_equation)
+    
+    return start_equation
