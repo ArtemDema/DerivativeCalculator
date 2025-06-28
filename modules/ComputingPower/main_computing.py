@@ -114,6 +114,8 @@ def start_power(start_equation):
     if "-" in start_equation or "+" in start_equation:
         start_equation = sun_and_minus_calculating(start_equation, sum, minus)
 
+    print(start_equation)
     start_equation = checks_X(start_equation)
+    print(start_equation)
     
     return start_equation

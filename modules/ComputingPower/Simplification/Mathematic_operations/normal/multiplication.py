@@ -11,7 +11,7 @@ def multiplication(first_path: list, second_path: str):
     if "√" in second_path or "sin" in second_path or "cos" in second_path or "tg" in second_path or "|" in second_path:
         return
     
-    first_path = cut_function(first_path)
+    first_path = cut_function(list(first_path))
     if "(" in second_path:
         second_path = second_path[1:-1]
     second_path = cut_function(list(second_path))
@@ -26,44 +26,57 @@ def multiplication(first_path: list, second_path: str):
         if "x" in second_path:
             if "-" in first_path:
                 if second_path[0] == "-":
-                    result = f"{first_path[1]}{second_path[1]}"
+                    result = f"{first_path[1]}*{second_path[1]}"
                 else:
-                    result = f"-{first_path[1]}{second_path[0]}"
+                    result = f"-{first_path[1]}*{second_path[0]}"
             elif "-" in second_path:
                 if len(second_path) == 3:
-                    result = f"-{int(first_path[0]) * int(second_path[1])}{second_path[2]}"
+                    result = f"-{int(first_path[0]) * int(second_path[1])}*{second_path[2]}"
                 else:
-                    result = f"-{first_path[0]}{second_path[1]}"
+                    result = f"-{first_path[0]}*{second_path[1]}"
             else:
-                result = f"{first_path[0]}{second_path[0]}"
+                result = f"{first_path[0]}*{second_path[0]}"
             return result
+        else:
+            if len(first_path) == 2:
+                if second_path[0] == "-":
+                    result = f"-{int(first_path[0]) * int(second_path[0])}*{first_path[1]}"
+                else:
+                    result = f"{int(first_path[0]) * int(second_path[0])}*{first_path[1]}"
+            else:
+                if second_path[0] == "-":
+                    result = f"{int(first_path[0]) * int(second_path[0])}*{first_path[1]}"
+                else:
+                    result = f"-{int(first_path[0]) * int(second_path[0])}*{first_path[1]}"
     else:
         if first_path[0] == "-":
-            result = f"-{int(first_path[0]) * int(second_path[1])}{second_path[2]}"
+            result = f"-{int(first_path[0]) * int(second_path[1])}*{second_path[2]}"
         else:
-            result = f"{int(first_path[0]) * int(second_path[0])}{second_path[1]}"
+            result = f"{int(first_path[0]) * int(second_path[0])}*{second_path[1]}"
         return result
+
+
 
     if len(first_path) == 1 or first_path[0] == "-":
         if "x" in first_path:
             if "-" in second_path:
                 if first_path[0] == "-":
-                    result = f"{second_path[1]}{first_path[1]}"
+                    result = f"{second_path[1]}*{first_path[1]}"
                 else:
-                    result = f"-{second_path[1]}{first_path[0]}"
+                    result = f"-{second_path[1]}*{first_path[0]}"
             elif "-" in first_path:
                 if len(first_path) == 3:
-                    result = f"-{int(second_path[0]) * int(first_path[1])}{first_path[2]}"
+                    result = f"-{int(second_path[0]) * int(first_path[1])}*{first_path[2]}"
                 else:
-                    result = f"-{second_path[0]}{first_path[1]}"
+                    result = f"-{second_path[0]}*{first_path[1]}"
             else:
-                result = f"{second_path[0]}{first_path[0]}"
+                result = f"{second_path[0]}*{first_path[0]}"
             return result
     else:
         if second_path[0] == "-":
-            result = f"-{int(second_path[0]) * int(first_path[1])}{first_path[2]}"
+            result = f"-{int(second_path[0]) * int(first_path[1])}*{first_path[2]}"
         else:
-            result = f"{int(second_path[0]) * int(first_path[0])}{first_path[1]}"
+            result = f"{int(second_path[0]) * int(first_path[0])}*{first_path[1]}"
         return result
 
 

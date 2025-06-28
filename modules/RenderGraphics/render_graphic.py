@@ -20,16 +20,17 @@ def render_and_simplification(equation, button9, graphic_frame):
     function = change_function(function)
     function += f"+{str(equal_C)}"
 
-    x = np.linspace(-10, 10, 2000)
-    y = eval(function)
-    ax.clear()
-    ax.plot(x, y)
-    ax.set_title("График функции")
-    ax.grid(True)
+    if "x" in function:
+        x = np.linspace(-10, 10, 2000)
+        y = eval(function)
+        ax.clear()
+        ax.plot(x, y)
+        ax.set_title("График функции")
+        ax.grid(True)
 
-    if canvas:
-        canvas.get_tk_widget().destroy()
+        if canvas:
+            canvas.get_tk_widget().destroy()
 
-    canvas = matplotlib.backends.backend_tkagg.FigureCanvasTkAgg(fig, master=graphic_frame)
-    canvas.draw()
-    canvas.get_tk_widget().pack(fill="both", expand=True)
+        canvas = matplotlib.backends.backend_tkagg.FigureCanvasTkAgg(fig, master=graphic_frame)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill="both", expand=True)
