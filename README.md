@@ -1,4 +1,4 @@
-# FoxGame
+# Derevative Calculator
 
 ## Навігація
 - [Мета проекта](#title1)
