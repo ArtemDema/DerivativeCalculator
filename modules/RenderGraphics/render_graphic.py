@@ -19,9 +19,11 @@ def render_and_simplification(equation, button9, graphic_frame):
     function = "".join(function)
     function = change_function(function)
     function += f"+{str(equal_C)}"
+    print(function)
 
     if "x" in function:
-        x = np.linspace(-10, 10, 2000)
+        x = np.linspace(0.01, 10, 1000)
+        x = x[(np.abs(np.log(x)) > 0.01)]
         y = eval(function)
         ax.clear()
         ax.plot(x, y)
