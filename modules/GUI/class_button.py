@@ -27,7 +27,9 @@ class Button(customtkinter.CTkButton):
                     corner_radius = 0,
                     hover_color = hover_color,
                     image = self.image_load(image),
-                    command = self.add_text_b
+                    command = self.add_text_b,
+                    border_width = 2,
+                    border_color = "#000000"
         )
         self.x = x
         self.y = y
@@ -61,7 +63,7 @@ class Button(customtkinter.CTkButton):
                 equation.confirm_text()
                 return
 
-        if self._text == "Example":
+        if self._text == "Examp.":
             self.example_button()
             return
         equation.add_text(self._text)
@@ -126,7 +128,7 @@ class Button(customtkinter.CTkButton):
             frame = customtkinter.CTkFrame(master = popup_window_example, width = 700, height = 50, fg_color="#1A1425")
             frame.place(x = 0, y = 0)
 
-            scrol_frame = customtkinter.CTkScrollableFrame(master = popup_window_example, width = 700, height = 450, fg_color="#271F37")
+            scrol_frame = customtkinter.CTkScrollableFrame(master = popup_window_example, width = 680, height = 450, fg_color="#271F37")
             scrol_frame.place(x = 0, y = 50)
 
             label = customtkinter.CTkLabel(master = popup_window_example, text="How to fill in the input field", font = ("Roboto Slab", 14), fg_color="#1A1425")

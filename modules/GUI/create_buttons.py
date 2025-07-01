@@ -56,5 +56,5 @@ button10 = Button(master = button_frame, x = 755, y = 190, text = "", fg_color =
 button11 = Button(master = button_frame, x = 433, y = 10, text = "", fg_color = "#EFEFEF",
                     hover_color = "#0098A9", image = "Download")
 
-button12 = Button(master = graphic_frame, x = 0, y = 450, text = "Example", fg_color = "#EFEFEF",
+button12 = Button(master = button_frame, x = 433, y = 70, text = "Examp.", fg_color = "#EFEFEF",
                     hover_color = "#0098A9")

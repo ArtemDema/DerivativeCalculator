@@ -13,6 +13,7 @@ button_frame = customtkinter.CTkFrame(master = app, width = 860, height = 250, f
 button_frame.place(x = 0, y = 550)
 button_frame.pack_propagate(False)
 
-equation_frame = customtkinter.CTkFrame(master = app, width = 860, height = 50, fg_color = "#4A396D", corner_radius = 0)
+equation_frame = customtkinter.CTkFrame(master = app, width = 860, height = 50, fg_color = "#4A396D", corner_radius = 0, border_width = 2,
+                    border_color = "#000000")
 equation_frame.place(x = 0, y = 500)
 equation_frame.pack_propagate(False)
