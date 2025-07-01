@@ -22,8 +22,8 @@ class Button(customtkinter.CTkButton):
                     height = 50,
                     text = text,
                     fg_color = fg_color,
-                    text_color = "#FFFFFF",
-                    font = ("Roboto Slab", 28),
+                    text_color = "#313131",
+                    font = ("Arial", 28),
                     corner_radius = 0,
                     hover_color = hover_color,
                     image = self.image_load(image),
@@ -111,7 +111,7 @@ class Button(customtkinter.CTkButton):
             popup_window_example.resizable(False, False)
             popup_window_example.title("Example")
 
-            WIDTH = 500
+            WIDTH = 700
             HEIGHT = 500
 
             screen_width = app.winfo_screenwidth()
@@ -123,10 +123,13 @@ class Button(customtkinter.CTkButton):
             popup_window_example.geometry(f"{WIDTH}x{HEIGHT}+{screen_x}+{screen_y}")
             popup_window_example.attributes("-topmost", True)
 
-            scrol_frame = customtkinter.CTkScrollableFrame(master = popup_window_example, width = 500, height = 450)
+            frame = customtkinter.CTkFrame(master = popup_window_example, width = 700, height = 50, fg_color="#1A1425")
+            frame.place(x = 0, y = 0)
+
+            scrol_frame = customtkinter.CTkScrollableFrame(master = popup_window_example, width = 700, height = 450, fg_color="#271F37")
             scrol_frame.place(x = 0, y = 50)
 
-            label = customtkinter.CTkLabel(master = popup_window_example, text="How to fill in the input field", font = ("Roboto Slab", 14))
+            label = customtkinter.CTkLabel(master = popup_window_example, text="How to fill in the input field", font = ("Roboto Slab", 14), fg_color="#1A1425")
             label.pack(padx= 10, pady = 10)
 
             list_examples = ["sin, cos, tg and ctg:","sin(45), cos(60)", "we write in brackets","+ and -:", "10+66, 3*√(25)-10",

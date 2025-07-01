@@ -11,50 +11,50 @@ list_text_button = ["sin","cos","tg","|","^","√",
 
 #-------------------------------------------------------------------
 for i in range(4):
-    button1 = Button(master = button_frame, x = 5, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#D9D9D9",
-                    hover_color = "#ACACAC")
+    button1 = Button(master = button_frame, x = 5, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#EFEFEF",
+                    hover_color = "#0098A9")
     del list_text_button[0]
 
 for i in range(4):
-    button2 = Button(master = button_frame, x = 111, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#D9D9D9",
-                    hover_color = "#ACACAC")
+    button2 = Button(master = button_frame, x = 111, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#EFEFEF",
+                    hover_color = "#0098A9")
     del list_text_button[0]
 #-------------------------------------------------------------------
 
 for i in range(4):
-    button3 = Button(master = button_frame, x = 217, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#D9D9D9",
-                    hover_color = "#ACACAC")
+    button3 = Button(master = button_frame, x = 217, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#EFEFEF",
+                    hover_color = "#0098A9")
     del list_text_button[0]
 
 for i in range(4):
-    button4 = Button(master = button_frame, x = 323, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#D9D9D9",
-                    hover_color = "#ACACAC")
+    button4 = Button(master = button_frame, x = 323, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#EFEFEF",
+                    hover_color = "#0098A9")
     del list_text_button[0]
 #-------------------------------------------------------------------
 
 for i in range(3):
-    button6 = Button(master = button_frame, x = 543, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#D9D9D9",
-                    hover_color = "#ACACAC")
+    button6 = Button(master = button_frame, x = 543, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#EFEFEF",
+                    hover_color = "#0098A9")
     del list_text_button[0]
 
 button7 = Button(master = button_frame, x = 543, y = 190, text = "", fg_color = "#E06363", hover_color = "#AA2C2C", 
                 image = "Delete")
 
 for i in range(4):
-    button8 = Button(master = button_frame, x = 649, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#D9D9D9",
-                    hover_color = "#ACACAC")
+    button8 = Button(master = button_frame, x = 649, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#EFEFEF",
+                    hover_color = "#0098A9")
     del list_text_button[0]
 
 for i in range(3):
-    button9 = Button(master = button_frame, x = 755, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#D9D9D9",
-                    hover_color = "#ACACAC")
+    button9 = Button(master = button_frame, x = 755, y = 10 + (60 * i), text = list_text_button[0], fg_color = "#EFEFEF",
+                    hover_color = "#0098A9")
     del list_text_button[0]
 
 button10 = Button(master = button_frame, x = 755, y = 190, text = "", fg_color = "#65E08A",
                     hover_color = "#3FD56C", image = "Enter")
 
-button11 = Button(master = button_frame, x = 433, y = 10, text = "", fg_color = "#D9D9D9",
-                    hover_color = "#ACACAC", image = "Download")
+button11 = Button(master = button_frame, x = 433, y = 10, text = "", fg_color = "#EFEFEF",
+                    hover_color = "#0098A9", image = "Download")
 
-button12 = Button(master = graphic_frame, x = 0, y = 450, text = "Example", fg_color = "#D9D9D9",
-                    hover_color = "#ACACAC")
+button12 = Button(master = graphic_frame, x = 0, y = 450, text = "Example", fg_color = "#EFEFEF",
+                    hover_color = "#0098A9")

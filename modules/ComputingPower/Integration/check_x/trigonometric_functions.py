@@ -64,5 +64,5 @@ def trigonometric_functions_x(list_trigonometric, type):
         result = ["sin", f"(x)"]
         return result
     if type == "tg":
-        result = ["-", "ln", "(|cos(x)|)"]
+        result = ["-", "ln", "(np.abs(cos(x)))"]
         return result

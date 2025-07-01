@@ -118,13 +118,13 @@ def checks_X(equation: list):
             
             for part in reversed(values):
                 equation.insert(index, part)
-
+    print(equation)
     list_bracket_c = {}
     for part in equation:
         if "(" in part:
             index = equation.index(part)
-            left_ok = index == 0 or equation[index - 1] not in ["/", "^"]
-            right_ok = index == len(equation) - 1 or equation[index + 1] not in ["/", "^"]
+            left_ok = index == 0 or equation[index - 1] not in ["/", "^","ln","log"]
+            right_ok = index == len(equation) - 1 or equation[index + 1] not in ["/", "^","ln","log"]
             if left_ok and right_ok:
                 list_bracket = [equation[index]]
                 result_bracket = bracket_calculating_x(list_bracket)

@@ -6,6 +6,8 @@ import customtkinter
 
 app = customtkinter.CTk(fg_color = "#E2E2E2")
 
+customtkinter.set_appearance_mode("dark")
+
 WIDTH = 860
 HEIGHT = 800
 

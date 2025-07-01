@@ -104,7 +104,10 @@ def start_power(start_equation):
                             if start_equation[index - 2] == "sin" or start_equation[index - 2] == "cos" or start_equation[index - 2] == "tg":
                                 break
                         list_multiplication.append(start_equation[index - 1])
-                        result = multiplication(list_multiplication, start_equation[index + 1])
+                        answer = check_x(index, start_equation)
+                        result = None
+                        if answer:
+                            result = multiplication(list_multiplication, start_equation[index + 1])
                         if result != None:
                             del start_equation[index + 1]
                             del start_equation[index - 1]

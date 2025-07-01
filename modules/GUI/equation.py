@@ -15,9 +15,6 @@ class Equation(customtkinter.CTkLabel):
     def delete_text(self):
         self.configure(text = self._text[:-1])
     
-    def confirm_text(self):
-        pass
-    
 
 equation = Equation(master = equation_frame, text = "")
 equation.place(x = 5, y = 10)
