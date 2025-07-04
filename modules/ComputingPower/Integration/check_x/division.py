@@ -54,7 +54,7 @@ def division_x(first_path, second_path):
     del (second_path[-1])
 
     if first_path[0] != "x":
-        result = ["8", "*","ln","(np.abs(x))"]
+        result = [f"{first_path[0]}", "*","ln","(np.abs(x))"]
     else:
         result = ["(x^(2))", "/", f"({int(second_path[0]) * 2})"]
     return result

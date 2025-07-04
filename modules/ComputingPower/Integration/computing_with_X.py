@@ -21,16 +21,17 @@ def checks_X(equation: list):
                 index_degree = index
                 result_degree = degree_x(equation[index - 1], list_degree)
                 del equation[index + 1]
+                del equation[index - 1]
+                del equation[index - 1]
                 list_degree_c[f"{index_degree - 1}"] = result_degree
     if len(list_degree_c) != 0:
         for idx in sorted(list_degree_c.keys(), reverse=True):
             index = int(idx)
             values = list_degree_c[idx]
-            del equation[index - 1]
-            del equation[index - 1]
             for part in reversed(values):
                 equation.insert(index, part)
 
+    print(equation)
     list_radical_c = {}
     for part in equation:
         if "√" in part:
@@ -145,4 +146,9 @@ def checks_X(equation: list):
             if equation[index + 1] == "-":
                 del equation[index + 1]
                 equation[index] = "+"
+        if part == "+":
+            index = equation.index(part)
+            if equation[index + 1] == "-":
+                del equation[index + 1]
+                equation[index] = "-"
     return equation
