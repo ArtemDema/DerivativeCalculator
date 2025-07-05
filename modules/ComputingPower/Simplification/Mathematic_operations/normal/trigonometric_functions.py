@@ -2,7 +2,7 @@ r"""
 Синус, косинус, тангeнс и котангенс
 """
 import math
-from .plus_and_minus_calculation import sun_and_minus_calculating
+from .plus_and_minus_calculation import sum_and_minus_calculating
 
 def trigonimetric_functions_calculating(index, list, type, minus, sum, multiplication, division, division_calculating, radical, radical_calculating, degree, degree_calculating, logarithm, log_calculating, ln_calculating, bracket_calculating, module_calculating):
     list_trigonometric = []
@@ -125,7 +125,7 @@ def trigonometric_functions(function: list, type, minus, sum, multiplication, di
                             del function[index_f - 1]
                             function.insert(index_f - 1, str(result))
 
-    function = sun_and_minus_calculating(function, sum, minus)
+    function = sum_and_minus_calculating(function, sum, minus)
 
     if type == "sin":
         result = math.sin(float(function[0]))

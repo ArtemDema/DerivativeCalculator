@@ -2,7 +2,7 @@ r"""
 Логарифм
 """
 import math
-from .plus_and_minus_calculation import sun_and_minus_calculating
+from .plus_and_minus_calculation import sum_and_minus_calculating
 
 def log_calculating(index, list, type, minus, sum, 
               multiplication, division, division_calculating, radical, radical_calculating, 
@@ -205,7 +205,7 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                             function_f.insert(index_f - 1, str(result))
 
         if ["+", "-"] in function_f:
-            function_f = sun_and_minus_calculating(function_f, sum, minus)
+            function_f = sum_and_minus_calculating(function_f, sum, minus)
     #----------------------------------------------------------------------------------
     if function_s != None:
         list_operations = ["^","sin","cos","tg","ctg","√","|","log","ln","/","(","*","+","-"]
@@ -273,7 +273,7 @@ def logarithm(function_f: list, function_s: list, type, minus, sum,
                                 function_s.insert(index_f - 1, str(result))
 
         if ["+", "-"] in function_s:
-            function_s = sun_and_minus_calculating(function_s, sum, minus)
+            function_s = sum_and_minus_calculating(function_s, sum, minus)
 
     if type == "log":
         result = math.log(float(function_s[0]), float(function_f[0]))

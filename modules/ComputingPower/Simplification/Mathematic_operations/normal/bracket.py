@@ -1,7 +1,7 @@
 r"""
 Проверка, и проведение действий в скобочках
 """
-from .plus_and_minus_calculation import sun_and_minus_calculating
+from .plus_and_minus_calculation import sum_and_minus_calculating
 
 def bracket_calculating(function: list, degree, degree_calculating, division, division_calculating, 
                         logarithm, log_calculating, trigonometric_functions, trigonimetric_functions_calculating, 
@@ -97,6 +97,6 @@ def bracket_calculating(function: list, degree, degree_calculating, division, di
                             del function[index_f - 1]
                             function.insert(index_f - 1, str(result))
                 #----------------------------------------------------------------------------------
-    function = sun_and_minus_calculating(function, sum, minus)
+    function = sum_and_minus_calculating(function, sum, minus)
 
     return function[0]

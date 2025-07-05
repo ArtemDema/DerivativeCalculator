@@ -15,9 +15,9 @@ def render_and_simplification(equation, button9, graphic_frame):
 
     start_equation = equation._text
     equal_C = button9.equal_C
-    function = start_power(start_equation)
+    function = start_power(start_equation) #Спрощення та інтегрування
     function = "".join(function)
-    function = change_function(function)
+    function = change_function(function) #Змінення функції на придатну для побудови
     function += f"+{str(equal_C)}"
     print(function)
 
@@ -27,7 +27,7 @@ def render_and_simplification(equation, button9, graphic_frame):
         y = eval(function)
         ax.clear()
         ax.plot(x, y)
-        ax.set_title("График функции")
+        ax.set_title("Графік функції")
         ax.grid(True)
 
         if canvas:

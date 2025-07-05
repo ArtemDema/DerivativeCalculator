@@ -2,7 +2,7 @@ r"""
 Корень
 """
 import math
-from .plus_and_minus_calculation import sun_and_minus_calculating
+from .plus_and_minus_calculation import sum_and_minus_calculating
 
 def radical_calculating(index, list, type, minus, sum, multiplication, 
             degree, degree_calculating, division, division_calculating, 
@@ -134,7 +134,7 @@ def radical(function: list, minus, sum, multiplication,
                             del function[index_f - 1]
                             function.insert(index_f - 1, str(result))
 
-    function = sun_and_minus_calculating(function, sum, minus)
+    function = sum_and_minus_calculating(function, sum, minus)
     for part in function:
         if part.startswith("-"):
             return ValueError

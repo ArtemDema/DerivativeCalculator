@@ -6,7 +6,7 @@ from .division import division_x
 from .logarithm import logarithm_x
 from .radical import radical_x
 from .trigonometric_functions import trigonometric_functions_x
-from ...Simplification import cut_function
+from ...cut_function import cut_function
 
 def bracket_calculating_x(function: list):
     result_degree = None

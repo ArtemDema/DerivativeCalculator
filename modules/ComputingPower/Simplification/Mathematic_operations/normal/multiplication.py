@@ -2,8 +2,6 @@ r"""
 Умножение
 """
 
-from ...cut_function import cut_function
-
 def multiplication(first_path: list, second_path: str):
     for part in first_path:
         if "x" in part or "√" in part or "sin" in part or "cos" in part or "tg" in part or "|" in part or "(" in part:

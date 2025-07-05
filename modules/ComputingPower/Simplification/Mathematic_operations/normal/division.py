@@ -1,7 +1,7 @@
 r"""
 Деление
 """
-from .plus_and_minus_calculation import sun_and_minus_calculating
+from .plus_and_minus_calculation import sum_and_minus_calculating
 
 def division_calculating(index, list, type, minus, sum,
             multiplication, degree, degree_calculating, radical, radical_calculating, 
@@ -181,7 +181,7 @@ def division(first_path: list, second_path: list, minus, sum,
                                 del first_path[index_f - 1]
                                 first_path.insert(index_f - 1, str(result))
 
-    first_path = sun_and_minus_calculating(first_path, sum, minus)
+    first_path = sum_and_minus_calculating(first_path, sum, minus)
 
     #---------------------------------------------------------------
     for i in range(2):
@@ -249,7 +249,7 @@ def division(first_path: list, second_path: list, minus, sum,
                                 del second_path[index_f - 1]
                                 second_path.insert(index_f - 1, str(result))
 
-    second_path = sun_and_minus_calculating(second_path, sum, minus)
+    second_path = sum_and_minus_calculating(second_path, sum, minus)
 
     result = float(first_path[0]) / float(second_path[0])
     result = round(float(result), 1)

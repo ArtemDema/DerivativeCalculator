@@ -2,7 +2,7 @@ r"""
 Главная вычислительная обработка
 """
 
-from .Simplification.cut_function import cut_function
+from .cut_function import cut_function
 from .Simplification.Mathematic_operations.normal import *
 from .Integration import checks_X
 
@@ -115,7 +115,7 @@ def start_power(start_equation):
                             start_equation.insert(index - 1, str(result))
                 #----------------------------------------------------------------------------------
     if "-" in start_equation or "+" in start_equation:
-        start_equation = sun_and_minus_calculating(start_equation, sum, minus)
+        start_equation = sum_and_minus_calculating(start_equation, sum, minus)
 
     print(start_equation)
     start_equation = checks_X(start_equation)

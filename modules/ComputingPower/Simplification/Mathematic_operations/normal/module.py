@@ -1,7 +1,7 @@
 r"""
 Модуль
 """
-from .plus_and_minus_calculation import sun_and_minus_calculating
+from .plus_and_minus_calculation import sum_and_minus_calculating
 
 def module_calculating(index, list, minus, sum, 
            multiplication, division, division_calculating, 
@@ -122,7 +122,7 @@ def module(function: list, minus, sum,
                             del function[index_f - 1]
                             function.insert(index_f - 1, str(result))
 
-    function = sun_and_minus_calculating(function, sum, minus)
+    function = sum_and_minus_calculating(function, sum, minus)
 
     function = [''.join(function)]
 

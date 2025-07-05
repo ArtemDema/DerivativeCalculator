@@ -3,7 +3,7 @@ r"""
 """
 from .check_x_number import check_x
 
-def sun_and_minus_calculating(function: list, sum, minus):
+def sum_and_minus_calculating(function: list, sum, minus):
 
     for i in range(5):
         for part in function:

@@ -1,7 +1,7 @@
 r"""
 Степень
 """
-from .plus_and_minus_calculation import sun_and_minus_calculating
+from .plus_and_minus_calculation import sum_and_minus_calculating
 
 def degree_calculating(index, list, type, minus, sum, 
            multiplication, division, division_calculating, 
@@ -134,7 +134,7 @@ def degree(first_path: str, second_path: list, minus, sum,
                             del second_path[index_f - 1]
                             second_path.insert(index_f - 1, str(result))
 
-    second_path = sun_and_minus_calculating(second_path, sum, minus)
+    second_path = sum_and_minus_calculating(second_path, sum, minus)
 
     if len(second_path) == 2:
         second_path = [str(second_path[0]) + str(second_path[1])]
