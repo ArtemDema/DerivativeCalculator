@@ -61,7 +61,7 @@ def trigonometric_functions(function: list, type, minus, sum, multiplication, di
     del (function[0])
     del (function[-1])
 
-    list_operations = ["^","sin","cos","tg","ctg","√","|","log","ln","/","(","*","+","-"]
+    list_operations = ["^","sin","cos","tg","√","|","log","ln","/","(","*","+","-"]
     for i in range(len(list_operations)):
         for part in function:
             if f"{list_operations[i]}" in part:
