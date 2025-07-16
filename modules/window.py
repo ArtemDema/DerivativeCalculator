@@ -2,11 +2,13 @@ r"""
 Создание главного окна
 """
 
-import customtkinter
+import customtkinter, os
 
 app = customtkinter.CTk(fg_color = "#E2E2E2")
 
 customtkinter.set_appearance_mode("dark")
+
+app.iconbitmap(os.path.abspath(__file__ + "/../../icon.ico"))
 
 WIDTH = 860
 HEIGHT = 800
